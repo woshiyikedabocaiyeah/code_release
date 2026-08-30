@@ -1,0 +1,3192 @@
+{
+  "total_questions": 144,
+  "question_types": {
+    "SM": 48,
+    "VoE": 48,
+    "Category": 48
+  },
+  "answer_format": {
+    "type": "two-alternative forced choice",
+    "options": [
+      "A",
+      "B"
+    ],
+    "source_key_mapping": {
+      "f": "A",
+      "j": "B"
+    }
+  },
+  "questions": [
+    {
+      "id": "29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3_SM",
+      "video_id": "29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3",
+      "video_path": "experiment_videos/29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cone from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3_VoE",
+      "video_id": "29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3",
+      "video_path": "experiment_videos/29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3_Cat",
+      "video_id": "29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3",
+      "video_path": "experiment_videos/29bb6f59e9c8765baae0c990187513b0de320037b1d1408540ebf5ed046387c3.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d_SM",
+      "video_id": "c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d",
+      "video_path": "experiment_videos/c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cone from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d_VoE",
+      "video_id": "c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d",
+      "video_path": "experiment_videos/c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d_Cat",
+      "video_id": "c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d",
+      "video_path": "experiment_videos/c308dfea1753c78955f5fe9585752bda4b8099c970f342582b92d318a9e7b97d.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be_SM",
+      "video_id": "613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be",
+      "video_path": "experiment_videos/613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cone from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be_VoE",
+      "video_id": "613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be",
+      "video_path": "experiment_videos/613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be_Cat",
+      "video_id": "613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be",
+      "video_path": "experiment_videos/613bda98c804e7e4c715ac5f7989e4314b788e582f99a585a7f364ffca1b69be.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370_SM",
+      "video_id": "080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370",
+      "video_path": "experiment_videos/080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cone from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370_VoE",
+      "video_id": "080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370",
+      "video_path": "experiment_videos/080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370_Cat",
+      "video_id": "080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370",
+      "video_path": "experiment_videos/080aeff0ac23509a53bee6f685f5e8ca88fa0e7231786a4e9c29d3748a152370.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "Box",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df_SM",
+      "video_id": "cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df",
+      "video_path": "experiment_videos/cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a blue cylinder from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df_VoE",
+      "video_id": "cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df",
+      "video_path": "experiment_videos/cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df_Cat",
+      "video_id": "cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df",
+      "video_path": "experiment_videos/cd6736300dc251eb8dd1d86b54534b52cafee43bd68e9f927a5aac6a1c7249df.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878_SM",
+      "video_id": "0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878",
+      "video_path": "experiment_videos/0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a blue cylinder from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878_VoE",
+      "video_id": "0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878",
+      "video_path": "experiment_videos/0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878_Cat",
+      "video_id": "0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878",
+      "video_path": "experiment_videos/0f8eb818bd7bed48614d6572dc54034f8cb40c3f616c098fcdc95273d624f878.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630_SM",
+      "video_id": "88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630",
+      "video_path": "experiment_videos/88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a blue cylinder from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630_VoE",
+      "video_id": "88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630",
+      "video_path": "experiment_videos/88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630_Cat",
+      "video_id": "88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630",
+      "video_path": "experiment_videos/88fdec3b88f1f9df00b7f9cbd68f5e67f1a6fd53f5abb773d30d0f1cd0d89630.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896_SM",
+      "video_id": "4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896",
+      "video_path": "experiment_videos/4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a blue cylinder from inside the box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896_VoE",
+      "video_id": "4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896",
+      "video_path": "experiment_videos/4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the box feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896_Cat",
+      "video_id": "4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896",
+      "video_path": "experiment_videos/4cc16b464b92bba7f4db58971b5363596dc309e7275dd4533464b3b008db6896.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the box follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "Box",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4_SM",
+      "video_id": "e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4",
+      "video_path": "experiment_videos/e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a yellow cylinder from inside the left-side box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4_VoE",
+      "video_id": "e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4",
+      "video_path": "experiment_videos/e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the boxes feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4_Cat",
+      "video_id": "e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4",
+      "video_path": "experiment_videos/e27791affc0d85d89374a10a6e8f0930a2d0a009c0eaffd1a087928da0ebd1c4.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the boxes follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac_SM",
+      "video_id": "253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac",
+      "video_path": "experiment_videos/253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a yellow cylinder from inside the left-side box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac_VoE",
+      "video_id": "253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac",
+      "video_path": "experiment_videos/253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the boxes feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac_Cat",
+      "video_id": "253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac",
+      "video_path": "experiment_videos/253669d6414066fd0c1ca625716d672344c3be36b735f56da5695bf8c3ba42ac.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the boxes follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012_SM",
+      "video_id": "179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012",
+      "video_path": "experiment_videos/179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a yellow cylinder from inside the left-side box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012_VoE",
+      "video_id": "179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012",
+      "video_path": "experiment_videos/179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the boxes feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012_Cat",
+      "video_id": "179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012",
+      "video_path": "experiment_videos/179cfd14e886bc12ef1ac9ce585036c182bff50870eb0e1f382198f41b195012.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the boxes follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44_SM",
+      "video_id": "591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44",
+      "video_path": "experiment_videos/591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a yellow cylinder from inside the left-side box after the camera rolls up?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44_VoE",
+      "video_id": "591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44",
+      "video_path": "experiment_videos/591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the boxes feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44_Cat",
+      "video_id": "591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44",
+      "video_path": "experiment_videos/591b1bcecd825582910166e4519a56ec3827838a7faf59237f5d7170565aba44.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the boxes follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "Box",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26_SM",
+      "video_id": "7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26",
+      "video_path": "experiment_videos/7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26_VoE",
+      "video_id": "7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26",
+      "video_path": "experiment_videos/7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26_Cat",
+      "video_id": "7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26",
+      "video_path": "experiment_videos/7d58767ffb9d1beedffab7265c59911dcabe7eaec17e66729b7d2bff5ae0bd26.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0_SM",
+      "video_id": "b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0",
+      "video_path": "experiment_videos/b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0_VoE",
+      "video_id": "b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0",
+      "video_path": "experiment_videos/b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0_Cat",
+      "video_id": "b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0",
+      "video_path": "experiment_videos/b8ef9a57b5fdc369c94d6e10f32503e3f70484ad1a30527c1609401f846113e0.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83_SM",
+      "video_id": "2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83",
+      "video_path": "experiment_videos/2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83_VoE",
+      "video_id": "2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83",
+      "video_path": "experiment_videos/2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83_Cat",
+      "video_id": "2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83",
+      "video_path": "experiment_videos/2d5ff2200633c95f6982e7971f2960fd2a83432f510ac3b1d45722b15c9f1f83.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466_SM",
+      "video_id": "1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466",
+      "video_path": "experiment_videos/1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466_VoE",
+      "video_id": "1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466",
+      "video_path": "experiment_videos/1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466_Cat",
+      "video_id": "1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466",
+      "video_path": "experiment_videos/1e6a916963d5ba5f72e51b8bd5d93e4343457265d9541d1032d6c87bfbd7e466.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_A",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01_SM",
+      "video_id": "6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01",
+      "video_path": "experiment_videos/6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01_VoE",
+      "video_id": "6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01",
+      "video_path": "experiment_videos/6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01_Cat",
+      "video_id": "6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01",
+      "video_path": "experiment_videos/6de22b6769adbcdf0ef1be6253f8cc5418e0c394d35771f463be632c6349cb01.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c_SM",
+      "video_id": "40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c",
+      "video_path": "experiment_videos/40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c_VoE",
+      "video_id": "40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c",
+      "video_path": "experiment_videos/40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c_Cat",
+      "video_id": "40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c",
+      "video_path": "experiment_videos/40b790e8068d476218fd14a7d2217ffac7e8dd408df7b8f17d490f9f230e584c.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9_SM",
+      "video_id": "132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9",
+      "video_path": "experiment_videos/132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9_VoE",
+      "video_id": "132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9",
+      "video_path": "experiment_videos/132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9_Cat",
+      "video_id": "132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9",
+      "video_path": "experiment_videos/132d3091c53527e3154bfd0c98526b64a7a6f35e6d5b918944066174bbb054c9.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a_SM",
+      "video_id": "1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a",
+      "video_path": "experiment_videos/1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a black cube from the left side of the wall after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a_VoE",
+      "video_id": "1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a",
+      "video_path": "experiment_videos/1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening on the left of the wall feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a_Cat",
+      "video_id": "1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a",
+      "video_path": "experiment_videos/1002905319b0ac6476b10fb962d1c82fc03666324e5fe26435bb66620eebf17a.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening on the left side of the wall follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_B",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0_SM",
+      "video_id": "aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0",
+      "video_path": "experiment_videos/aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up the black pyramid from a closer distance than the pink pyramid after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0_VoE",
+      "video_id": "aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0",
+      "video_path": "experiment_videos/aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0.mp4",
+      "question_type": "VoE",
+      "question": "Does the event related to the critical objects feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0_Cat",
+      "video_id": "aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0",
+      "video_path": "experiment_videos/aea1c46ab8601ecf3a03dff8c3e6108c0f1908ee0a75eb908dab95c8f10ffee0.mp4",
+      "question_type": "Category",
+      "question": "Does the event related to the critical objects follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e_SM",
+      "video_id": "89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e",
+      "video_path": "experiment_videos/89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up the black pyramid from a closer distance than the pink pyramid after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e_VoE",
+      "video_id": "89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e",
+      "video_path": "experiment_videos/89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e.mp4",
+      "question_type": "VoE",
+      "question": "Does the event related to the critical objects feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e_Cat",
+      "video_id": "89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e",
+      "video_path": "experiment_videos/89c5923fd9ffffab6e1460ac91309bbbfd03d19f41a08a9d8bfc304c25ef3b3e.mp4",
+      "question_type": "Category",
+      "question": "Does the event related to the critical objects follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46_SM",
+      "video_id": "04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46",
+      "video_path": "experiment_videos/04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up the black pyramid from a closer distance than the pink pyramid after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46_VoE",
+      "video_id": "04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46",
+      "video_path": "experiment_videos/04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46.mp4",
+      "question_type": "VoE",
+      "question": "Does the event related to the critical objects feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46_Cat",
+      "video_id": "04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46",
+      "video_path": "experiment_videos/04c1ec25e63edc25183d243a6202e9afd39d6d867a803499cb5b318ee3e8fb46.mp4",
+      "question_type": "Category",
+      "question": "Does the event related to the critical objects follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24_SM",
+      "video_id": "34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24",
+      "video_path": "experiment_videos/34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up the black pyramid from a closer distance than the pink pyramid after the camera rolls to the left?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24_VoE",
+      "video_id": "34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24",
+      "video_path": "experiment_videos/34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24.mp4",
+      "question_type": "VoE",
+      "question": "Does the event related to the critical objects feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24_Cat",
+      "video_id": "34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24",
+      "video_path": "experiment_videos/34bccc188f289d984d88c24bd7a071de06dbb7d26d78cab14f1639851c41df24.mp4",
+      "question_type": "Category",
+      "question": "Does the event related to the critical objects follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "MovingAroundOccluder",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "SM_01WoodBox_D",
+        "difficulty": "Medium",
+        "camera": "Moving"
+      }
+    },
+    {
+      "id": "e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c_SM",
+      "video_id": "e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c",
+      "video_path": "experiment_videos/e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c_VoE",
+      "video_id": "e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c",
+      "video_path": "experiment_videos/e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c_Cat",
+      "video_id": "e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c",
+      "video_path": "experiment_videos/e40af30878e19eaabac0ecfeb7654b844b830771357635b03af5f09fb1fc649c.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd_SM",
+      "video_id": "2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd",
+      "video_path": "experiment_videos/2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd_VoE",
+      "video_id": "2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd",
+      "video_path": "experiment_videos/2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd_Cat",
+      "video_id": "2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd",
+      "video_path": "experiment_videos/2d71c4ce1323eeb92ec1239286a974dd24285931f8e158099b92dfb03fe7e5bd.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7_SM",
+      "video_id": "bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7",
+      "video_path": "experiment_videos/bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7_VoE",
+      "video_id": "bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7",
+      "video_path": "experiment_videos/bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7_Cat",
+      "video_id": "bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7",
+      "video_path": "experiment_videos/bc9d04d6e6ce93ed0bcde6357e2c10f54334e47002dbf7cfaa195e613296d1b7.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5_SM",
+      "video_id": "122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5",
+      "video_path": "experiment_videos/122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5_VoE",
+      "video_id": "122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5",
+      "video_path": "experiment_videos/122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5_Cat",
+      "video_id": "122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5",
+      "video_path": "experiment_videos/122a7317bbce4f18c2554ca0cd86c6088d992cac89084af979d25a7e11f14ee5.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "RotatingCup",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d_SM",
+      "video_id": "15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d",
+      "video_path": "experiment_videos/15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d_VoE",
+      "video_id": "15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d",
+      "video_path": "experiment_videos/15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d_Cat",
+      "video_id": "15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d",
+      "video_path": "experiment_videos/15660a01d0da7716e38af417e52a61f9c31148b5b4eabc1850b49cab6692f40d.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d_SM",
+      "video_id": "f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d",
+      "video_path": "experiment_videos/f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d_VoE",
+      "video_id": "f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d",
+      "video_path": "experiment_videos/f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d_Cat",
+      "video_id": "f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d",
+      "video_path": "experiment_videos/f084a168738c8c9f9595a98353e9ff16bb7d1e661987ff13505762e88741b68d.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517_SM",
+      "video_id": "5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517",
+      "video_path": "experiment_videos/5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517_VoE",
+      "video_id": "5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517",
+      "video_path": "experiment_videos/5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517_Cat",
+      "video_id": "5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517",
+      "video_path": "experiment_videos/5872c0227d8a4b65d765ea9da1a75c46ae6fb9812f89a1ebe494ba0c908c6517.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140_SM",
+      "video_id": "561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140",
+      "video_path": "experiment_videos/561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink ball from inside the cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140_VoE",
+      "video_id": "561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140",
+      "video_path": "experiment_videos/561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cup feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140_Cat",
+      "video_id": "561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140",
+      "video_path": "experiment_videos/561c3ba7ac9ffe1022b1e3ec8f74e80dc3d7d6d0e51bb5b97859145d63b8c140.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cup follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "RotatingCup",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73_SM",
+      "video_id": "e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73",
+      "video_path": "experiment_videos/e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green ball from inside the right-side cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73_VoE",
+      "video_id": "e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73",
+      "video_path": "experiment_videos/e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cups feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73_Cat",
+      "video_id": "e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73",
+      "video_path": "experiment_videos/e853c91d323330848e8f6bad3617cbfa2afa2cbc3698a7ff13db2a4b45206e73.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cups follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df_SM",
+      "video_id": "7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df",
+      "video_path": "experiment_videos/7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green ball from inside the right-side cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df_VoE",
+      "video_id": "7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df",
+      "video_path": "experiment_videos/7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cups feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df_Cat",
+      "video_id": "7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df",
+      "video_path": "experiment_videos/7fa2f0ef29977cae919a48ff365c050338e494a850dd721083315044087819df.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cups follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b_SM",
+      "video_id": "ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b",
+      "video_path": "experiment_videos/ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green ball from inside the right-side cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b_VoE",
+      "video_id": "ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b",
+      "video_path": "experiment_videos/ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cups feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b_Cat",
+      "video_id": "ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b",
+      "video_path": "experiment_videos/ebc75ed6e3de95086e652be2837206809270990546b20f49f3d5a1e6ba0e151b.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cups follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5_SM",
+      "video_id": "659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5",
+      "video_path": "experiment_videos/659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green ball from inside the right-side cup after it turns around?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5_VoE",
+      "video_id": "659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5",
+      "video_path": "experiment_videos/659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the cups feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5_Cat",
+      "video_id": "659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5",
+      "video_path": "experiment_videos/659834938f6b18cf5d6ba1514f2ae6047023bce59dcc6a09cec21a39d4ceeec5.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the cups follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "RotatingCup",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2_SM",
+      "video_id": "d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2",
+      "video_path": "experiment_videos/d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2_VoE",
+      "video_id": "d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2",
+      "video_path": "experiment_videos/d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2_Cat",
+      "video_id": "d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2",
+      "video_path": "experiment_videos/d386d692a5ed8bac3cc7facb605032f2de9a4a8a19561d98c1d9f7a760bdeea2.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259_SM",
+      "video_id": "277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259",
+      "video_path": "experiment_videos/277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259_VoE",
+      "video_id": "277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259",
+      "video_path": "experiment_videos/277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259_Cat",
+      "video_id": "277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259",
+      "video_path": "experiment_videos/277f8147b3a594c33d313f1e8c7000d545990379dc9d6c1fb13b626320474259.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441_SM",
+      "video_id": "b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441",
+      "video_path": "experiment_videos/b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441_VoE",
+      "video_id": "b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441",
+      "video_path": "experiment_videos/b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441_Cat",
+      "video_id": "b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441",
+      "video_path": "experiment_videos/b1329f1f46961f2b4190e89137f81ec0c616d5ad41ec7e0b0541f244026c5441.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9_SM",
+      "video_id": "e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9",
+      "video_path": "experiment_videos/e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9_VoE",
+      "video_id": "e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9",
+      "video_path": "experiment_videos/e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9_Cat",
+      "video_id": "e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9",
+      "video_path": "experiment_videos/e5b0981b36fc24321d8d3ff1729b0d995ff4b20a0f8c988b4b65fc6d54bf5cd9.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"permanence\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "permanence",
+        "game_name": "HotAirBallon",
+        "physical_concept": "permanence",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc_SM",
+      "video_id": "f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc",
+      "video_path": "experiment_videos/f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc_VoE",
+      "video_id": "f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc",
+      "video_path": "experiment_videos/f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc_Cat",
+      "video_id": "f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc",
+      "video_path": "experiment_videos/f3da1fee9d5bde9518f9f22cf737cbc601c6dde311b3af13689cb87ece46f7bc.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6_SM",
+      "video_id": "19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6",
+      "video_path": "experiment_videos/19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6_VoE",
+      "video_id": "19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6",
+      "video_path": "experiment_videos/19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6_Cat",
+      "video_id": "19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6",
+      "video_path": "experiment_videos/19106a00496b4b5b291670f8ee463daaf95ed17f958e3ebdaa383a7e197ecbe6.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a_SM",
+      "video_id": "c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a",
+      "video_path": "experiment_videos/c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a_VoE",
+      "video_id": "c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a",
+      "video_path": "experiment_videos/c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a_Cat",
+      "video_id": "c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a",
+      "video_path": "experiment_videos/c08b8ba3188ed519016203cebbba011a58245d7fd4cdb40cd911f0e15bb0883a.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8_SM",
+      "video_id": "ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8",
+      "video_path": "experiment_videos/ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a green cylinder from inside the basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8_VoE",
+      "video_id": "ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8",
+      "video_path": "experiment_videos/ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the basket feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8_Cat",
+      "video_id": "ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8",
+      "video_path": "experiment_videos/ca9ff607f474eed28a4c7d333572400f33b3a006bb91814a77b5fb5b753e2ef8.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the basket follow the concept of \"immutability\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "immutability",
+        "game_name": "HotAirBallon",
+        "physical_concept": "immutability",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a_SM",
+      "video_id": "1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a",
+      "video_path": "experiment_videos/1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink tube from inside the left-side basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a_VoE",
+      "video_id": "1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a",
+      "video_path": "experiment_videos/1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the baskets feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a_Cat",
+      "video_id": "1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a",
+      "video_path": "experiment_videos/1196c2cd68ae478556d3c4ba8a555387999b90cd11b55956b5134dcfb25c142a.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the baskets follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c_SM",
+      "video_id": "a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c",
+      "video_path": "experiment_videos/a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink tube from inside the left-side basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c_VoE",
+      "video_id": "a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c",
+      "video_path": "experiment_videos/a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the baskets feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c_Cat",
+      "video_id": "a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c",
+      "video_path": "experiment_videos/a193e9c4cad20c18e2d26cde21b574036509eb993bfa9a1f21432701f8972d7c.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the baskets follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Possible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d_SM",
+      "video_id": "837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d",
+      "video_path": "experiment_videos/837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink tube from inside the left-side basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d_VoE",
+      "video_id": "837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d",
+      "video_path": "experiment_videos/837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the baskets feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d_Cat",
+      "video_id": "837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d",
+      "video_path": "experiment_videos/837511d22de1e73f26aac1a815e25cbfdadef4c5b3a4926ea4bf217e7ac3c29d.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the baskets follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "2_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220_SM",
+      "video_id": "937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220",
+      "video_path": "experiment_videos/937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220.mp4",
+      "question_type": "SM",
+      "question": "Is it physically possible for you to pick up a pink tube from inside the left-side basket after it lands?",
+      "options": {
+        "A": "Yes, I can.",
+        "B": "No, I cannot."
+      },
+      "correct_answer": "A",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220_VoE",
+      "video_id": "937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220",
+      "video_path": "experiment_videos/937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220.mp4",
+      "question_type": "VoE",
+      "question": "Does the event happening inside the baskets feel physically \"correct\" and plausible?",
+      "options": {
+        "A": "Yes, it feels solid and logical.",
+        "B": "No, it feels \"wrong\"."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    },
+    {
+      "id": "937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220_Cat",
+      "video_id": "937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220",
+      "video_path": "experiment_videos/937f0d80a7e74e320518efb7567f73d97cd2af601f5047e46015bd61e1ebe220.mp4",
+      "question_type": "Category",
+      "question": "Does the event happening inside the baskets follow the concept of \"continuity\"?",
+      "options": {
+        "A": "Yes, it follows this concept.",
+        "B": "No, it violates the concept."
+      },
+      "correct_answer": "B",
+      "metadata": {
+        "condition": "continuity",
+        "game_name": "HotAirBallon",
+        "physical_concept": "continuity",
+        "environment": "SaltFlats_0",
+        "possibility": "1_Impossible",
+        "occlusion": "",
+        "difficulty": "Medium",
+        "camera": "Fixed"
+      }
+    }
+  ],
+  "public_release_note": {
+    "video_path_policy": "Relative paths are used for public reproducibility; place videos under Main_Experiment_Scripts/experiment_videos or update video_path values."
+  }
+}

@@ -1,0 +1,25 @@
+name: mllm
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - pillow
+  - opencv
+  - pytorch
+  - torchvision
+  - pytorch-cuda=12.1
+  - pip:
+      - accelerate
+      - einops
+      - huggingface_hub[cli]
+      - qwen-vl-utils
+      - safetensors
+      - sentencepiece
+      - timm
+      - transformers
