@@ -1,0 +1,223 @@
+---
+title: "cat_pilot_1"
+output: html_document
+date: "2026-03-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+folder_path <- "."
+
+csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+dat_1  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_223ac6bab42d48dd8dc26a1f5c47d201 (2).csv"),  header = TRUE, skip = 1)
+dat_2  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_2ead690de69d4bfbbf9addd78980d214 (1).csv"),  header = TRUE, skip = 1)
+dat_3  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_2f45d4d30c2f4f31831a25483c2dba57 (3).csv"),  header = TRUE, skip = 1)
+dat_4  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_61b9f94b3c8c435aa0b31a1f8e66dead (3).csv"),  header = TRUE, skip = 1)
+dat_5  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_7077683e10964bab8e58bfac17976731 (3).csv"),  header = TRUE, skip = 1)
+dat_6  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_78c43140a80c4231a2a278bfb9fa5299 (3).csv"),  header = TRUE, skip = 1)
+dat_7  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_7c51bccd3e2a4af9819b7ac361b64887 (3).csv"),  header = TRUE, skip = 1)
+dat_8  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_86c0890baff946769b4eba1591f0487a (1).csv"),  header = TRUE, skip = 1)
+dat_9  <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_916f05e268434a519fe22a10b97867f2 (2).csv"),  header = TRUE, skip = 1)
+dat_10 <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_91f5ef4564e9427abdde1dbf844b9345 (3).csv"),  header = TRUE, skip = 1)
+dat_11 <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_9f08e9565a1c4d48903cb09eb82c09a1 (1).csv"),  header = TRUE, skip = 1)
+dat_12 <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_a6c0e87eb6bf466b9c4b131cc3444d1d (3).csv"),  header = TRUE, skip = 1)
+dat_13 <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_b2a5fbac132f4bc087c69633d0b3ad5a (1).csv"),  header = TRUE, skip = 1)
+dat_14 <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_e69885dbb3124c4c81994e09f08cf791 (1).csv"),  header = TRUE, skip = 1)
+dat_15 <- read.csv(file.path(folder_path, "Intuitive Physics Experiment 1_febc71bfda65491fab07a89bc510ed5e (3).csv"),  header = TRUE, skip = 1)
+
+```
+
+
+```{r}
+dat_1  <- dat_1[!grepl("^stimuli_practice/", dat_1$Video), ]
+dat_2  <- dat_2[!grepl("^stimuli_practice/", dat_2$Video), ]
+dat_3  <- dat_3[!grepl("^stimuli_practice/", dat_3$Video), ]
+dat_4  <- dat_4[!grepl("^stimuli_practice/", dat_4$Video), ]
+dat_5  <- dat_5[!grepl("^stimuli_practice/", dat_5$Video), ]
+dat_6  <- dat_6[!grepl("^stimuli_practice/", dat_6$Video), ]
+dat_7  <- dat_7[!grepl("^stimuli_practice/", dat_7$Video), ]
+dat_8  <- dat_8[!grepl("^stimuli_practice/", dat_8$Video), ]
+dat_9  <- dat_9[!grepl("^stimuli_practice/", dat_9$Video), ]
+dat_10 <- dat_10[!grepl("^stimuli_practice/", dat_10$Video), ]
+dat_11 <- dat_11[!grepl("^stimuli_practice/", dat_11$Video), ]
+dat_12 <- dat_12[!grepl("^stimuli_practice/", dat_12$Video), ]
+dat_13 <- dat_13[!grepl("^stimuli_practice/", dat_13$Video), ]
+dat_14 <- dat_14[!grepl("^stimuli_practice/", dat_14$Video), ]
+dat_15 <- dat_15[!grepl("^stimuli_practice/", dat_15$Video), ]
+
+cat("完成！已删除所有 stimuli_practice/ 开头的行\n")
+```
+
+```{r}
+
+
+summarize_dat <- function(dat) {
+  dat %>%
+    summarise(
+      # T_encode
+      mean_T_encode     = mean(cat_practice_question.stopped - cat_practice_question.started, na.rm = TRUE),
+      sd_T_encode       = sd(cat_practice_question.stopped   - cat_practice_question.started, na.rm = TRUE),
+      
+      # RT_onset
+      mean_RT_onset     = mean(key_resp_8.rt, na.rm = TRUE),
+      sd_RT_onset       = sd(key_resp_8.rt,   na.rm = TRUE),
+      
+      # RT_critical
+      mean_RT_critical  = mean(key_resp_8.rt - critical_time, na.rm = TRUE),
+      sd_RT_critical    = sd(key_resp_8.rt   - critical_time, na.rm = TRUE),
+      
+      # ACC
+      mean_ACC          = mean(key_resp_8.corr, na.rm = TRUE),
+      sd_ACC            = sd(key_resp_8.corr,   na.rm = TRUE),
+      
+      # IES_onset
+      mean_IES_onset    = mean(key_resp_8.rt / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
+      sd_IES_onset      = sd(key_resp_8.rt   / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
+      
+      # IES_critical
+      mean_IES_critical = mean((key_resp_8.rt - critical_time) / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
+      sd_IES_critical   = sd((key_resp_8.rt   - critical_time) / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE)
+    )
+}
+
+# 生成每个dat的summary table
+summary_1  <- summarize_dat(dat_1)
+summary_2  <- summarize_dat(dat_2)
+summary_3  <- summarize_dat(dat_3)
+summary_4  <- summarize_dat(dat_4)
+summary_5  <- summarize_dat(dat_5)
+summary_6  <- summarize_dat(dat_6)
+summary_7  <- summarize_dat(dat_7)
+summary_8  <- summarize_dat(dat_8)
+summary_9  <- summarize_dat(dat_9)
+summary_10 <- summarize_dat(dat_10)
+summary_11 <- summarize_dat(dat_11)
+summary_12 <- summarize_dat(dat_12)
+summary_13 <- summarize_dat(dat_13)
+summary_14 <- summarize_dat(dat_14)
+summary_15 <- summarize_dat(dat_15)
+
+cat("Summary tables 生成完成！\n")
+
+# 可选：合并所有summary为一个大表（加participant列）
+all_summary <- bind_rows(
+  mutate(summary_1,  participant = dat_1$participant[1]),
+  mutate(summary_2,  participant = dat_2$participant[1]),
+  mutate(summary_3,  participant = dat_3$participant[1]),
+  mutate(summary_4,  participant = dat_4$participant[1]),
+  mutate(summary_5,  participant = dat_5$participant[1]),
+  mutate(summary_6,  participant = dat_6$participant[1]),
+  mutate(summary_7,  participant = dat_7$participant[1]),
+  mutate(summary_8,  participant = dat_8$participant[1]),
+  mutate(summary_9,  participant = dat_9$participant[1]),
+  mutate(summary_10, participant = dat_10$participant[1]),
+  mutate(summary_11, participant = dat_11$participant[1]),
+  mutate(summary_12, participant = dat_12$participant[1]),
+  mutate(summary_13, participant = dat_13$participant[1]),
+  mutate(summary_14, participant = dat_14$participant[1]),
+  mutate(summary_15, participant = dat_15$participant[1])
+) %>% select(participant, everything())
+
+print(all_summary)
+```
+
+```{r}
+write.csv(all_summary, 
+          file = "../all_summary.csv", 
+          row.names = FALSE)
+
+cat("导出完成！\n")
+```
+
+
+```{r}
+# 筛选 correct trials
+dat_1c  <- dat_1[dat_1$key_resp_8.corr  == 1, ]
+dat_2c  <- dat_2[dat_2$key_resp_8.corr  == 1, ]
+dat_3c  <- dat_3[dat_3$key_resp_8.corr  == 1, ]
+dat_4c  <- dat_4[dat_4$key_resp_8.corr  == 1, ]
+dat_5c  <- dat_5[dat_5$key_resp_8.corr  == 1, ]
+dat_6c  <- dat_6[dat_6$key_resp_8.corr  == 1, ]
+dat_7c  <- dat_7[dat_7$key_resp_8.corr  == 1, ]
+dat_8c  <- dat_8[dat_8$key_resp_8.corr  == 1, ]
+dat_9c  <- dat_9[dat_9$key_resp_8.corr  == 1, ]
+dat_10c <- dat_10[dat_10$key_resp_8.corr == 1, ]
+dat_11c <- dat_11[dat_11$key_resp_8.corr == 1, ]
+dat_12c <- dat_12[dat_12$key_resp_8.corr == 1, ]
+dat_13c <- dat_13[dat_13$key_resp_8.corr == 1, ]
+dat_14c <- dat_14[dat_14$key_resp_8.corr == 1, ]
+dat_15c <- dat_15[dat_15$key_resp_8.corr == 1, ]
+
+# 生成 summary
+summary_1c  <- summarize_dat(dat_1c)
+summary_2c  <- summarize_dat(dat_2c)
+summary_3c  <- summarize_dat(dat_3c)
+summary_4c  <- summarize_dat(dat_4c)
+summary_5c  <- summarize_dat(dat_5c)
+summary_6c  <- summarize_dat(dat_6c)
+summary_7c  <- summarize_dat(dat_7c)
+summary_8c  <- summarize_dat(dat_8c)
+summary_9c  <- summarize_dat(dat_9c)
+summary_10c <- summarize_dat(dat_10c)
+summary_11c <- summarize_dat(dat_11c)
+summary_12c <- summarize_dat(dat_12c)
+summary_13c <- summarize_dat(dat_13c)
+summary_14c <- summarize_dat(dat_14c)
+summary_15c <- summarize_dat(dat_15c)
+
+# 合并
+all_summary_correct <- bind_rows(
+  mutate(summary_1c,  participant = dat_1c$participant[1]),
+  mutate(summary_2c,  participant = dat_2c$participant[1]),
+  mutate(summary_3c,  participant = dat_3c$participant[1]),
+  mutate(summary_4c,  participant = dat_4c$participant[1]),
+  mutate(summary_5c,  participant = dat_5c$participant[1]),
+  mutate(summary_6c,  participant = dat_6c$participant[1]),
+  mutate(summary_7c,  participant = dat_7c$participant[1]),
+  mutate(summary_8c,  participant = dat_8c$participant[1]),
+  mutate(summary_9c,  participant = dat_9c$participant[1]),
+  mutate(summary_10c, participant = dat_10c$participant[1]),
+  mutate(summary_11c, participant = dat_11c$participant[1]),
+  mutate(summary_12c, participant = dat_12c$participant[1]),
+  mutate(summary_13c, participant = dat_13c$participant[1]),
+  mutate(summary_14c, participant = dat_14c$participant[1]),
+  mutate(summary_15c, participant = dat_15c$participant[1])
+) %>% select(participant, everything())
+
+# 导出
+write.csv(all_summary_correct,
+          file = "../with_correct_trial.csv",
+          row.names = FALSE)
+
+cat("导出完成！\n")
+print(all_summary_correct)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -1,0 +1,213 @@
+---
+title: "pilot_cat"
+output: html_document
+date: "2026-03-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+# Path repair after reorganisation: this notebook moved to
+# _organized/code/, the CSVs stayed in place.
+data_dir <- "."
+dat <- read.csv(file.path(data_dir, "all_summary_1.csv"))
+dat_1 <- read.csv(file.path(data_dir, "all_summary_2.csv"))
+dat_2 <- read.csv(file.path(data_dir, "with_correct_trial_1.csv"))
+dat_3 <- read.csv(file.path(data_dir, "with_correct_trial_2.csv"))
+```
+
+```{r}
+dat_c <- bind_rows(dat, dat_1)
+
+cat("合并完成：", nrow(dat), "行，", ncol(dat), "列\n")
+```
+
+```{r}
+dat_cc <- bind_rows(dat_2, dat_3)
+
+cat("合并完成：", nrow(dat), "行，", ncol(dat), "列\n")
+```
+
+
+```{r}
+summary_table <- dat_c %>%
+  summarise(
+    T_encode_mean    = mean(mean_T_encode,    na.rm = TRUE),
+    T_encode_sd      = sd(mean_T_encode,      na.rm = TRUE),
+    
+    RT_onset_mean    = mean(mean_RT_onset,    na.rm = TRUE),
+    RT_onset_sd      = sd(mean_RT_onset,      na.rm = TRUE),
+    
+    RT_critical_mean = mean(mean_RT_critical, na.rm = TRUE),
+    RT_critical_sd   = sd(mean_RT_critical,   na.rm = TRUE),
+    
+    ACC_mean         = mean(mean_ACC,         na.rm = TRUE),
+    ACC_sd           = sd(mean_ACC,           na.rm = TRUE)
+  )
+
+print(summary_table)
+```
+```{r}
+summary_table_c <- dat_cc %>%
+  summarise(
+    T_encode_mean    = mean(mean_T_encode,    na.rm = TRUE),
+    T_encode_sd      = sd(mean_T_encode,      na.rm = TRUE),
+    
+    RT_onset_mean    = mean(mean_RT_onset,    na.rm = TRUE),
+    RT_onset_sd      = sd(mean_RT_onset,      na.rm = TRUE),
+    
+    RT_critical_mean = mean(mean_RT_critical, na.rm = TRUE),
+    RT_critical_sd   = sd(mean_RT_critical,   na.rm = TRUE),
+    
+    ACC_mean         = mean(mean_ACC,         na.rm = TRUE),
+    ACC_sd           = sd(mean_ACC,           na.rm = TRUE)
+  )
+
+print(summary_table)
+```
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+
+# 分开 ACC 和其他指标
+dat_long_rt <- dat_c %>%
+  select(participant, mean_T_encode, mean_RT_onset, mean_RT_critical) %>%
+  pivot_longer(
+    cols = c(mean_T_encode, mean_RT_onset, mean_RT_critical),
+    names_to = "measure",
+    values_to = "value"
+  ) %>%
+  mutate(measure = recode(measure,
+    "mean_T_encode"    = "T_encode",
+    "mean_RT_onset"    = "RT_onset",
+    "mean_RT_critical" = "RT_critical"
+  ))
+
+dat_long_acc <- dat_c %>%
+  select(participant, mean_ACC) %>%
+  mutate(mean_ACC = mean_ACC * 100)  # 转成 %
+
+# 计算均值SD
+summary_rt  <- dat_long_rt %>%
+  group_by(measure) %>%
+  summarise(mean = mean(value, na.rm = TRUE),
+            sd   = sd(value,   na.rm = TRUE))
+
+summary_acc <- dat_long_acc %>%
+  summarise(mean = mean(mean_ACC, na.rm = TRUE),
+            sd   = sd(mean_ACC,   na.rm = TRUE)) %>%
+  mutate(measure = "ACC")
+
+# Bar chart
+bar_rt <- ggplot(summary_rt, aes(x = measure, y = mean, fill = measure)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd), width = 0.2) +
+  scale_y_continuous(name = "Time (s)", sec.axis = sec_axis(
+    ~ . / max(summary_rt$mean) * 100,
+    name = "ACC (%)"
+  )) +
+  geom_bar(data = summary_acc, aes(x = measure, y = mean / 100 * max(summary_rt$mean)),
+           stat = "identity", width = 0.6, fill = "#E69F00") +
+  geom_errorbar(data = summary_acc,
+                aes(x = measure,
+                    y = mean / 100 * max(summary_rt$mean),
+                    ymin = (mean - sd) / 100 * max(summary_rt$mean),
+                    ymax = (mean + sd) / 100 * max(summary_rt$mean)),
+                width = 0.2) +
+  labs(title = "Bar Chart (Mean ± SD)", x = "") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.title.y.right = element_text(color = "#E69F00"),
+        axis.text.y.right  = element_text(color = "#E69F00"))
+
+# Box plot
+box_rt <- ggplot(dat_long_rt, aes(x = measure, y = value, fill = measure)) +
+  geom_boxplot(width = 0.6, outlier.shape = 16, outlier.size = 2) +
+  scale_y_continuous(name = "Time (s)", sec.axis = sec_axis(
+    ~ . / max(dat_long_rt$value, na.rm = TRUE) * 100,
+    name = "ACC (%)"
+  )) +
+  geom_boxplot(data = dat_long_acc %>% rename(value = mean_ACC) %>% mutate(
+    measure = "ACC",
+    value = value / 100 * max(dat_long_rt$value, na.rm = TRUE)
+  ), aes(x = measure, y = value), fill = "#E69F00", width = 0.6) +
+  labs(title = "Box Plot", x = "") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.title.y.right = element_text(color = "#E69F00"),
+        axis.text.y.right  = element_text(color = "#E69F00"))
+
+# 并排
+bar_rt + box_rt
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+
+# RT 相关指标
+dat_long_rt <- dat_cc %>%
+  select(participant, mean_T_encode, mean_RT_onset, mean_RT_critical) %>%
+  pivot_longer(
+    cols = c(mean_T_encode, mean_RT_onset, mean_RT_critical),
+    names_to = "measure",
+    values_to = "value"
+  ) %>%
+  mutate(measure = recode(measure,
+    "mean_T_encode"    = "T_encode",
+    "mean_RT_onset"    = "RT_onset",
+    "mean_RT_critical" = "RT_critical"
+  ))
+
+# 计算均值SD
+summary_rt <- dat_long_rt %>%
+  group_by(measure) %>%
+  summarise(mean = mean(value, na.rm = TRUE),
+            sd   = sd(value,   na.rm = TRUE))
+
+# Bar chart
+bar_rt <- ggplot(summary_rt, aes(x = measure, y = mean, fill = measure)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd), width = 0.2) +
+  labs(title = "Bar Chart (Mean ± SD)", x = "", y = "Time (s)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Box plot
+box_rt <- ggplot(dat_long_rt, aes(x = measure, y = value, fill = measure)) +
+  geom_boxplot(width = 0.6, outlier.shape = 16, outlier.size = 2) +
+  labs(title = "Box Plot", x = "", y = "Time (s)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# 并排
+bar_rt + box_rt
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

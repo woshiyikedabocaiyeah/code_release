@@ -1,0 +1,1382 @@
+---
+title: "cat_pilot_matrix"
+output: html_document
+date: "2026-04-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+# --- figure output redirected to _organized/figures/ ---
+# Data files and CSV/RDS outputs keep their original paths.
+fig_dir <- "../../../figures/data_analysis/ex_sensor_matrix"
+dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
+
+folder_path <- "../../project1_ex/sensor"
+
+csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# 分出 output, answer, 和数据文件
+output_file <- csv_files[grepl("output\\.csv$", csv_files)]
+answer_file <- csv_files[grepl("sensor_answer\\.csv$", csv_files)]
+data_files  <- csv_files[!grepl("output\\.csv$", csv_files) & 
+                         !grepl("sensor_answer\\.csv$", csv_files)]
+
+# 读取 output 和 answer
+output <- read.csv(output_file, header = TRUE)
+cat("output 已读取：", nrow(output), "行，", ncol(output), "列\n")
+
+answer <- read.csv(answer_file, header = TRUE)
+cat("answer 已读取：", nrow(answer), "行，", ncol(answer), "列\n")
+
+# 读取其余文件为 dat_1, dat_2...
+for (i in seq_along(data_files)) {
+  tryCatch({
+    dat <- read.csv(data_files[i], header = TRUE)
+    assign(paste0("dat_", i), dat)
+    cat(paste0("dat_", i, " 已读取：", basename(data_files[i]),
+               "（", nrow(dat), " 行，", ncol(dat), " 列）\n"))
+  }, error = function(e) {
+    cat(paste0("跳过：", basename(data_files[i]), " -> ", e$message, "\n"))
+  })
+}
+rm(dat)
+```
+
+```{r}
+for (i in 1:131) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  dat <- dat[grepl("^video/", dat$Video, ignore.case = FALSE), ]
+  assign(dat_name, dat)
+}
+rm(dat)
+cat("完成！已保留所有 video/ 开头的行\n")
+```
+
+```{r}
+for (i in 1:131) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  # 以 Video = key 为键，merge output 的 time 列
+  dat <- merge(dat, output[, c("key", "time")], 
+               by.x = "Video", by.y = "key", 
+               all.x = TRUE)
+  
+  assign(dat_name, dat)
+}
+rm(dat)
+cat("完成！time 列已添加到所有 dat\n")
+```
+
+```{r}
+for (i in 1:131) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  # 直接用 match 而不是 merge，避免行数问题
+  idx <- match(dat$Video, answer$Video)
+  dat$key_resp_9.corr <- ifelse(dat$key_resp_9.keys == answer$SM_Ans[idx], 1, 0)
+  
+  assign(dat_name, dat)
+}
+
+rm(dat)
+cat("完成！key_resp_9.corr 已添加到所有 dat\n")
+```
+
+```{r}
+folder_path <- "../../project2_ex/sensor"
+
+csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# 分出 output, answer, 和数据文件
+output_file <- csv_files[grepl("output\\.csv$", csv_files)]
+answer_file <- csv_files[grepl("sensor_answer\\.csv$", csv_files)]
+data_files  <- csv_files[!grepl("output\\.csv$", csv_files) & 
+                         !grepl("sensor_answer\\.csv$", csv_files)]
+
+# 读取 output 和 answer
+output <- read.csv(output_file, header = TRUE)
+cat("output 已读取：", nrow(output), "行，", ncol(output), "列\n")
+
+answer_1 <- read.csv(answer_file, header = TRUE)
+cat("answer 已读取：", nrow(answer), "行，", ncol(answer), "列\n")
+
+# 读取其余文件为 dat_1, dat_2...
+for (i in seq_along(data_files)) {
+  tryCatch({
+    dat <- read.csv(data_files[i], header = TRUE)
+    assign(paste0("dat_", i+131), dat)
+    cat(paste0("dat_", i+131, " 已读取：", basename(data_files[i]),
+               "（", nrow(dat), " 行，", ncol(dat), " 列）\n"))
+  }, error = function(e) {
+    cat(paste0("跳过：", basename(data_files[i]), " -> ", e$message, "\n"))
+  })
+}
+rm(dat)
+```
+
+```{r}
+for (i in 132:258) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  dat <- dat[grepl("^video/", dat$Video, ignore.case = FALSE), ]
+  assign(dat_name, dat)
+}
+
+cat("完成！已保留所有 video/ 开头的行\n")
+rm(dat)
+```
+
+```{r}
+for (i in 132:258) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  # 以 Video = key 为键，merge output 的 time 列
+  dat <- merge(dat, output[, c("key", "time")], 
+               by.x = "Video", by.y = "key", 
+               all.x = TRUE)
+  
+  assign(dat_name, dat)
+}
+rm(dat)
+cat("完成！time 列已添加到所有 dat\n")
+
+```
+
+```{r}
+for (i in 132:258) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  # 直接用 match 而不是 merge，避免行数问题
+  idx <- match(dat$Video, answer_1$Video)
+  dat$key_resp_9.corr <- ifelse(dat$key_resp_9.keys == answer_1$SM_Ans[idx], 1, 0)
+  
+  assign(dat_name, dat)
+}
+
+rm(dat)
+cat("完成！key_resp_9.corr 已添加到所有 dat\n")
+```
+
+```{r}
+for (i in 1:258) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  dat <- dat %>%
+    mutate(rt_critical = key_resp_9.rt - time)
+  
+  assign(dat_name, dat)
+}
+cat("完成！rt_critical 列已添加到所有 dat\n")
+rm(dat)
+```
+
+```{r}
+for (i in 1:258) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  dat <- dat %>%
+    dplyr::select(participant, Video, key_resp_9.rt, key_resp_9.corr)
+  
+  assign(dat_name, dat)
+}
+cat("完成！\n")
+rm(dat)
+```
+
+```{r}
+all_cat <- bind_rows(lapply(1:258, function(i) {
+  get(paste0("dat_", i))
+}))
+
+cat("合并完成：", nrow(all_cat), "行，", ncol(all_cat), "列\n")
+```
+
+```{r}
+
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(pheatmap)
+
+# =========================================================
+# Step 1. 构建 RT 矩阵（行 = Video，列 = participant）
+# 同一个 Video × participant 如果有多条 trial，先取 mean
+# =========================================================
+rt_wide <- all_cat %>%
+  dplyr::select(Video, participant, key_resp_9.rt) %>%
+  filter(!is.na(key_resp_9.rt)) %>%
+  pivot_wider(
+    names_from  = participant,
+    values_from = key_resp_9.rt,
+    values_fn   = mean
+  )
+
+rt_matrix <- rt_wide %>%
+  column_to_rownames("Video") %>%
+  as.matrix()
+
+cat("RT 矩阵维度：", dim(rt_matrix), "\n")
+cat("视频数：", nrow(rt_matrix), "\n")
+cat("被试数：", ncol(rt_matrix), "\n")
+cat("缺失值数量：", sum(is.na(rt_matrix)), "\n")
+
+# =========================================================
+# Step 2. 每列 z-score（按 participant 标准化）
+# 去掉不同被试整体快慢差异
+# =========================================================
+rt_zscored <- scale(rt_matrix, center = TRUE, scale = TRUE)
+
+# 去掉标准化后没有信息的列
+keep_cols <- colSums(!is.na(rt_zscored)) > 1
+rt_zscored <- rt_zscored[, keep_cols, drop = FALSE]
+
+cat("标准化后矩阵维度：", dim(rt_zscored), "\n")
+
+# =========================================================
+# Step 3. 计算 RDM
+# 比较的是 video 和 video 之间的 dissimilarity
+# correlation distance = 1 - Pearson correlation
+# =========================================================
+rdm_rt <- 1 - cor(
+  t(rt_zscored),
+  method = "pearson",
+  use = "pairwise.complete.obs"
+)
+
+# 保证行列名是 Video
+rownames(rdm_rt) <- rownames(rt_zscored)
+colnames(rdm_rt) <- rownames(rt_zscored)
+
+cat("RDM 维度：", dim(rdm_rt), "\n")
+
+# =========================================================
+# Step 4. 可视化
+# =========================================================
+pheatmap(
+  rdm_rt,
+  cluster_rows = TRUE,
+  cluster_cols = TRUE,
+  show_rownames = FALSE,
+  show_colnames = FALSE,
+  main = "Human RDM - RT"
+)
+
+# =========================================================
+# Step 5. 保存
+# =========================================================
+saveRDS(rdm_rt, "human_rdm_rt.rds")
+write.csv(rdm_rt, "human_rdm_rt.csv")
+```
+
+```{r}
+
+```
+
+```{r}
+# ── Step 1: 构建 RT 矩阵（行=视频，列=被试）──────────
+rt_wide <- all_cat %>%
+  dplyr::select(Video, participant, key_resp_9.rt) %>%
+  filter(!is.na(key_resp_9.rt)) %>%
+  pivot_wider(names_from  = participant,
+              values_from = key_resp_9.rt,
+              values_fn   = mean)
+
+rt_matrix <- rt_wide %>%
+  column_to_rownames("Video") %>%
+  as.matrix()
+
+cat("RT 矩阵维度：", dim(rt_matrix), "\n")
+cat("视频数：", nrow(rt_matrix), "\n")
+cat("被试数：", ncol(rt_matrix), "\n")
+
+# 检查缺失值
+cat("缺失值数量：", sum(is.na(rt_matrix)), "\n")
+```
+
+```{r}
+save_path <- "."
+
+# 如果文件夹不存在就创建
+if (!dir.exists(save_path)) {
+  dir.create(save_path, recursive = TRUE)
+}
+
+# 保存为 RDS
+saveRDS(rdm_rt, file.path(save_path, "human_rdm_rt.rds"))
+
+# 保存为 CSV
+write.csv(rdm_rt, file.path(save_path, "human_rdm_rt.csv"), row.names = TRUE)
+
+write.csv(rt_wide, file.path(save_path, "rt_wide.csv"), row.names = FALSE)
+```
+
+
+
+rdm-correctness
+```{r}
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(pheatmap)
+
+# =========================================================
+# Step 1. 构建 correctness 矩阵（行 = Video，列 = participant）
+# 同一个 Video × participant 如果有多条 trial，先取 mean
+# 这样每个 cell 表示该 participant 对该 video 的正确率
+# =========================================================
+corr_wide <- all_cat %>%
+  dplyr::select(Video, participant, key_resp_9.corr) %>%
+  filter(!is.na(key_resp_9.corr)) %>%
+  pivot_wider(
+    names_from  = participant,
+    values_from = key_resp_9.corr,
+    values_fn   = mean
+  )
+
+corr_matrix <- corr_wide %>%
+  column_to_rownames("Video") %>%
+  as.matrix()
+
+cat("Correctness 矩阵维度：", dim(corr_matrix), "\n")
+cat("视频数：", nrow(corr_matrix), "\n")
+cat("被试数：", ncol(corr_matrix), "\n")
+cat("缺失值数量：", sum(is.na(corr_matrix)), "\n")
+
+# =========================================================
+# Step 2. 计算 RDM
+# 用平均绝对差（适合 binary / proportion correctness）
+# d(i,j) = mean(|x_i - x_j|)
+# =========================================================
+video_ids <- rownames(corr_matrix)
+n_video <- nrow(corr_matrix)
+
+rdm_corr <- matrix(
+  NA_real_,
+  nrow = n_video,
+  ncol = n_video,
+  dimnames = list(video_ids, video_ids)
+)
+
+for (i in seq_len(n_video)) {
+  for (j in i:n_video) {
+    xi <- corr_matrix[i, ]
+    xj <- corr_matrix[j, ]
+    
+    keep <- !is.na(xi) & !is.na(xj)
+    
+    if (sum(keep) == 0) {
+      d <- NA_real_
+    } else {
+      d <- mean(abs(xi[keep] - xj[keep]))
+    }
+    
+    rdm_corr[i, j] <- d
+    rdm_corr[j, i] <- d
+  }
+}
+
+cat("RDM 维度：", dim(rdm_corr), "\n")
+
+# =========================================================
+# Step 3. 可视化
+# =========================================================
+pheatmap(
+  rdm_corr,
+  cluster_rows = TRUE,
+  cluster_cols = TRUE,
+  show_rownames = FALSE,
+  show_colnames = FALSE,
+  main = "Human RDM - Correctness"
+)
+
+# =========================================================
+# Step 4. 保存
+# =========================================================
+save_path <- "."
+
+if (!dir.exists(save_path)) {
+  dir.create(save_path, recursive = TRUE)
+}
+
+saveRDS(rdm_corr, file.path(save_path, "human_rdm_corr.rds"))
+write.csv(rdm_corr, file.path(save_path, "human_rdm_corr.csv"), row.names = TRUE)
+
+write.csv(corr_wide, file.path(save_path, "corr_wide.csv"), row.names = FALSE)
+```
+
+```{r}
+# ── Step 2: 每列计算 z-score ──────────────────────────
+rt_zscored <- scale(rt_matrix, center = TRUE, scale = TRUE)
+
+# ── Step 3: 跑 PCA ───────────────────────────────────
+pca_rt <- prcomp(rt_zscored, center = FALSE, scale. = FALSE)
+
+# ── Step 4: 查看方差解释 ──────────────────────────────
+var_explained <- summary(pca_rt)$importance
+cat("=== 各 PC 方差解释 ===\n")
+print(round(var_explained[, 1:10], 3))
+
+# 找到解释 80% 和 90% 方差所需的 PC 数量
+cum_var <- cumsum(pca_rt$sdev^2 / sum(pca_rt$sdev^2))
+k_80 <- which(cum_var >= 0.80)[1]
+k_90 <- which(cum_var >= 0.90)[1]
+cat("\n解释 80% 方差需要", k_80, "个 PC\n")
+cat("解释 90% 方差需要", k_90, "个 PC\n")
+
+# ── Step 5: 可视化方差解释 ───────────────────────────
+plot(cum_var, type = "b", pch = 19,
+     xlab = "Number of PCs",
+     ylab = "Cumulative Variance Explained",
+     main = "Sensorimotor - RT PCA")
+abline(h = 0.80, col = "blue", lty = 2)
+abline(h = 0.90, col = "red",  lty = 2)
+legend("bottomright",
+       legend = c("80%", "90%"),
+       col    = c("blue", "red"),
+       lty    = 2)
+
+# ── Step 6: 每个视频在每个 PC 上的得分 ──────────────
+pc_scores <- pca_rt$x
+cat("\n=== 视频 PC 得分（前5行，前5个PC）===\n")
+print(round(pc_scores[1:5, 1:5], 3))
+
+# ── Step 7: 每个 PC 得分最高和最低的视频 ────────────
+cat("\n=== 各 PC 得分最高/最低的视频 ===\n")
+for (k in 1:k_90) {
+  scores <- pc_scores[, k]
+  top10   <- names(sort(scores, decreasing = TRUE))[1:10]
+  bot10   <- names(sort(scores, decreasing = FALSE))[1:10]
+  cat(paste0("\nPC", k, ":\n"))
+  cat("  最高：", paste(top10, collapse = ", "), "\n")
+  cat("  最低：", paste(bot10, collapse = ", "), "\n")
+}
+```
+
+```{r}
+save_path <- "."
+# ── Step 8: 保存所有 PC loadings ─────────────────────
+loadings_all <- as.data.frame(pca_rt$rotation)
+loadings_all$participant <- rownames(pca_rt$rotation)
+loadings_all <- loadings_all %>% dplyr::select(participant, everything())
+
+cat("Loadings 矩阵维度（全部）：", dim(loadings_all), "\n")
+
+write.csv(loadings_all,
+          file.path(save_path, "ex_sensor_RT_PCA_loadings_all.csv"),
+          row.names = FALSE)
+
+# ── Step 9: 保存所有 PC scores ───────────────────────
+pc_scores_all <- as.data.frame(pca_rt$x)
+pc_scores_all$Video <- rownames(pca_rt$x)
+pc_scores_all <- pc_scores_all %>% dplyr::select(Video, everything())
+
+cat("PC Scores 矩阵维度（全部）：", dim(pc_scores_all), "\n")
+
+write.csv(pc_scores_all,
+          file.path(save_path, "ex_sensor_RT_PCA_scores_all.csv"),
+          row.names = FALSE)
+
+```
+
+PC1 只解释 7.3%，是所有任务中最低的
+需要 28 个 PC 解释 80% 方差
+需要 36 个 PC 解释 90% 方差
+曲线几乎完全线性
+
+```{r}
+save_path <- "."
+eigenvalues <- pca_rt$sdev^2
+
+scree_df <- data.frame(
+  PC          = 1:length(eigenvalues),
+  Eigenvalue  = eigenvalues
+)
+
+p_scree <- ggplot(scree_df, aes(x = PC, y = Eigenvalue)) +
+  geom_line(color = "black", linewidth = 0.6) +
+  geom_point(color = "black", size = 2) +
+  scale_x_continuous(breaks = seq(1, length(eigenvalues), by = 5)) +
+  labs(title = "Scree Plot",
+       x = "Component Number",
+       y = "Eigenvalue") +
+  theme_classic(base_size = 9) +
+  theme(
+    plot.title  = element_text(size = 10, hjust = 0.5),
+    axis.text   = element_text(size = 8, color = "black"),
+    axis.line   = element_line(color = "black", linewidth = 0.4),
+    axis.ticks  = element_line(color = "black", linewidth = 0.3)
+  )
+
+print(p_scree)
+
+ggsave(
+  filename = file.path(fig_dir, "ex_cat_RT_PCA_scree.pdf"),
+  plot = p_scree, width = 90, height = 80, units = "mm",
+  dpi = 300, device = cairo_pdf
+)
+ggsave(
+  filename = file.path(fig_dir, "ex_cat_RT_PCA_scree.png"),
+  plot = p_scree, width = 90, height = 80, units = "mm",
+  dpi = 300
+)
+cat("Scree plot 已保存！\n")
+```
+
+```{r}
+# ── 保存 PC scores（保留 80% 方差的前14个PC）──────────
+save_path <- "."
+
+pc_scores_80 <- as.data.frame(pc_scores[, 1:k_80])
+pc_scores_80$Video <- rownames(pc_scores)
+pc_scores_80 <- pc_scores_80 %>% dplyr::select(Video, everything())
+
+pc_scores_90 <- as.data.frame(pc_scores[, 1:k_90])
+pc_scores_90$Video <- rownames(pc_scores)
+pc_scores_90 <- pc_scores_90 %>% dplyr::select(Video, everything())
+
+# 导出
+write.csv(pc_scores_80,
+          file.path(save_path, "sensor_RT_PCA_scores_80pct.csv"),
+          row.names = FALSE)
+write.csv(pc_scores_90,
+          file.path(save_path, "sensor_RT_PCA_scores_90pct.csv"),
+          row.names = FALSE)
+
+# ── 保存方差解释图 ────────────────────────────────────
+library(ggplot2)
+
+var_df <- data.frame(
+  PC  = 1:length(pca_rt$sdev),
+  cum = cumsum(pca_rt$sdev^2 / sum(pca_rt$sdev^2))
+)
+
+ggplot(var_df, aes(x = PC, y = cum)) +
+  geom_line(color = "#4DBBD5", linewidth = 0.8) +
+  geom_point(color = "#4DBBD5", size = 1.5) +
+  geom_hline(yintercept = 0.80, linetype = "dashed", color = "blue") +
+  geom_hline(yintercept = 0.90, linetype = "dashed", color = "red") +
+  geom_vline(xintercept = k_80, linetype = "dotted", color = "blue") +
+  geom_vline(xintercept = k_90, linetype = "dotted", color = "red") +
+  annotate("text", x = k_80 + 0.5, y = 0.75,
+           label = paste0("80%: k=", k_80), color = "blue", size = 3) +
+  annotate("text", x = k_90 + 0.5, y = 0.85,
+           label = paste0("90%: k=", k_90), color = "red", size = 3) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Sensorimotor Task - RT PCA Cumulative Variance Explained",
+       x = "Number of PCs", y = "Cumulative Variance Explained") +
+  theme_classic(base_size = 10)
+
+ggsave(file.path(fig_dir, "sensor_RT_PCA_variance.png"),
+       width = 8, height = 5, dpi = 300)
+
+cat("完成！PC scores 和方差图已保存\n")
+```
+
+```{r}
+
+```
+
+```{r}
+library(logisticPCA)
+save_path <- "."
+# ── Step 1: 构建 Correctness 矩阵 ────────────────────
+corr_wide <- all_cat %>%
+  dplyr::select(Video, participant, key_resp_9.corr) %>%
+  filter(!is.na(key_resp_9.corr)) %>%
+  pivot_wider(names_from  = participant,
+              values_from = key_resp_9.corr,
+              values_fn   = mean)
+
+corr_matrix <- corr_wide %>%
+  column_to_rownames("Video") %>%
+  as.matrix()
+
+cat("Correctness 矩阵维度：", dim(corr_matrix), "\n")
+cat("缺失值数量：", sum(is.na(corr_matrix)), "\n")
+
+# ── Step 2: Cross-validation 选最优 k ────────────────
+logpca_cv <- cv.lpca(corr_matrix, ks = 1:10, ms = 4)
+plot(logpca_cv)
+k_opt <- which.min(rowMeans(logpca_cv))
+cat("最优 k：", k_opt, "\n")
+
+# ── Step 3: 跑 Logistic PCA ───────────────────────────
+logpca_model <- logisticPCA(corr_matrix, k = k_opt, m = 4)
+
+# ── Step 4: 每个视频的 PC 得分 ───────────────────────
+pc_scores_corr <- logpca_model$PCs
+rownames(pc_scores_corr) <- rownames(corr_matrix)
+
+cat("\n=== 各 PC 得分最高/最低的视频 ===\n")
+for (k in 1:k_opt) {
+  scores <- pc_scores_corr[, k]
+  top10   <- names(sort(scores, decreasing = TRUE))[1:10]
+  bot10   <- names(sort(scores, decreasing = FALSE))[1:10]
+  cat(paste0("\nPC", k, ":\n"))
+  cat("  最高：", paste(top10, collapse = ", "), "\n")
+  cat("  最低：", paste(bot10, collapse = ", "), "\n")
+}
+
+# ── Step 5: 方差解释 ──────────────────────────────────
+cat("\n=== 方差解释 ===\n")
+var_exp <- logpca_model$prop_deviance_expl
+cat("各 PC 解释的方差比例：\n")
+print(round(var_exp, 3))
+
+# ── Step 6: 保存 ─────────────────────────────────────
+pc_scores_corr_df <- as.data.frame(pc_scores_corr)
+pc_scores_corr_df$Video <- rownames(corr_matrix)
+pc_scores_corr_df <- pc_scores_corr_df %>% dplyr::select(Video, everything())
+
+write.csv(pc_scores_corr_df,
+          file.path(save_path, "sensor_correctness_logisticPCA_scores.csv"),
+          row.names = FALSE)
+cat("\n完成！Logistic PCA scores 已保存\n")
+```
+
+```{r}
+# ── Step 7: 保存 Logistic PCA loadings ───────────────
+# logisticPCA 的 loadings 存在 logpca_model$U
+loadings_corr <- as.data.frame(logpca_model$U)
+colnames(loadings_corr) <- paste0("PC", 1:k_opt)
+loadings_corr$participant <- colnames(corr_matrix)
+loadings_corr <- loadings_corr %>% dplyr::select(participant, everything())
+
+cat("Logistic PCA Loadings 矩阵维度：", dim(loadings_corr), "\n")
+
+write.csv(loadings_corr,
+          file.path(save_path, "sensor_correctness_logisticPCA_loadings.csv"),
+          row.names = FALSE)
+cat("Logistic PCA Loadings 已保存！\n")
+```
+
+```{r}
+# ── Step 5.5: Scree Plot ──────────────────────────────
+max_k <- 20
+var_by_k <- numeric(max_k)
+
+for (k in 1:max_k) {
+  m <- logisticPCA(corr_matrix, k = k, m = 4)
+  var_by_k[k] <- m$prop_deviance_expl
+}
+
+# 每个 PC 新增的边际方差
+marginal_var <- c(var_by_k[1], diff(var_by_k))
+
+scree_df_corr <- data.frame(
+  PC           = 1:max_k,
+  Marginal_Var = marginal_var
+)
+
+p_scree_corr <- ggplot(scree_df_corr, aes(x = PC, y = Marginal_Var)) +
+  geom_line(color = "black", linewidth = 0.6) +
+  geom_point(color = "black", size = 2) +
+  scale_x_continuous(breaks = 1:max_k) +
+  scale_y_continuous(labels = scales::percent,
+                     limits = c(0, NA), expand = c(0.02, 0)) +
+  labs(title = "Scree Plot - Correctness Logistic PCA",
+       x = "Component Number",
+       y = "Marginal Variance Explained") +
+  theme_classic(base_size = 9) +
+  theme(
+    plot.title  = element_text(size = 10, hjust = 0.5),
+    axis.text   = element_text(size = 8, color = "black"),
+    axis.line   = element_line(color = "black", linewidth = 0.4),
+    axis.ticks  = element_line(color = "black", linewidth = 0.3)
+  )
+
+print(p_scree_corr)
+
+ggsave(
+  filename = file.path(fig_dir, "correctness_logisticPCA_scree.pdf"),
+  plot = p_scree_corr, width = 90, height = 80, units = "mm",
+  dpi = 300, device = cairo_pdf
+)
+ggsave(
+  filename = file.path(fig_dir, "correctness_logisticPCA_scree.png"),
+  plot = p_scree_corr, width = 90, height = 80, units = "mm",
+  dpi = 300
+)
+cat("Correctness Scree plot 已保存！\n")
+```
+
+
+```{r}
+# 扩大 k 的范围重新 CV
+logpca_cv2 <- cv.lpca(corr_matrix, ks = 1:20, ms = 4)
+plot(logpca_cv2)
+
+# 手动看哪里有肘部
+cv_means <- rowMeans(logpca_cv2)
+cat("各 k 的 CV 得分：\n")
+print(round(cv_means, 2))
+
+# 用肘部法则找最优 k
+# 计算斜率变化
+diffs <- diff(cv_means)
+diffs2 <- diff(diffs)
+k_elbow <- which.min(diffs2) + 1
+cat("肘部法则建议 k =", k_elbow, "\n")
+
+# 或者选择方差解释达到 80% 的最小 k
+# 重新跑不同 k 看方差解释
+for (k in c(3, 5, 7, 10, 15, 20)) {
+  m <- logisticPCA(corr_matrix, k = k, m = 4)
+  cat(paste0("k=", k, ": 方差解释 = ", round(m$prop_deviance_expl, 3), "\n"))
+}
+```
+
+建议用 k=15，理由：
+
+解释 81.6% 方差，超过 80% 阈值
+与 CAT (k=15) 一致，便于跨任务比较
+CV 曲线在 k=15-17 附近略有趋缓
+
+```{r}
+# 用 k=7 重新跑 Logistic PCA
+logpca_final <- logisticPCA(corr_matrix, k = 15, m = 4)
+
+cat("方差解释：", round(logpca_final$prop_deviance_expl, 3), "\n")
+
+# PC scores
+pc_scores_corr_final <- logpca_final$PCs
+rownames(pc_scores_corr_final) <- rownames(corr_matrix)
+
+cat("\n=== 各 PC 得分最高/最低的视频 ===\n")
+for (k in 1:15) {
+  scores <- pc_scores_corr_final[, k]
+  top3   <- names(sort(scores, decreasing = TRUE))[1:3]
+  bot3   <- names(sort(scores, decreasing = FALSE))[1:3]
+  cat(paste0("\nPC", k, ":\n"))
+  cat("  最高：", paste(top3, collapse = ", "), "\n")
+  cat("  最低：", paste(bot3, collapse = ", "), "\n")
+}
+
+# 保存
+pc_scores_corr_df <- as.data.frame(pc_scores_corr_final)
+colnames(pc_scores_corr_df) <- paste0("PC", 1:15)
+pc_scores_corr_df$Video <- rownames(corr_matrix)
+pc_scores_corr_df <- pc_scores_corr_df %>% dplyr::select(Video, everything())
+
+write.csv(pc_scores_corr_df,
+          file.path(save_path, "sensor_correctness_logisticPCA_k15.csv"),
+          row.names = FALSE)
+cat("\n完成！k=15 的 Logistic PCA scores 已保存\n")
+```
+
+```{r}
+# =========================================================
+# PC1/PC2/PC3 flat biplots for videos
+# 每个点 = 一个视频；颜色 = 标准化后在 |PC1|, |PC2|, |PC3| 中最大的 Dominant PC
+# =========================================================
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(stringr)
+library(readxl)
+
+save_path <- "."
+
+clean_video_id <- function(video) {
+  tools::file_path_sans_ext(basename(video))
+}
+
+make_short_game <- function(game) {
+  dplyr::case_when(
+    stringr::str_detect(game, regex("HotAir", ignore_case = TRUE)) ~ "HB",
+    stringr::str_detect(game, regex("MovingAround", ignore_case = TRUE)) ~ "MA",
+    stringr::str_detect(game, regex("RotatingCup", ignore_case = TRUE)) ~ "Cup",
+    stringr::str_detect(game, regex("Box", ignore_case = TRUE)) ~ "Box",
+    TRUE ~ stringr::str_replace_all(game, "\\s+", "")
+  )
+}
+
+make_short_object <- function(object) {
+  object <- stringr::str_to_lower(object)
+  dplyr::case_when(
+    stringr::str_detect(object, "yellow cylinder") ~ "YellowCyl",
+    stringr::str_detect(object, "magenta cylinder.*cyan|cyan.*magenta cylinder") ~ "MagCyl+CyanCube",
+    stringr::str_detect(object, "magenta cylinder") ~ "MagCyl",
+    stringr::str_detect(object, "magenta torus") ~ "MagTorus",
+    stringr::str_detect(object, "black.*pink.*pyramid") ~ "BlackPinkPyr",
+    stringr::str_detect(object, "yellow cube.*pink pyramid|pink pyramid.*yellow cube") ~ "YellowCube+PinkPyr",
+    stringr::str_detect(object, "pink pyramid") ~ "PinkPyr",
+    stringr::str_detect(object, "cyan") ~ "CyanCube",
+    stringr::str_detect(object, "yellow cube") ~ "YellowCube",
+    stringr::str_detect(object, "green sphere") ~ "GreenSphere",
+    stringr::str_detect(object, "orange.*green") ~ "OrangeGreenSphere",
+    stringr::str_detect(object, "black.*pink.*sphere") ~ "BlackPinkSphere",
+    stringr::str_detect(object, "green cone") ~ "GreenCone",
+    stringr::str_detect(object, "empty") ~ "Empty",
+    TRUE ~ stringr::str_to_title(stringr::str_replace_all(object, "[^a-z0-9]+", ""))
+  )
+}
+
+build_sensor_video_labels <- function(xlsx_file = file.path(save_path, "sensor_pc123.xlsx")) {
+  sheets <- readxl::excel_sheets(xlsx_file)
+
+  bind_rows(lapply(sheets, function(sheet_name) {
+    readxl::read_excel(xlsx_file, sheet = sheet_name) %>%
+      dplyr::mutate(Source_sheet = sheet_name)
+  })) %>%
+    dplyr::mutate(
+      Video_name = clean_video_id(Video),
+      Game_short = make_short_game(Game_name),
+      Object_short = make_short_object(Object),
+      Plausibility_short = dplyr::case_when(
+        stringr::str_detect(Plausibility, regex("^Plaus", ignore_case = TRUE)) ~ "P",
+        stringr::str_detect(Plausibility, regex("^Implaus", ignore_case = TRUE)) ~ "I",
+        TRUE ~ ""
+      ),
+      Semantic_label = paste(Game_short, Object_short, Plausibility_short, sep = "-")
+    ) %>%
+    dplyr::group_by(Video_name) %>%
+    dplyr::slice_head(n = 1) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(Video_name, Semantic_label, Concept, Game_name, Camera, Plausibility, Object)
+}
+
+sensor_video_labels <- build_sensor_video_labels()
+
+make_pc123_flat_biplot <- function(scores_file, title, output_prefix,
+                                   pc_cols = c("PC1", "PC2", "PC3"),
+                                   label_n_per_pc = 6,
+                                   plot_width = 10.5,
+                                   plot_height = 7.5,
+                                   label_size = 4.0,
+                                   axis_expand_x = 1.22,
+                                   axis_expand_y = 1.22,
+                                   label_nudge_y = 0,
+                                   pc1_label_x = 0.92,
+                                   pc1_label_y = 0.09,
+                                   pc2_label_x = -0.06,
+                                   pc2_label_y = 0.96,
+                                   pc3_label_x = 0.50,
+                                   pc3_label_y = 0.60,
+                                   dim_names = c(PC1 = "Dim 1", PC2 = "Dim 2", PC3 = "Dim 3"),
+                                   label_source = c("semantic", "hash"),
+                                   special_label_right = character(0),
+                                   special_label_nudge_x = 0.025,
+                                   special_label_nudge_y = 0.035,
+                                   special_label_hjust = 0,
+                                   label_box_padding = 0.42,
+                                   label_point_padding = 0.25,
+                                   label_force = 2.2,
+                                   label_force_pull = 0.06,
+                                   label_max_time = 2) {
+  label_source <- match.arg(label_source)
+  scores_raw <- read.csv(file.path(save_path, scores_file), check.names = FALSE)
+
+  scores_df <- scores_raw %>%
+    dplyr::select(Video, dplyr::all_of(pc_cols)) %>%
+    dplyr::rename(PC1 = !!pc_cols[1], PC2 = !!pc_cols[2], PC3 = !!pc_cols[3])
+
+  pc_scaled <- as.data.frame(scale(scores_df[, c("PC1", "PC2", "PC3")]))
+  colnames(pc_scaled) <- paste0(c("PC1", "PC2", "PC3"), "_z")
+
+  scores_df <- bind_cols(scores_df, pc_scaled) %>%
+    dplyr::mutate(
+      Video_name = clean_video_id(Video),
+      Dominant_PC = c("PC1", "PC2", "PC3")[
+        max.col(abs(dplyr::pick(PC1_z, PC2_z, PC3_z)), ties.method = "first")
+      ],
+      Dominant_PC = factor(Dominant_PC, levels = c("PC1", "PC2", "PC3"))
+    ) %>%
+    dplyr::left_join(sensor_video_labels, by = "Video_name") %>%
+    dplyr::mutate(
+      Video_label = dplyr::if_else(
+        label_source == "semantic" & !is.na(Semantic_label),
+        Semantic_label,
+        stringr::str_sub(Video_name, 1, 12)
+      ),
+      Dominant_Dimension = factor(
+        dplyr::recode(as.character(Dominant_PC), !!!as.list(dim_names)),
+        levels = unname(dim_names)
+      )
+    )
+
+  write.csv(
+    scores_df %>%
+      dplyr::select(
+        Video, Video_name, Video_label, Concept, Game_name, Camera, Plausibility, Object,
+        PC1, PC2, PC3, PC1_z, PC2_z, PC3_z, Dominant_PC, Dominant_Dimension
+      ) %>%
+      dplyr::arrange(Dominant_PC, dplyr::desc(abs(PC1) + abs(PC2) + abs(PC3))),
+    file.path(save_path, paste0(output_prefix, "_pc123_video_groups.csv")),
+    row.names = FALSE
+  )
+
+  label_df <- bind_rows(lapply(c("PC1", "PC2", "PC3"), function(pc) {
+    scores_df %>%
+      dplyr::arrange(dplyr::desc(abs(.data[[pc]]))) %>%
+      dplyr::slice_head(n = label_n_per_pc) %>%
+      dplyr::mutate(Label_for = pc)
+  })) %>%
+    dplyr::distinct(Video, .keep_all = TRUE)
+
+  special_label_df <- label_df %>%
+    dplyr::filter(Video_label %in% special_label_right)
+  label_df_general <- label_df %>%
+    dplyr::filter(!Video %in% special_label_df$Video)
+
+  axis_lim_x <- max(abs(scores_df$PC1), na.rm = TRUE) * axis_expand_x
+  axis_lim_y <- max(abs(scores_df$PC2), na.rm = TRUE) * axis_expand_y
+  arrow_x <- axis_lim_x * 0.86
+  arrow_y <- axis_lim_y * 0.86
+
+  pc_cols_plot <- c(PC1 = "#D55E00", PC2 = "#0072B2", PC3 = "#009E73")
+  names(pc_cols_plot) <- unname(dim_names)
+  arrow_dim_names <- dim_names
+  arrow_dim_names[] <- stringr::str_replace(dim_names, ": ", ":\n")
+
+  p <- ggplot(scores_df, aes(x = PC1, y = PC2, color = Dominant_Dimension, fill = Dominant_Dimension)) +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "grey25", linewidth = 0.45) +
+    geom_vline(xintercept = 0, linetype = "dashed", color = "grey25", linewidth = 0.45) +
+    stat_ellipse(
+      geom = "polygon", type = "norm", level = 0.68,
+      alpha = 0.12, linewidth = 1.1, show.legend = FALSE
+    ) +
+    geom_point(size = 2.6, alpha = 0.85) +
+    ggrepel::geom_text_repel(
+      data = label_df_general,
+      aes(label = Video_label),
+      size = label_size, color = "black", max.overlaps = Inf,
+      box.padding = label_box_padding, point.padding = label_point_padding,
+      nudge_y = axis_lim_y * label_nudge_y,
+      force = label_force,
+      force_pull = label_force_pull,
+      max.time = label_max_time,
+      max.iter = 10000,
+      min.segment.length = Inf,
+      segment.color = NA,
+      seed = 42,
+      show.legend = FALSE
+    ) +
+    geom_text(
+      data = special_label_df,
+      aes(label = Video_label),
+      size = label_size,
+      color = "black",
+      hjust = special_label_hjust,
+      nudge_x = axis_lim_x * special_label_nudge_x,
+      nudge_y = axis_lim_y * special_label_nudge_y,
+      show.legend = FALSE
+    ) +
+    annotate("segment", x = 0, y = 0, xend = arrow_x, yend = 0,
+             arrow = arrow(length = unit(0.28, "cm")), linewidth = 0.8, color = "black") +
+    annotate("segment", x = 0, y = 0, xend = 0, yend = arrow_y,
+             arrow = arrow(length = unit(0.28, "cm")), linewidth = 0.8, color = "black") +
+    annotate("segment", x = 0, y = 0, xend = arrow_x * 0.62, yend = arrow_y * 0.62,
+             arrow = arrow(length = unit(0.28, "cm")), linewidth = 0.8, color = "black") +
+    annotate("text", x = arrow_x * pc1_label_x, y = axis_lim_y * pc1_label_y, label = arrow_dim_names[["PC1"]], size = 4.4, hjust = 0, lineheight = 0.92) +
+    annotate("text", x = axis_lim_x * pc2_label_x, y = arrow_y * pc2_label_y, label = arrow_dim_names[["PC2"]], size = 4.4, hjust = 1, lineheight = 0.92) +
+    annotate("text", x = arrow_x * pc3_label_x, y = arrow_y * pc3_label_y, label = arrow_dim_names[["PC3"]], size = 4.4, lineheight = 0.92) +
+    scale_color_manual(values = pc_cols_plot) +
+    scale_fill_manual(values = pc_cols_plot) +
+    guides(
+      color = guide_legend(nrow = 1, byrow = TRUE),
+      fill = guide_legend(nrow = 1, byrow = TRUE)
+    ) +
+    coord_cartesian(xlim = c(-axis_lim_x, axis_lim_x), ylim = c(-axis_lim_y, axis_lim_y), clip = "off") +
+    labs(
+      title = title,
+      x = dim_names[["PC1"]],
+      y = dim_names[["PC2"]],
+      color = "Dominant Dimension",
+      fill = "Dominant Dimension"
+    ) +
+    theme_minimal(base_size = 18) +
+    theme(
+      plot.title = element_text(face = "bold", size = 24, hjust = 0),
+      axis.title = element_text(size = 20),
+      axis.title.x = element_text(size = 16, margin = margin(t = 12, b = 6)),
+      axis.title.y = element_text(size = 16, margin = margin(r = 12)),
+      axis.text = element_text(size = 14, color = "black"),
+      panel.grid.major = element_line(color = "grey86", linewidth = 0.55),
+      panel.grid.minor = element_line(color = "grey92", linewidth = 0.35),
+      legend.position = "bottom",
+      legend.direction = "horizontal",
+      legend.box = "horizontal",
+      legend.title = element_blank(),
+      legend.text = element_text(size = 10),
+      legend.key.size = unit(0.48, "cm"),
+      legend.margin = margin(t = 2, r = 4, b = 0, l = 4),
+      plot.margin = margin(10, 34, 28, 18)
+    )
+
+  print(p)
+
+  ggsave(file.path(fig_dir, paste0(output_prefix, "_pc123_flat_biplot.png")),
+         plot = p, width = plot_width, height = plot_height, dpi = 300)
+  ggsave(file.path(fig_dir, paste0(output_prefix, "_pc123_flat_biplot.pdf")),
+         plot = p, width = plot_width, height = plot_height, device = cairo_pdf)
+
+  invisible(scores_df)
+}
+
+rt_pc123_groups <- make_pc123_flat_biplot(
+  scores_file = "ex_sensor_RT_PCA_scores_all.csv",
+  title = "Action - RT PCA Semantic Biplot",
+  output_prefix = "sensor_RT_PCA",
+  pc3_label_x = 0.44,
+  pc3_label_y = 0.68,
+  dim_names = c(
+    PC1 = "Dim 1: Box Continuity",
+    PC2 = "Dim 2: Dense Mechanics",
+    PC3 = "Dim 3: Object Complexity"
+  ),
+  label_source = "semantic"
+)
+
+correctness_pc123_groups <- make_pc123_flat_biplot(
+  scores_file = "sensor_correctness_logisticPCA_k15.csv",
+  title = "Action - Correctness Logistic PCA Semantic Biplot",
+  output_prefix = "sensor_correctness_logisticPCA",
+  label_n_per_pc = 5,
+  plot_width = 10.5,
+  plot_height = 7.5,
+  label_size = 3.3,
+  axis_expand_x = 1.65,
+  axis_expand_y = 1.25,
+  label_nudge_y = 0,
+  pc1_label_x = 1.02,
+  pc1_label_y = 0.17,
+  pc2_label_x = -0.09,
+  pc2_label_y = 1.03,
+  pc3_label_x = 0.70,
+  pc3_label_y = 0.80,
+  dim_names = c(
+    PC1 = "Dim 1: Object Identity",
+    PC2 = "Dim 2: Continuity Context",
+    PC3 = "Dim 3: Physical Mechanics"
+  ),
+  label_source = "semantic",
+  special_label_right = "MA-YellowCube-P",
+  special_label_nudge_x = -0.012,
+  special_label_nudge_y = 0.005,
+  special_label_hjust = 1,
+  label_box_padding = 0.70,
+  label_point_padding = 0.42,
+  label_force = 4.5,
+  label_force_pull = 0.03,
+  label_max_time = 5
+)
+
+cat("完成！已保存 RT 和 Correctness 的 PC1/PC2/PC3 flat biplot，以及对应视频归类表。\n")
+```
+
+```{r}
+# =========================================================
+# Video RSM matrix plots
+# =========================================================
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(stringr)
+
+save_path <- "."
+
+clean_video_id_rsm <- function(video) {
+  tools::file_path_sans_ext(basename(video))
+}
+
+make_grouped_rsm_order <- function(rsm, group_file, move_mean_range_to_end = NULL,
+                                   order_mode = c("grouped", "global"),
+                                   group_order = c("PC1", "PC2", "PC3")) {
+  order_mode <- match.arg(order_mode)
+  group_order <- intersect(group_order, c("PC1", "PC2", "PC3"))
+  if (length(group_order) == 0) group_order <- c("PC1", "PC2", "PC3")
+
+  group_df <- read.csv(file.path(save_path, group_file), check.names = FALSE) %>%
+    dplyr::mutate(
+      Video_key = clean_video_id_rsm(Video),
+      Dim_code = dplyr::case_when(
+        Dominant_PC == "PC1" ~ "D1",
+        Dominant_PC == "PC2" ~ "D2",
+        Dominant_PC == "PC3" ~ "D3",
+        TRUE ~ "DX"
+      ),
+      Axis_label = Video_label
+    ) %>%
+    dplyr::filter(Video_key %in% clean_video_id_rsm(rownames(rsm)))
+
+  rsm_keys <- clean_video_id_rsm(rownames(rsm))
+  names(rsm_keys) <- rownames(rsm)
+
+  group_df <- group_df %>%
+    dplyr::mutate(Video_full = names(rsm_keys)[match(Video_key, rsm_keys)]) %>%
+    dplyr::filter(!is.na(Video_full))
+
+  dim_levels <- group_order
+
+  if (order_mode == "global") {
+    rsm_for_order <- rsm
+    rsm_for_order[is.na(rsm_for_order)] <- 0
+    ordered_videos <- rownames(rsm_for_order)[
+      hclust(as.dist(1 - rsm_for_order), method = "average")$order
+    ]
+    group_sizes <- integer(0)
+  } else {
+    ordered_videos <- unlist(lapply(dim_levels, function(pc) {
+      vids <- group_df %>%
+        dplyr::filter(Dominant_PC == pc) %>%
+        dplyr::pull(Video_full)
+
+      pc_ordered <- if (length(vids) <= 2) {
+        vids
+      } else {
+        sub_rsm <- rsm[vids, vids, drop = FALSE]
+        sub_rsm[is.na(sub_rsm)] <- 0
+        vids[hclust(as.dist(1 - sub_rsm), method = "average")$order]
+      }
+
+      if (!is.null(move_mean_range_to_end) && length(pc_ordered) > 0) {
+        mean_sim <- rowMeans(rsm[pc_ordered, rownames(rsm), drop = FALSE], na.rm = TRUE)
+        move_to_group_end <- pc_ordered[
+          mean_sim >= move_mean_range_to_end[1] &
+            mean_sim <= move_mean_range_to_end[2]
+        ]
+        pc_ordered <- c(setdiff(pc_ordered, move_to_group_end), move_to_group_end)
+      }
+
+      pc_ordered
+    }), use.names = FALSE)
+  }
+
+  missing_videos <- setdiff(rownames(rsm), ordered_videos)
+  video_order <- c(ordered_videos, missing_videos)
+  move_to_end <- character(0)
+
+  if (!is.null(move_mean_range_to_end) && order_mode == "global") {
+    mean_sim <- rowMeans(rsm[video_order, video_order, drop = FALSE], na.rm = TRUE)
+    move_to_end <- video_order[
+      mean_sim >= move_mean_range_to_end[1] &
+        mean_sim <= move_mean_range_to_end[2]
+    ]
+    video_order <- c(setdiff(video_order, move_to_end), move_to_end)
+  }
+
+  if (order_mode == "global") {
+    group_sizes <- integer(0)
+  } else {
+    group_lookup <- group_df$Dominant_PC
+    names(group_lookup) <- group_df$Video_full
+    group_for_boundary <- unname(group_lookup[video_order])
+    group_for_boundary[is.na(group_for_boundary)] <- "Missing"
+    group_sizes <- rle(group_for_boundary)$lengths
+  }
+
+  label_lookup <- group_df$Axis_label
+  names(label_lookup) <- group_df$Video_full
+  video_labels <- dplyr::coalesce(
+    unname(label_lookup[video_order]),
+    paste0("DX-", stringr::str_sub(clean_video_id_rsm(video_order), 1, 10))
+  )
+  video_labels <- make.unique(video_labels, sep = ".")
+
+  list(order = video_order, labels = video_labels, group_sizes = group_sizes)
+}
+
+plot_rsm_matrix <- function(rsm, title, output_prefix, palette = c("red_yellow_blue", "white_blue"),
+                            group_file = NULL,
+                            draw_group_lines = TRUE,
+                            move_mean_range_to_end = NULL,
+                            order_mode = c("grouped", "global"),
+                            group_order = c("PC1", "PC2", "PC3")) {
+  palette <- match.arg(palette)
+  order_mode <- match.arg(order_mode)
+
+  diag(rsm) <- 1
+  rsm[is.na(rsm)] <- 0
+
+  if (is.null(group_file)) {
+    rsm_dist <- as.dist(1 - rsm)
+    video_order <- rownames(rsm)[hclust(rsm_dist, method = "average")$order]
+    video_labels <- stringr::str_sub(clean_video_id_rsm(video_order), 1, 10)
+    group_sizes <- integer(0)
+  } else {
+    grouped_order <- make_grouped_rsm_order(rsm, group_file, move_mean_range_to_end, order_mode, group_order)
+    video_order <- grouped_order$order
+    video_labels <- grouped_order$labels
+    group_sizes <- grouped_order$group_sizes
+  }
+
+  rsm_ordered <- rsm[video_order, video_order, drop = FALSE]
+
+  rsm_long <- as.data.frame(rsm_ordered) %>%
+    tibble::rownames_to_column("Video_row") %>%
+    tidyr::pivot_longer(-Video_row, names_to = "Video_col", values_to = "Similarity") %>%
+    dplyr::mutate(
+      Video_row = factor(Video_row, levels = rev(video_order), labels = rev(video_labels)),
+      Video_col = factor(Video_col, levels = video_order, labels = video_labels)
+    )
+
+  fill_scale <- if (palette == "red_yellow_blue") {
+    scale_fill_gradientn(
+      colors = c("#EF3B2C", "#FDAE61", "#FFFFBF", "#ABD9E9", "#2166AC"),
+      limits = c(0, 1), breaks = seq(0, 1, by = 0.2),
+      name = "Similarity"
+    )
+  } else {
+    scale_fill_gradientn(
+      colors = c("#F7FBFF", "#DEEBF7", "#9ECAE1", "#4292C6", "#2171B5", "#08306B"),
+      values = scales::rescale(c(0, 0.2, 0.4, 0.6, 0.8, 1)),
+      limits = c(0, 1), breaks = seq(0, 1, by = 0.2),
+      name = "Similarity"
+    )
+  }
+
+  group_breaks_x <- cumsum(group_sizes)
+  group_breaks_x <- group_breaks_x[group_breaks_x < length(video_order)] + 0.5
+  group_breaks_y <- length(video_order) - cumsum(group_sizes)
+  group_breaks_y <- group_breaks_y[group_breaks_y > 0] + 0.5
+  group_bounds <- if (length(group_sizes) > 0) {
+    x_start <- c(1, head(cumsum(group_sizes), -1) + 1)
+    x_end <- cumsum(group_sizes)
+    tibble::tibble(
+      xmin = x_start - 0.5,
+      xmax = x_end + 0.5,
+      ymin = length(video_order) - x_end + 0.5,
+      ymax = length(video_order) - x_start + 1.5
+    )
+  } else {
+    tibble::tibble(xmin = numeric(), xmax = numeric(), ymin = numeric(), ymax = numeric())
+  }
+
+  p <- ggplot(rsm_long, aes(x = Video_col, y = Video_row, fill = Similarity)) +
+    geom_tile() +
+    fill_scale +
+    coord_fixed() +
+    labs(title = title, x = NULL, y = NULL) +
+    theme_minimal(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold", size = 22, hjust = 0.5),
+      axis.text.x = element_text(angle = 55, hjust = 1, vjust = 1, size = 6.8, color = "grey30"),
+      axis.text.y = element_text(size = 7.0, color = "grey30"),
+      panel.grid = element_blank(),
+      legend.title = element_text(size = 14),
+      legend.text = element_text(size = 11),
+      legend.key.height = unit(1.0, "cm"),
+      plot.margin = margin(18, 20, 18, 18)
+    )
+
+  if (draw_group_lines && length(group_breaks_x) > 0) {
+    p <- p +
+      geom_rect(
+        data = group_bounds,
+        aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+        inherit.aes = FALSE,
+        fill = NA,
+        color = "white",
+        linewidth = 1.35
+      )
+  }
+
+  print(p)
+
+  ggsave(file.path(fig_dir, paste0(output_prefix, "_video_RSM.png")),
+         plot = p, width = 11, height = 12, dpi = 300)
+  ggsave(file.path(fig_dir, paste0(output_prefix, "_video_RSM.pdf")),
+         plot = p, width = 11, height = 12, device = cairo_pdf)
+
+  write.csv(rsm_ordered, file.path(save_path, paste0(output_prefix, "_video_RSM_matrix.csv")))
+
+  invisible(rsm)
+}
+
+# RT RSM: 视频之间的 Pearson correlation，rescale 到 0-1
+rt_wide_saved <- read.csv(file.path(save_path, "rt_wide.csv"), check.names = FALSE)
+rt_matrix_saved <- rt_wide_saved %>%
+  tibble::column_to_rownames("Video") %>%
+  as.matrix()
+rt_z_saved <- scale(rt_matrix_saved, center = TRUE, scale = TRUE)
+rt_rsm <- cor(t(rt_z_saved), method = "pearson", use = "pairwise.complete.obs")
+rt_rsm <- (rt_rsm + 1) / 2
+rt_rsm <- pmin(pmax(rt_rsm, 0), 1)
+
+plot_rsm_matrix(
+  rsm = rt_rsm,
+  title = "Action - RT Video RSM",
+  output_prefix = "sensor_RT",
+  palette = "red_yellow_blue",
+  group_file = "sensor_RT_PCA_pc123_video_groups.csv",
+  draw_group_lines = TRUE,
+  order_mode = "grouped"
+)
+
+# Correctness RSM: 1 - 视频间平均绝对差
+corr_wide_saved <- read.csv(file.path(save_path, "corr_wide.csv"), check.names = FALSE)
+corr_matrix_saved <- corr_wide_saved %>%
+  tibble::column_to_rownames("Video") %>%
+  as.matrix()
+
+video_ids <- rownames(corr_matrix_saved)
+corr_rsm <- matrix(
+  NA_real_,
+  nrow = length(video_ids),
+  ncol = length(video_ids),
+  dimnames = list(video_ids, video_ids)
+)
+
+for (i in seq_along(video_ids)) {
+  for (j in i:length(video_ids)) {
+    xi <- corr_matrix_saved[i, ]
+    xj <- corr_matrix_saved[j, ]
+    keep <- !is.na(xi) & !is.na(xj)
+    sim <- if (sum(keep) == 0) NA_real_ else 1 - mean(abs(xi[keep] - xj[keep]))
+    corr_rsm[i, j] <- sim
+    corr_rsm[j, i] <- sim
+  }
+}
+
+corr_rsm <- pmin(pmax(corr_rsm, 0), 1)
+
+plot_rsm_matrix(
+  rsm = corr_rsm,
+  title = "Action - Correctness Video RSM",
+  output_prefix = "sensor_correctness",
+  palette = "red_yellow_blue",
+  group_file = "sensor_correctness_logisticPCA_pc123_video_groups.csv",
+  draw_group_lines = TRUE,
+  order_mode = "grouped",
+  group_order = c("PC1", "PC3", "PC2"),
+  move_mean_range_to_end = c(0.35, 0.65)
+)
+
+cat("完成！已保存 RT 和 Correctness 的 Video RSM matrix 图和对应矩阵 CSV。\n")
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

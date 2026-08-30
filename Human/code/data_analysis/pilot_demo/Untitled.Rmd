@@ -1,0 +1,89 @@
+---
+title: "demo_pilot"
+output: html_document
+date: "2026-03-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+folder_path_demo <- "."
+
+# 两个都是 Numbers 文件，尝试读取（如果是csv格式）
+demo1 <- read.csv(file.path(folder_path_demo, "pilot_validate_data_demo.csv"))
+demo2 <- read.csv(file.path(folder_path_demo, "pilot_demo_final.csv"))
+
+head(demo1)
+head(demo2)
+colnames(demo1)
+colnames(demo2)
+```
+```{r}
+# 统一列名
+demo1 <- demo1 %>% rename(
+  age       = Age,
+  condition = Condition,
+  english   = English_literacy,
+  education = highest_education,
+  gender    = Gender,
+  nationality = Nationality
+)
+
+demo2 <- demo2 %>% rename(
+  age       = age,
+  condition = Condition,
+  english   = english,
+  education = education,
+  gender    = Gender,
+  nationality = Nationality
+)
+
+# 合并
+demo_all <- bind_rows(demo1, demo2)
+
+# 修正拼写错误，合并两个 Categorization
+demo_all <- demo_all %>%
+  mutate(condition = recode(condition, "Catergorization" = "Categorization"))
+
+# 重新做汇总表
+demo_table <- demo_all %>%
+  group_by(condition) %>%
+  summarise(
+    N        = n(),
+    Age_mean = round(mean(age, na.rm = TRUE), 2),
+    Age_sd   = round(sd(age,   na.rm = TRUE), 2),
+    Female   = sum(gender == "F", na.rm = TRUE),
+    Male     = sum(gender == "M", na.rm = TRUE)
+  )
+
+print(demo_table)
+```
+```{r}
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

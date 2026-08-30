@@ -1,0 +1,510 @@
+---
+title: "pilot"
+output: html_document
+date: "2026-03-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+# --- figure output redirected to _organized/figures/ ---
+# Data files and CSV/RDS outputs keep their original paths.
+fig_dir <- "../../../figures/data_analysis/pilot"
+dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
+
+folder_path <- "."
+
+s1_cat    <- read.csv(file.path(folder_path, "all_summary_1_cat.csv"))
+s2_cat    <- read.csv(file.path(folder_path, "all_summary_2_cat.csv"))
+s1_sensor <- read.csv(file.path(folder_path, "all_summary_1_sensor.csv"))
+s2_sensor <- read.csv(file.path(folder_path, "all_summary_2_sensor.csv"))
+s1_voe    <- read.csv(file.path(folder_path, "all_summary_1_voe.csv"))
+s2_voe    <- read.csv(file.path(folder_path, "all_summary_2_voe.csv"))
+
+# 看结构
+head(s1_cat)
+head(s1_sensor)
+head(s1_voe)
+```
+
+
+```{r}
+colnames(s1_cat)
+colnames(s1_sensor)
+colnames(s1_voe)
+```
+
+```{r}
+library(tidyverse)
+
+# ── 预实验 ────────────────────────────────────────
+pilot_cat    <- bind_rows(s1_cat, s2_cat)       %>% mutate(group = "Categorization")
+pilot_sensor <- bind_rows(s1_sensor, s2_sensor) %>% mutate(group = "Sensorimotor")
+pilot_voe    <- bind_rows(s1_voe, s2_voe)       %>% mutate(group = "VoE")
+
+pilot_all <- bind_rows(pilot_cat, pilot_sensor, pilot_voe) %>%
+  mutate(group = factor(group, levels = c("Categorization", "Sensorimotor", "VoE")))
+
+pilot_table <- pilot_all %>%
+  group_by(group) %>%
+  summarise(
+    N                  = n(),
+    `T_encode M`       = round(mean(mean_T_encode,    na.rm = TRUE), 3),
+    `T_encode SD`      = round(sd(mean_T_encode,      na.rm = TRUE), 3),
+    `RT_onset M`       = round(mean(mean_RT_onset,    na.rm = TRUE), 3),
+    `RT_onset SD`      = round(sd(mean_RT_onset,      na.rm = TRUE), 3),
+    `RT_critical M`    = round(mean(mean_RT_critical, na.rm = TRUE), 3),
+    `RT_critical SD`   = round(sd(mean_RT_critical,   na.rm = TRUE), 3),
+    `ACC M`            = round(mean(mean_ACC,         na.rm = TRUE), 3),
+    `ACC SD`           = round(sd(mean_ACC,           na.rm = TRUE), 3),
+    `IES_onset M`      = round(mean(mean_IES_onset,   na.rm = TRUE), 3),
+    `IES_onset SD`     = round(sd(mean_IES_onset,     na.rm = TRUE), 3),
+    `IES_critical M`   = round(mean(mean_IES_critical, na.rm = TRUE), 3),
+    `IES_critical SD`  = round(sd(mean_IES_critical,   na.rm = TRUE), 3)
+  )
+
+cat("=== 预实验 Descriptive Statistics ===\n")
+print(pilot_table)
+
+# 导出
+write.csv(pilot_table,
+          file = file.path(folder_path, "descriptive_pilot.csv"),
+          row.names = FALSE)
+
+cat("\n导出完成！\n")
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+# 整理数据
+plot_dat <- pilot_all %>%
+  mutate(group = factor(group, levels = c("Categorization", "VoE", "Sensorimotor"))) %>%
+  dplyr::select(group, mean_T_encode, mean_RT_onset, mean_RT_critical, 
+                mean_ACC, mean_IES_onset, mean_IES_critical) %>%
+  mutate(mean_ACC = mean_ACC * 100) %>%
+  pivot_longer(
+    cols = c(mean_T_encode, mean_RT_onset, mean_RT_critical, 
+             mean_ACC, mean_IES_onset, mean_IES_critical),
+    names_to = "measure",
+    values_to = "value"
+  ) %>%
+  mutate(
+    measure = case_when(
+      measure == "mean_T_encode"     ~ "T_encode (s)",
+      measure == "mean_RT_onset"     ~ "RT_onset (s)",
+      measure == "mean_RT_critical"  ~ "RT_critical (s)",
+      measure == "mean_ACC"          ~ "ACC (%)",
+      measure == "mean_IES_onset"    ~ "IES_onset",
+      measure == "mean_IES_critical" ~ "IES_critical"
+    ),
+    measure = factor(measure, levels = c("T_encode (s)", "RT_onset (s)", 
+                                          "RT_critical (s)", "ACC (%)",
+                                          "IES_onset", "IES_critical"))
+  )
+
+sem_dat <- plot_dat %>%
+  group_by(group, measure) %>%
+  summarise(
+    mean = mean(value, na.rm = TRUE),
+    sem  = sd(value,   na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  )
+
+ggplot(plot_dat, aes(x = group, y = value, fill = group)) +
+  geom_boxplot(width = 0.5, outlier.shape = 16, outlier.size = 1.5, alpha = 0.7) +
+  geom_pointrange(data = sem_dat,
+                  aes(x = group, y = mean,
+                      ymin = mean - sem,
+                      ymax = mean + sem),
+                  color = "black", size = 0.5) +
+  facet_wrap(~ measure, scales = "free_y", nrow = 2) +
+  scale_fill_manual(values = c("Categorization" = "#4E79A7",
+                                "VoE"            = "#59A14F",
+                                "Sensorimotor"   = "#F28E2B")) +
+  labs(title = "Performance by Group (Box Plot with SEM)", x = "", y = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        legend.title    = element_blank(),
+        strip.text      = element_text(size = 11, face = "bold"),
+        axis.text.x     = element_blank(),
+        axis.ticks.x    = element_blank())
+
+ggsave(file.path(fig_dir, "boxplot_by_group.png"),
+       width = 14, height = 8, dpi = 300)
+cat("图已保存！\n")
+```
+
+```{r}
+all_dat <- pilot_all %>%
+  mutate(group = factor(group, levels = c("Categorization", "Sensorimotor", "VoE")))
+
+cat("行数：", nrow(all_dat), "\n")
+cat("组别：", levels(all_dat$group), "\n")
+```
+
+
+```{r}
+library(bestNormalize)
+
+# 用 orderNorm 单独变换 T_encode
+on_T_encode <- orderNorm(all_dat$mean_T_encode)
+all_dat$bc_T_encode <- on_T_encode$x.t
+shapiro.test(all_dat$bc_T_encode)
+```
+
+```{r}
+library(bestNormalize)
+
+# IES_onset
+bn_IES_onset <- bestNormalize(all_dat$mean_IES_onset)
+all_dat$bc_IES_onset <- bn_IES_onset$x.t
+cat("IES_onset 变换：", class(bn_IES_onset$chosen_transform)[1], "\n")
+print(shapiro.test(all_dat$bc_IES_onset))
+
+# IES_critical
+bn_IES_critical <- bestNormalize(all_dat$mean_IES_critical)
+all_dat$bc_IES_critical <- bn_IES_critical$x.t
+cat("IES_critical 变换：", class(bn_IES_critical$chosen_transform)[1], "\n")
+print(shapiro.test(all_dat$bc_IES_critical))
+
+# RT_onset
+bn_RT_onset <- bestNormalize(all_dat$mean_RT_onset)
+all_dat$bc_RT_onset <- bn_RT_onset$x.t
+cat("RT_onset 变换：", class(bn_RT_onset$chosen_transform)[1], "\n")
+print(shapiro.test(all_dat$bc_RT_onset))
+
+#RT_critical
+all_dat$bc_RT_critical <- orderNorm(all_dat$mean_RT_critical)$x.t
+cat("RT_critical 变换：orderNorm\n")
+print(shapiro.test(all_dat$bc_RT_critical))
+
+# T_encode 用 orderNorm
+on_T_encode <- orderNorm(all_dat$mean_T_encode)
+all_dat$bc_T_encode <- on_T_encode$x.t
+cat("T_encode 变换：orderNorm\n")
+print(shapiro.test(all_dat$bc_T_encode))
+```
+
+
+```{r}
+cat("=== Pearson 相关：bc_T_encode vs 变换后各 DV ===\n")
+
+dvs_cor <- list(
+  "bc_IES_onset"    = all_dat$bc_IES_onset,
+  "bc_IES_critical" = all_dat$bc_IES_critical,
+  "bc_RT_onset"     = all_dat$bc_RT_onset,
+  "bc_RT_critical"  = all_dat$bc_RT_critical
+)
+
+for (dv_name in names(dvs_cor)) {
+  result <- cor.test(all_dat$bc_T_encode, dvs_cor[[dv_name]])
+  cat(paste0("\nbc_T_encode vs ", dv_name, ":\n"))
+  cat(paste0("r = ", round(result$estimate, 3),
+             ", t(", result$parameter, ") = ", round(result$statistic, 3),
+             ", p = ", format(result$p.value, scientific = TRUE, digits = 3), "\n"))
+}
+
+# ACC 用 Spearman
+cat("\n=== Spearman 相关：T_encode vs ACC ===\n")
+print(cor.test(all_dat$mean_T_encode, all_dat$mean_ACC, method = "spearman"))
+```
+
+```{r}
+library(car)
+
+run_ancova <- function(dv, covariate = "bc_T_encode") {
+  cat(paste0("\n", strrep("=", 50), "\n"))
+  cat(paste0("DV = ", dv, "\n"))
+  cat(paste0(strrep("=", 50), "\n"))
+  
+  # Levene's Test
+  cat("\n--- Levene's Test ---\n")
+  print(leveneTest(as.formula(paste0(dv, " ~ group")), data = all_dat))
+  
+  # 平行性假设
+  cat("\n--- 平行性假设 ---\n")
+  print(summary(aov(as.formula(paste0(dv, " ~ group * ", covariate)),
+                    data = all_dat)))
+  
+  # ANCOVA
+  cat("\n--- ANCOVA ---\n")
+  model <- aov(as.formula(paste0(dv, " ~ group + ", covariate)),
+               data = all_dat)
+  print(summary(model))
+  
+  cat("\n--- Type III SS ---\n")
+  print(Anova(model, type = "III"))
+  
+  cat("\n--- Post-hoc Tukey HSD ---\n")
+  print(TukeyHSD(model, "group"))
+}
+
+run_ancova("bc_IES_onset")
+run_ancova("bc_IES_critical")
+run_ancova("bc_RT_onset")
+run_ancova("bc_RT_critical")
+```
+
+
+```{r}
+# 对 ACC 取秩再做 ANCOVA
+all_dat$rank_ACC <- rank(all_dat$mean_ACC)
+
+rank_model <- aov(rank_ACC ~ group + mean_T_encode, data = all_dat)
+
+cat("=== 秩 ANCOVA ===\n")
+rank_anova <- Anova(rank_model, type = "III")
+print(rank_anova)
+
+cat("\n=== Partial eta squared ===\n")
+rank_eta_p2 <- rank_anova[, "Sum Sq"] /
+  (rank_anova[, "Sum Sq"] + rank_anova["Residuals", "Sum Sq"])
+rank_eta_p2 <- data.frame(
+  term = rownames(rank_anova),
+  eta_p2 = round(rank_eta_p2, 3),
+  row.names = NULL
+) %>%
+  filter(term != "Residuals")
+print(rank_eta_p2)
+
+cat("\n=== Post-hoc ===\n")
+rank_tukey <- TukeyHSD(rank_model, "group")
+print(rank_tukey)
+
+cat("\n=== Post-hoc eta squared ===\n")
+rank_tukey_eta <- as.data.frame(rank_tukey$group)
+rank_tukey_eta$contrast <- rownames(rank_tukey_eta)
+
+mse_rank <- deviance(rank_model) / df.residual(rank_model)
+n_by_group <- table(all_dat$group)
+
+rank_tukey_eta <- rank_tukey_eta %>%
+  rowwise() %>%
+  mutate(
+    group_1 = strsplit(contrast, "-")[[1]][1],
+    group_2 = strsplit(contrast, "-")[[1]][2],
+    se = sqrt(mse_rank * (1 / n_by_group[group_1] + 1 / n_by_group[group_2])),
+    t_value = diff / se,
+    eta_sq = round(t_value^2 / (t_value^2 + df.residual(rank_model)), 3)
+  ) %>%
+  ungroup() %>%
+  dplyr::select(contrast, p_adj = `p adj`, eta_sq)
+
+print(rank_tukey_eta)
+```
+IES_onset（ANCOVA）
+
+Type III：group 显著，F(2, 86) = 3.47, p = .036，协变量不显著 p = .198
+Post-hoc：Sensorimotor > Categorization (p = .016)，Sensorimotor > VoE (p < .001)，Cat vs VoE 不显著
+
+
+IES_critical（ANCOVA）
+
+Type III：group 不显著，F(2, 86) = 2.41, p = .096，协变量不显著 p = .092
+Post-hoc：仅 Sensorimotor > VoE 显著 (p < .001)
+
+
+RT_onset（ANCOVA）
+
+Type III：group 不显著，F(2, 86) = 2.20, p = .117，协变量边界显著 p = .055
+Post-hoc：仅 Sensorimotor > VoE 显著 (p < .001)
+
+
+RT_critical（ANCOVA）
+
+Type III：group 不显著，F(2, 86) = 2.30, p = .106，协变量显著 p = .039
+Post-hoc：仅 Sensorimotor > VoE 显著 (p < .001)
+
+
+
+
+```{r}
+library(ggsignif)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(ggsignif)
+library(patchwork)
+library(cowplot)
+
+# ── Step 1: 整理原始数据长格式 ───────────────────────
+plot_dat <- all_dat %>%
+  mutate(group = factor(group, levels = c("Categorization", "VoE", "Sensorimotor"))) %>%
+  dplyr::select(group, mean_IES_onset, mean_IES_critical,
+                mean_RT_onset, mean_RT_critical, mean_ACC) %>%
+  mutate(mean_ACC = mean_ACC * 100) %>%
+  pivot_longer(
+    cols = c(mean_IES_onset, mean_IES_critical,
+             mean_RT_onset, mean_RT_critical, mean_ACC),
+    names_to  = "measure",
+    values_to = "value"
+  ) %>%
+  mutate(
+    measure = case_when(
+      measure == "mean_IES_onset"    ~ "IES[onset]",
+      measure == "mean_IES_critical" ~ "IES[critical]",
+      measure == "mean_RT_onset"     ~ "RT[onset]~(s)",
+      measure == "mean_RT_critical"  ~ "RT[critical]~(s)",
+      measure == "mean_ACC"          ~ "ACC~('%')"
+    ),
+    measure = factor(measure, levels = c(
+      "IES[onset]", "IES[critical]",
+      "RT[onset]~(s)", "RT[critical]~(s)", "ACC~('%')"
+    ))
+  )
+
+# ── Step 2: 计算均值和 SEM ────────────────────────────
+sem_dat <- plot_dat %>%
+  group_by(group, measure) %>%
+  summarise(
+    mean = mean(value, na.rm = TRUE),
+    sem  = sd(value,   na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  )
+
+# ── Step 3: 显著性标注 ────────────────────────────────
+comparisons_list <- list(
+  "IES[onset]"       = list(list(c("Categorization", "Sensorimotor"), "*"),
+                            list(c("VoE", "Sensorimotor"), "***")),
+  "IES[critical]"    = list(list(c("VoE", "Sensorimotor"), "***")),
+  "RT[onset]~(s)"    = list(list(c("VoE", "Sensorimotor"), "***")),
+  "RT[critical]~(s)" = list(list(c("VoE", "Sensorimotor"), "***")),
+  "ACC~('%')"        = list(list(c("Categorization", "Sensorimotor"), "**"),
+                            list(c("VoE", "Sensorimotor"), "**"))
+)
+
+# ── Step 4: 配色 ─────────────────────────────────────
+nature_colors <- c(
+  "Categorization" = "#4DBBD5",
+  "VoE"            = "#00A087",
+  "Sensorimotor"   = "#E64B35"
+)
+group_labels <- c(
+  "Categorization" = "Concept Verification",
+  "VoE"            = "Plausibility Assessment",
+  "Sensorimotor"   = "Affordance Recognition"
+)
+
+# ── Step 5: 循环画每个子图 ───────────────────────────
+plot_list <- list()
+
+for (m in levels(sem_dat$measure)) {
+  d      <- sem_dat %>% filter(measure == m)
+  comps  <- lapply(comparisons_list[[m]], `[[`, 1)
+  labels <- lapply(comparisons_list[[m]], `[[`, 2)
+  y_max  <- max(d$mean + d$sem) * 1.5
+
+  p_sub <- ggplot(d, aes(x = group, y = mean, fill = group)) +
+
+    geom_bar(stat = "identity", width = 0.6,
+             color = "black", linewidth = 0.3) +
+
+    geom_errorbar(aes(ymin = mean - sem, ymax = mean + sem),
+                  width = 0.2, linewidth = 0.4, color = "black") +
+
+    geom_signif(
+      comparisons = comps,
+      annotations = unlist(labels),
+      y_position  = seq(max(d$mean + d$sem) * 1.1,
+                        max(d$mean + d$sem) * 1.35,
+                        length.out = length(comps)),
+      tip_length  = 0.02,
+      textsize    = 3,
+      vjust       = 0.5
+    ) +
+
+    scale_fill_manual(
+      values = nature_colors,
+      labels = group_labels,
+      name   = NULL
+    ) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, y_max)) +
+
+    labs(x = NULL, y = NULL, title = parse(text = m)) +
+
+    theme_classic(base_size = 9, base_family = "sans") +
+    theme(
+      plot.title      = element_text(size = 9, face = "bold", hjust = 0.5),
+      axis.text.x     = element_blank(),
+      axis.ticks.x    = element_blank(),
+      axis.text.y     = element_text(size = 8, color = "black"),
+      axis.line       = element_line(color = "black", linewidth = 0.4),
+      axis.ticks.y    = element_line(color = "black", linewidth = 0.4),
+      legend.position = "bottom",
+      panel.grid      = element_blank(),
+      plot.margin     = margin(6, 4, 0, 4)
+    )
+
+  plot_list[[m]] <- p_sub
+}
+
+# ── Step 6: 合并：5个子图一行，自动收集 legend ───────
+combined <- wrap_plots(plot_list, nrow = 1, ncol = 5, guides = "collect") &
+  theme(
+    legend.position   = "bottom",
+    legend.direction  = "horizontal",
+    legend.title      = element_blank(),
+    legend.text       = element_text(size = 9),
+    legend.key.size   = unit(4, "mm"),
+    legend.spacing.x  = unit(4, "mm"),
+    legend.margin     = margin(t = -2, b = 0),
+    plot.margin       = margin(2, 2, 2, 2),
+    legend.background = element_rect(fill = "white", color = NA),
+    plot.background   = element_rect(fill = "white", color = NA),
+    panel.background  = element_rect(fill = "white", color = NA)
+  )
+
+print(combined)
+
+# ── Step 7: 保存 ─────────────────────────────────────
+ggsave(
+  filename = file.path(fig_dir, "pilot_barchart.pdf"),
+  plot     = combined,
+  width    = 200,
+  height   = 90,
+  units    = "mm",
+  dpi      = 300,
+  bg       = "white"
+)
+
+ggsave(
+  filename = file.path(fig_dir, "pilot_barchart.png"),
+  plot     = combined,
+  width    = 200,
+  height   = 90,
+  units    = "mm",
+  dpi      = 300,
+  bg       = "white"
+)
+cat("图已保存！\n")
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

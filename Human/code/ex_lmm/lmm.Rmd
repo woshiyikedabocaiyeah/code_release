@@ -1,0 +1,285 @@
+---
+title: "lmm"
+output: html_document
+date: "2026-04-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+path <- "."
+
+csv_files <- list.files(
+  path = path,
+  pattern = "\\.csv$",
+  full.names = TRUE
+)
+
+for (file in csv_files) {
+  obj_name <- tools::file_path_sans_ext(basename(file))
+  assign(obj_name, read.csv(file), envir = .GlobalEnv)
+}
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+feature_phys_surprise_scores <- feature_phys_surprise_scores %>% select(video_name,physical_z)
+```
+
+```{r}
+video_summary_all <- video_summary_all %>% select(video_name,mean_visual_density)
+video_summary_sci_all <- video_summary_sci_all %>% select(video_name,mean_visual_density)
+```
+
+```{r}
+merged_video_features <- video_summary_all %>%
+  rename(visual_density_1 = mean_visual_density) %>%
+  left_join(
+    video_summary_sci_all %>%
+      rename(visual_density_2 = mean_visual_density),
+    by = "video_name"
+  ) %>%
+  left_join(
+    feature_phys_surprise_scores,
+    by = "video_name"
+  )
+```
+
+```{r}
+all_data <- bind_rows(
+  all_dat_cat,
+  all_dat_sensor,
+  all_dat_voe,
+  all_dat_cat_2,
+  all_dat_sensor_2,
+  all_dat_voe_2
+)
+```
+
+```{r}
+all_data$Video <- sub("^video/", "", all_data$Video)
+```
+
+```{r}
+all_data_merged <- all_data %>%
+  left_join(merged_video_features, by = c("Video" = "video_name"))
+```
+
+```{r}
+write.csv(all_data_merged, "all_data_merged.csv", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+```{r}
+library(lme4)
+library(lmerTest)
+
+# =========================
+# 1. 数据预处理
+# =========================
+dat_model <- all_data_merged %>%
+  mutate(
+    Subject   = factor(Subject),
+    Video     = factor(Video),
+    condition = factor(condition),
+    ACC       = as.integer(ACC),
+
+    # 视觉复杂度：这里先用 visual_density_1
+    Visual_Z   = as.numeric(scale(visual_density_1)),
+
+    # physical_z 虽然名字里已有 z，这里再标准化一次也可以
+    Physical_Z = as.numeric(scale(physical_z))
+  )
+
+# 看一下 condition 的水平
+levels(dat_model$condition)
+```
+
+```{r}
+all_dat_merged <- dat_model %>% select(Video, Subject, condition, RT_onset, RT_critical, ACC, Visual_Z, Physical_Z)
+write.csv(all_dat_merged, "all_dat_merged.csv", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+```{r}
+
+# =========================
+# 2. RT模型：只用正确试次
+#    因变量 = log(RT_critical)
+# =========================
+dat_rt <- dat_model %>%
+  filter(
+    ACC == 1,
+    !is.na(RT_critical),
+    RT_critical > 0,
+    !is.na(Visual_Z),
+    !is.na(Physical_Z)
+  )
+
+m_rt <- lmer(
+  log(RT_critical) ~ condition * Visual_Z + condition * Physical_Z +
+    (1 | Subject) + (1 | Video),
+  data = dat_rt,
+  REML = FALSE
+)
+
+summary(m_rt)
+anova(m_rt)
+
+```
+
+```{r}
+
+# =========================
+# 3. ACC模型：用全部试次
+#    因变量 = ACC (0/1)
+# =========================
+dat_acc <- dat_model %>%
+  filter(
+    !is.na(ACC),
+    !is.na(Visual_Z),
+    !is.na(Physical_Z)
+  )
+
+m_acc <- glmer(
+  ACC ~ condition * Visual_Z + condition * Physical_Z +
+    (1 | Subject) + (1 | Video),
+  data = dat_acc,
+  family = binomial(link = "logit"),
+  control = glmerControl(
+    optimizer = "bobyqa",
+    optCtrl = list(maxfun = 2e5)
+  )
+)
+
+summary(m_acc)
+```
+
+```{r}
+# =========================
+# 4. 导出模型摘要
+# =========================
+sink("../lmm/model_summary.txt")
+cat("===== RT model =====\n")
+print(summary(m_rt))
+cat("\n\n===== RT ANOVA =====\n")
+print(anova(m_rt))
+
+cat("\n\n===== ACC model =====\n")
+print(summary(m_acc))
+sink()
+```
+
+```{r}
+library(emmeans)
+acc_phys_slopes <- emtrends(
+  m_acc,
+  specs = "condition",
+  var = "Physical_Z"
+)
+
+summary(acc_phys_slopes, infer = c(TRUE, TRUE))
+pairs(acc_phys_slopes)
+```
+
+```{r}
+acc_visual_slopes <- emtrends(
+  m_acc,
+  specs = "condition",
+  var = "Visual_Z"
+)
+
+summary(acc_visual_slopes, infer = c(TRUE, TRUE))
+pairs(acc_visual_slopes)
+```
+```{r}
+rt_visual_slopes <- emtrends(
+  m_rt,
+  specs = "condition",
+  var = "Visual_Z"
+)
+
+summary(rt_visual_slopes, infer = c(TRUE, TRUE))
+pairs(rt_visual_slopes)
+```
+
+```{r}
+rt_phys_slopes <- emtrends(
+  m_rt,
+  specs = "condition",
+  var = "Physical_Z"
+)
+
+summary(rt_phys_slopes, infer = c(TRUE, TRUE))
+pairs(rt_phys_slopes)
+```
+
+```{r}
+# =========================
+# 3. RT模型：只用正确试次
+#    因变量 = log(RT_onset)
+# =========================
+dat_rt_onset <- dat_model %>%
+  filter(
+    ACC == 1,
+    !is.na(RT_onset),
+    RT_onset > 0,
+    !is.na(Visual_Z),
+    !is.na(Physical_Z)
+  )
+
+m_rt_onset <- lmer(
+  log(RT_onset) ~ condition * Visual_Z + condition * Physical_Z +
+    (1 | Subject) + (1 | Video),
+  data = dat_rt_onset,
+  REML = FALSE
+)
+
+summary(m_rt_onset)
+anova(m_rt_onset)
+```
+
+```{r}
+rt_visual_slopes_onset <- emtrends(
+  m_rt_onset,
+  specs = "condition",
+  var = "Visual_Z"
+)
+
+summary(rt_visual_slopes_onset, infer = c(TRUE, TRUE))
+pairs(rt_visual_slopes_onset)
+```
+
+```{r}
+rt_phys_slopes_onset <- emtrends(
+  m_rt_onset,
+  specs = "condition",
+  var = "Physical_Z"
+)
+
+summary(rt_phys_slopes_onset, infer = c(TRUE, TRUE))
+pairs(rt_phys_slopes_onset)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

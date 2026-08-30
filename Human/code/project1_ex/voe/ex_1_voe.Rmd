@@ -1,0 +1,259 @@
+---
+title: "pilot_1_sensor"
+output: html_document
+date: "2026-03-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+folder_path <- "."
+
+csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# 分出 output, answer, 和数据文件
+output_file <- csv_files[grepl("output\\.csv$", csv_files)]
+answer_file <- csv_files[grepl("voe_answer\\.csv$", csv_files)]
+data_files  <- csv_files[!grepl("output\\.csv$", csv_files) & 
+                         !grepl("voe_answer\\.csv$", csv_files)]
+
+# 读取 output 和 answer
+output <- read.csv(output_file, header = TRUE)
+cat("output 已读取：", nrow(output), "行，", ncol(output), "列\n")
+
+answer <- read.csv(answer_file, header = TRUE)
+cat("answer 已读取：", nrow(answer), "行，", ncol(answer), "列\n")
+
+# 读取其余文件为 dat_1, dat_2...
+for (i in seq_along(data_files)) {
+  tryCatch({
+    dat <- read.csv(data_files[i], header = TRUE)
+    assign(paste0("dat_", i), dat)
+    cat(paste0("dat_", i, " 已读取：", basename(data_files[i]),
+               "（", nrow(dat), " 行，", ncol(dat), " 列）\n"))
+  }, error = function(e) {
+    cat(paste0("跳过：", basename(data_files[i]), " -> ", e$message, "\n"))
+  })
+}
+rm(dat)
+```
+
+```{r}
+for (i in 1:126) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  dat <- dat[grepl("^video/", dat$Video, ignore.case = FALSE), ]
+  assign(dat_name, dat)
+}
+rm(dat)
+cat("完成！已保留所有 video/ 开头的行\n")
+```
+
+```{r}
+for (i in 1:126) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  # 以 Video = key 为键，merge output 的 time 列
+  dat <- merge(dat, output[, c("key", "time")], 
+               by.x = "Video", by.y = "key", 
+               all.x = TRUE)
+  
+  assign(dat_name, dat)
+}
+rm(dat)
+cat("完成！time 列已添加到所有 dat\n")
+```
+
+```{r}
+for (i in 1:126) {
+  dat_name <- paste0("dat_", i)
+  dat <- get(dat_name)
+  
+  # 直接用 match 而不是 merge，避免行数问题
+  idx <- match(dat$Video, answer$Video)
+  dat$key_resp_7.corr <- ifelse(dat$key_resp_7.keys == answer$VoE_Ans[idx], 1, 0)
+  
+  assign(dat_name, dat)
+}
+
+rm(dat)
+cat("完成！key_resp_9.corr 已添加到所有 dat\n")
+```
+
+```{r}
+all_dat <- bind_rows(lapply(1:126, function(i) {
+  get(paste0("dat_", i))
+})) %>%
+  dplyr::select(participant,voe_practice_question.stopped, 
+                voe_practice_question.started,
+                key_resp_7.rt,
+                time,
+                key_resp_7.corr) %>%
+  mutate(condition = "voe")
+
+cat("合并完成：", nrow(all_dat), "行，", ncol(all_dat), "列\n")
+```
+
+```{r}
+all_dat_voe <- bind_rows(lapply(1:126, function(i) {
+  get(paste0("dat_", i))
+})) %>%
+  transmute(
+    Video,
+    Subject     = participant,
+    condition   = "Voe",
+    t_encode    = voe_practice_question.stopped - voe_practice_question.started,
+    RT_onset    = key_resp_7.rt,
+    RT_critical = key_resp_7.rt - time,
+    ACC         = key_resp_7.corr
+  )
+```
+
+```{r}
+dir.create("../../ex_lmm", recursive = TRUE, showWarnings = FALSE)
+
+write.csv(
+  all_dat_voe,
+  "../../ex_lmm/all_dat_voe.csv",
+  row.names = FALSE,
+  fileEncoding = "UTF-8"
+)
+```
+
+```{r}
+dvs <- list(
+  T_encode    = quote(voe_practice_question.stopped - voe_practice_question.started),
+  RT_onset    = quote(key_resp_7.rt),
+  RT_critical = quote(key_resp_7.rt - time),
+  ACC         = quote(key_resp_7.corr)
+)
+
+outlier_results <- lapply(names(dvs), function(dv_name) {
+  vals <- eval(dvs[[dv_name]], envir = all_cat)
+  all_cat %>%
+    mutate(value = vals) %>%
+    group_by(participant) %>%
+    mutate(
+      p_mean  = mean(value, na.rm = TRUE),
+      p_sd    = sd(value,   na.rm = TRUE),
+      z_score = (value - p_mean) / p_sd
+    ) %>%
+    filter(abs(z_score) > 3) %>%
+    mutate(variable = dv_name) %>%
+    dplyr::select(participant, variable, value, p_mean, p_sd, z_score)
+})
+
+all_outliers <- bind_rows(outlier_results)
+
+# 每个 participant 的异常情况
+all_outliers %>%
+  group_by(participant, variable) %>%
+  summarise(n_outliers = n(), .groups = "drop") %>%
+  arrange(participant, variable) %>%
+  pivot_wider(
+    names_from  = variable,
+    values_from = n_outliers,
+    values_fill = 0
+  ) %>%
+  mutate(total = T_encode + RT_onset + RT_critical + ACC) %>%
+  arrange(desc(total)) %>%
+  print(n=124)
+```
+
+```{r}
+total_count <- sum(sapply(1:126, function(i) {
+  dat <- get(paste0("dat_", i))
+  sum(dat$key_resp_7.rt < 6, na.rm = TRUE)
+}))
+
+cat("key_resp_7.rt < 6 的总数：", total_count, "\n")
+```
+
+```{r}
+summarize_dat <- function(dat) {
+  dat %>%
+    summarise(
+      # T_encode
+      mean_T_encode     = mean(voe_practice_question.stopped - voe_practice_question.started, na.rm = TRUE),
+      sd_T_encode       = sd(voe_practice_question.stopped   - voe_practice_question.started, na.rm = TRUE),
+      
+      # RT_onset
+      mean_RT_onset     = mean(key_resp_7.rt, na.rm = TRUE),
+      sd_RT_onset       = sd(key_resp_7.rt,   na.rm = TRUE),
+      
+      # RT_critical
+      mean_RT_critical  = mean(key_resp_7.rt - time, na.rm = TRUE),
+      sd_RT_critical    = sd(key_resp_7.rt   - time, na.rm = TRUE),
+      
+      # ACC
+      mean_ACC          = mean(key_resp_7.corr, na.rm = TRUE),
+      sd_ACC            = sd(key_resp_7.corr,   na.rm = TRUE),
+      
+      # IES_onset
+      mean_IES_onset    = mean(key_resp_7.rt / mean(key_resp_7.corr, na.rm = TRUE), na.rm = TRUE),
+      sd_IES_onset      = sd(key_resp_7.rt   / mean(key_resp_7.corr, na.rm = TRUE), na.rm = TRUE),
+      
+      # IES_critical
+      mean_IES_critical = mean((key_resp_7.rt - time) / mean(key_resp_7.corr, na.rm = TRUE), na.rm = TRUE),
+      sd_IES_critical   = sd((key_resp_7.rt   - time) / mean(key_resp_7.corr, na.rm = TRUE), na.rm = TRUE)
+    )
+}
+
+# 生成所有 summary 并合并
+all_summary <- bind_rows(
+  lapply(1:126, function(i) {
+    dat <- get(paste0("dat_", i))
+    summarize_dat(dat) %>%
+      mutate(participant = dat$participant[1])
+  })
+) %>% select(participant, everything())
+write.csv(all_summary,
+          file = "../../data_analysis/ex_1_voe/all_summary.csv",
+          row.names = FALSE)
+
+
+cat("完成！\n")
+print(all_summary)
+```
+
+```{r}
+# 筛选 correct trials 并生成 summary
+all_summary_correct <- bind_rows(
+  lapply(1:126, function(i) {
+    dat <- get(paste0("dat_", i))
+    dat_c <- dat[dat$key_resp_7.corr == 1, ]
+    summarize_dat(dat_c) %>%
+      mutate(participant = dat_c$participant[1])
+  })
+) %>% select(participant, everything())
+
+# 导出
+write.csv(all_summary_correct,
+          file = "../../data_analysis/ex_1_voe/with_correct_trial.csv",
+          row.names = FALSE)
+
+cat("导出完成！\n")
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
