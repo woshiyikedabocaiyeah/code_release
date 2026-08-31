@@ -9,19 +9,19 @@ def compute_frame_metrics(frame):
     h, w = gray.shape
     area = h * w
 
-    # 1. 边缘密度
+    # 1. Edge density
     edges = cv2.Canny(gray, 100, 200)
     edge_density = np.count_nonzero(edges) / area
 
-    # 2. 关键点密度
+    # 2. Keypoint density
     orb = cv2.ORB_create(nfeatures=500)
     keypoints = orb.detect(gray, None)
     keypoint_density = len(keypoints) / area
 
-    # 3. 纹理复杂度
+    # 3. Texture complexity
     laplacian_var = cv2.Laplacian(gray, cv2.CV_64F).var()
 
-    # 4. 合成每帧视觉复杂度
+    # 4. Combine per-frame visual complexity metrics
     visual_density = (
         0.4 * edge_density +
         0.4 * keypoint_density * 1000 +
@@ -35,7 +35,7 @@ def analyze_video(video_path, sample_every=10):
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
-        raise ValueError(f"无法打开视频: {video_path}")
+        raise ValueError(f"Unable to open video: {video_path}")
 
     fps = cap.get(cv2.CAP_PROP_FPS)
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -57,7 +57,7 @@ def analyze_video(video_path, sample_every=10):
     cap.release()
 
     if len(visual_density_list) == 0:
-        raise ValueError(f"没有成功抽取到任何帧: {video_path}")
+        raise ValueError(f"No frames were extracted successfully: {video_path}")
 
     summary = {
         "video_name": os.path.basename(video_path),
@@ -66,9 +66,9 @@ def analyze_video(video_path, sample_every=10):
         "total_frames": total_frames,
         "sample_every": sample_every,
         "sampled_frames": len(visual_density_list),
-        "mean_visual_density": float(np.mean(visual_density_list)),   # 平均复杂度
-        "std_visual_density": float(np.std(visual_density_list, ddof=1)) if len(visual_density_list) > 1 else 0.0,  # 波动程度
-        "max_visual_density": float(np.max(visual_density_list)),     # 峰值复杂度
+        "mean_visual_density": float(np.mean(visual_density_list)),   # Mean complexity
+        "std_visual_density": float(np.std(visual_density_list, ddof=1)) if len(visual_density_list) > 1 else 0.0,  # Variability
+        "max_visual_density": float(np.max(visual_density_list)),     # Peak complexity
     }
 
     return summary
@@ -91,37 +91,37 @@ def get_video_files(folder_path):
 
 
 if __name__ == "__main__":
-    video_folder = "video"   # 你的视频文件夹
+    video_folder = "video"   # your video directory
     sample_every = 10
     output_csv = "video_summary_all.csv"
 
     if not os.path.exists(video_folder):
-        raise ValueError(f"找不到文件夹: {video_folder}")
+        raise ValueError(f"Directory not found: {video_folder}")
 
     video_files = get_video_files(video_folder)
 
     if len(video_files) == 0:
-        raise ValueError(f"文件夹里没有找到视频文件: {video_folder}")
+        raise ValueError(f"No video files were found in the directory: {video_folder}")
 
     all_results = []
     failed_videos = []
 
-    print(f"共找到 {len(video_files)} 个视频，开始处理...\n")
+    print(f"Found {len(video_files)} videos. Starting processing...\n")
 
     for i, video_path in enumerate(video_files, start=1):
-        print(f"[{i}/{len(video_files)}] 正在处理: {os.path.basename(video_path)}")
+        print(f"[{i}/{len(video_files)}] Processing: {os.path.basename(video_path)}")
 
         try:
             summary = analyze_video(video_path, sample_every=sample_every)
             all_results.append(summary)
 
             print(
-                f"  平均复杂度={summary['mean_visual_density']:.6f}, "
-                f"波动程度={summary['std_visual_density']:.6f}, "
-                f"峰值复杂度={summary['max_visual_density']:.6f}"
+                f"  Mean complexity={summary['mean_visual_density']:.6f}, "
+                f"Variability={summary['std_visual_density']:.6f}, "
+                f"Peak complexity={summary['max_visual_density']:.6f}"
             )
         except Exception as e:
-            print(f"  处理失败: {e}")
+            print(f"  Processing failed: {e}")
             failed_videos.append({
                 "video_path": video_path,
                 "error": str(e)
@@ -130,13 +130,13 @@ if __name__ == "__main__":
     if len(all_results) > 0:
         df_summary = pd.DataFrame(all_results)
         df_summary.to_csv(output_csv, index=False, encoding="utf-8-sig")
-        print(f"\n所有成功结果已保存到: {output_csv}")
+        print(f"\nAll successful results were saved to: {output_csv}")
     else:
-        print("\n没有任何视频处理成功。")
+        print("\nNo videos were processed successfully.")
 
     if len(failed_videos) > 0:
         df_failed = pd.DataFrame(failed_videos)
         df_failed.to_csv("failed_videos.csv", index=False, encoding="utf-8-sig")
-        print("失败视频列表已保存到: failed_videos.csv")
+        print("The failed-video list was saved to: failed_videos.csv")
 
-    print("\n处理完成。")
+    print("\nProcessing complete.")

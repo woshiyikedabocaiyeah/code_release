@@ -13,10 +13,10 @@ args_eval = {
         "checkpoint": str(PROJECT_DIR / "checkpoints" / "checkpoint.pth"),
         "module_name": "PATH.TO.YOUR.MODULE",
         "pretrain_kwargs": {
-            # 从官方现成配置里复制
+            # Copy from the official configuration
         },
         "wrapper_kwargs": {
-            # 从官方现成配置里复制
+            # Copy from the official configuration
         },
     },
 

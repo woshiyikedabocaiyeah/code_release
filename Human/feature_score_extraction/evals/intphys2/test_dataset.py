@@ -10,11 +10,11 @@ ds = IntPhys2Dataset(
     transform=None
 )
 
-print("视频数量:", len(ds))
-print("前5个路径:")
+print("Number of videos:", len(ds))
+print("First five paths:")
 for p in ds.videopaths[:5]:
     print(p)
 
 frames, idx = ds[0]
-print("第一条视频 shape:", frames.shape)
-print("索引:", idx)
+print("Shape of the first video:", frames.shape)
+print("Index:", idx)

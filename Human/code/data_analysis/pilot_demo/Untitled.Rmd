@@ -15,7 +15,7 @@ library(tidyverse)
 ```{r}
 folder_path_demo <- "."
 
-# 两个都是 Numbers 文件，尝试读取（如果是csv格式）
+# Both are Numbers files; attempt CSV import when applicable
 demo1 <- read.csv(file.path(folder_path_demo, "pilot_validate_data_demo.csv"))
 demo2 <- read.csv(file.path(folder_path_demo, "pilot_demo_final.csv"))
 
@@ -25,7 +25,7 @@ colnames(demo1)
 colnames(demo2)
 ```
 ```{r}
-# 统一列名
+# Standardize column names
 demo1 <- demo1 %>% rename(
   age       = Age,
   condition = Condition,
@@ -44,14 +44,14 @@ demo2 <- demo2 %>% rename(
   nationality = Nationality
 )
 
-# 合并
+# Merge
 demo_all <- bind_rows(demo1, demo2)
 
-# 修正拼写错误，合并两个 Categorization
+# Correct spelling errors and merge the two Categorization datasets
 demo_all <- demo_all %>%
   mutate(condition = recode(condition, "Catergorization" = "Categorization"))
 
-# 重新做汇总表
+# Rebuild the summary table
 demo_table <- demo_all %>%
   group_by(condition) %>%
   summarise(

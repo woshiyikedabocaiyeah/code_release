@@ -25,13 +25,13 @@ dat_3 <- read.csv(file.path(data_dir, "with_correct_trial_2.csv"))
 ```{r}
 dat_c <- bind_rows(dat, dat_1)
 
-cat("合并完成：", nrow(dat), "行，", ncol(dat), "列\n")
+cat("Merge complete: ", nrow(dat), "rows, ", ncol(dat), "columns\n")
 ```
 
 ```{r}
 dat_cc <- bind_rows(dat_2, dat_3)
 
-cat("合并完成：", nrow(dat), "行，", ncol(dat), "列\n")
+cat("Merge complete: ", nrow(dat), "rows, ", ncol(dat), "columns\n")
 ```
 
 
@@ -40,13 +40,13 @@ summary_table <- dat_c %>%
   summarise(
     T_encode_mean    = mean(mean_T_encode,    na.rm = TRUE),
     T_encode_sd      = sd(mean_T_encode,      na.rm = TRUE),
-    
+
     RT_onset_mean    = mean(mean_RT_onset,    na.rm = TRUE),
     RT_onset_sd      = sd(mean_RT_onset,      na.rm = TRUE),
-    
+
     RT_critical_mean = mean(mean_RT_critical, na.rm = TRUE),
     RT_critical_sd   = sd(mean_RT_critical,   na.rm = TRUE),
-    
+
     ACC_mean         = mean(mean_ACC,         na.rm = TRUE),
     ACC_sd           = sd(mean_ACC,           na.rm = TRUE)
   )
@@ -58,13 +58,13 @@ summary_table_c <- dat_cc %>%
   summarise(
     T_encode_mean    = mean(mean_T_encode,    na.rm = TRUE),
     T_encode_sd      = sd(mean_T_encode,      na.rm = TRUE),
-    
+
     RT_onset_mean    = mean(mean_RT_onset,    na.rm = TRUE),
     RT_onset_sd      = sd(mean_RT_onset,      na.rm = TRUE),
-    
+
     RT_critical_mean = mean(mean_RT_critical, na.rm = TRUE),
     RT_critical_sd   = sd(mean_RT_critical,   na.rm = TRUE),
-    
+
     ACC_mean         = mean(mean_ACC,         na.rm = TRUE),
     ACC_sd           = sd(mean_ACC,           na.rm = TRUE)
   )
@@ -77,7 +77,7 @@ library(tidyverse)
 library(ggplot2)
 library(patchwork)
 
-# 分开 ACC 和其他指标
+# Separate ACC from the other measures
 dat_long_rt <- dat_c %>%
   select(participant, mean_T_encode, mean_RT_onset, mean_RT_critical) %>%
   pivot_longer(
@@ -93,9 +93,9 @@ dat_long_rt <- dat_c %>%
 
 dat_long_acc <- dat_c %>%
   select(participant, mean_ACC) %>%
-  mutate(mean_ACC = mean_ACC * 100)  # 转成 %
+  mutate(mean_ACC = mean_ACC * 100)  # convert to percent
 
-# 计算均值SD
+# Calculate the mean and SD
 summary_rt  <- dat_long_rt %>%
   group_by(measure) %>%
   summarise(mean = mean(value, na.rm = TRUE),
@@ -145,7 +145,7 @@ box_rt <- ggplot(dat_long_rt, aes(x = measure, y = value, fill = measure)) +
         axis.title.y.right = element_text(color = "#E69F00"),
         axis.text.y.right  = element_text(color = "#E69F00"))
 
-# 并排
+# Arrange side by side
 bar_rt + box_rt
 ```
 
@@ -154,7 +154,7 @@ library(tidyverse)
 library(ggplot2)
 library(patchwork)
 
-# RT 相关指标
+# RT-related measures
 dat_long_rt <- dat_cc %>%
   select(participant, mean_T_encode, mean_RT_onset, mean_RT_critical) %>%
   pivot_longer(
@@ -168,7 +168,7 @@ dat_long_rt <- dat_cc %>%
     "mean_RT_critical" = "RT_critical"
   ))
 
-# 计算均值SD
+# Calculate the mean and SD
 summary_rt <- dat_long_rt %>%
   group_by(measure) %>%
   summarise(mean = mean(value, na.rm = TRUE),
@@ -189,7 +189,7 @@ box_rt <- ggplot(dat_long_rt, aes(x = measure, y = value, fill = measure)) +
   theme_minimal() +
   theme(legend.position = "none")
 
-# 并排
+# Arrange side by side
 bar_rt + box_rt
 ```
 

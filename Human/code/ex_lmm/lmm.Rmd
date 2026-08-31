@@ -79,7 +79,7 @@ library(lme4)
 library(lmerTest)
 
 # =========================
-# 1. 数据预处理
+# 1. Data preprocessing
 # =========================
 dat_model <- all_data_merged %>%
   mutate(
@@ -88,14 +88,14 @@ dat_model <- all_data_merged %>%
     condition = factor(condition),
     ACC       = as.integer(ACC),
 
-    # 视觉复杂度：这里先用 visual_density_1
+    # Visual complexity: use visual_density_1
     Visual_Z   = as.numeric(scale(visual_density_1)),
 
-    # physical_z 虽然名字里已有 z，这里再标准化一次也可以
+    # Although physical_z is already standardized by name, standardizing it again here is acceptable
     Physical_Z = as.numeric(scale(physical_z))
   )
 
-# 看一下 condition 的水平
+# Inspect condition levels
 levels(dat_model$condition)
 ```
 
@@ -107,8 +107,8 @@ write.csv(all_dat_merged, "all_dat_merged.csv", row.names = FALSE, fileEncoding 
 ```{r}
 
 # =========================
-# 2. RT模型：只用正确试次
-#    因变量 = log(RT_critical)
+# 2. RTModel: Use only correct trials
+#    Dependent variable = log(RT_critical)
 # =========================
 dat_rt <- dat_model %>%
   filter(
@@ -134,8 +134,8 @@ anova(m_rt)
 ```{r}
 
 # =========================
-# 3. ACC模型：用全部试次
-#    因变量 = ACC (0/1)
+# 3. ACCModel: Use all trials
+#    Dependent variable = ACC (0/1)
 # =========================
 dat_acc <- dat_model %>%
   filter(
@@ -160,7 +160,7 @@ summary(m_acc)
 
 ```{r}
 # =========================
-# 4. 导出模型摘要
+# 4. Export the model summary
 # =========================
 sink("../lmm/model_summary.txt")
 cat("===== RT model =====\n")
@@ -219,8 +219,8 @@ pairs(rt_phys_slopes)
 
 ```{r}
 # =========================
-# 3. RT模型：只用正确试次
-#    因变量 = log(RT_onset)
+# 3. RTModel: Use only correct trials
+#    Dependent variable = log(RT_onset)
 # =========================
 dat_rt_onset <- dat_model %>%
   filter(

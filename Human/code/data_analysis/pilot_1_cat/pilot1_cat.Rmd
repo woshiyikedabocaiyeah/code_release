@@ -54,7 +54,7 @@ dat_13 <- dat_13[!grepl("^stimuli_practice/", dat_13$Video), ]
 dat_14 <- dat_14[!grepl("^stimuli_practice/", dat_14$Video), ]
 dat_15 <- dat_15[!grepl("^stimuli_practice/", dat_15$Video), ]
 
-cat("完成！已删除所有 stimuli_practice/ 开头的行\n")
+cat("Complete: retained all rows beginning with stimuli_practice/\n")
 ```
 
 ```{r}
@@ -66,30 +66,30 @@ summarize_dat <- function(dat) {
       # T_encode
       mean_T_encode     = mean(cat_practice_question.stopped - cat_practice_question.started, na.rm = TRUE),
       sd_T_encode       = sd(cat_practice_question.stopped   - cat_practice_question.started, na.rm = TRUE),
-      
+
       # RT_onset
       mean_RT_onset     = mean(key_resp_8.rt, na.rm = TRUE),
       sd_RT_onset       = sd(key_resp_8.rt,   na.rm = TRUE),
-      
+
       # RT_critical
       mean_RT_critical  = mean(key_resp_8.rt - critical_time, na.rm = TRUE),
       sd_RT_critical    = sd(key_resp_8.rt   - critical_time, na.rm = TRUE),
-      
+
       # ACC
       mean_ACC          = mean(key_resp_8.corr, na.rm = TRUE),
       sd_ACC            = sd(key_resp_8.corr,   na.rm = TRUE),
-      
+
       # IES_onset
       mean_IES_onset    = mean(key_resp_8.rt / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
       sd_IES_onset      = sd(key_resp_8.rt   / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
-      
+
       # IES_critical
       mean_IES_critical = mean((key_resp_8.rt - critical_time) / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
       sd_IES_critical   = sd((key_resp_8.rt   - critical_time) / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE)
     )
 }
 
-# 生成每个dat的summary table
+# Generate each dat summary table
 summary_1  <- summarize_dat(dat_1)
 summary_2  <- summarize_dat(dat_2)
 summary_3  <- summarize_dat(dat_3)
@@ -106,9 +106,9 @@ summary_13 <- summarize_dat(dat_13)
 summary_14 <- summarize_dat(dat_14)
 summary_15 <- summarize_dat(dat_15)
 
-cat("Summary tables 生成完成！\n")
+cat("Summary tables Generation complete!\n")
 
-# 可选：合并所有summary为一个大表（加participant列）
+# Optional: Merge all summaries into one large table and add a participant column
 all_summary <- bind_rows(
   mutate(summary_1,  participant = dat_1$participant[1]),
   mutate(summary_2,  participant = dat_2$participant[1]),
@@ -131,16 +131,16 @@ print(all_summary)
 ```
 
 ```{r}
-write.csv(all_summary, 
-          file = "../all_summary.csv", 
+write.csv(all_summary,
+          file = "../all_summary.csv",
           row.names = FALSE)
 
-cat("导出完成！\n")
+cat("Export complete!\n")
 ```
 
 
 ```{r}
-# 筛选 correct trials
+# Filter correct trials
 dat_1c  <- dat_1[dat_1$key_resp_8.corr  == 1, ]
 dat_2c  <- dat_2[dat_2$key_resp_8.corr  == 1, ]
 dat_3c  <- dat_3[dat_3$key_resp_8.corr  == 1, ]
@@ -157,7 +157,7 @@ dat_13c <- dat_13[dat_13$key_resp_8.corr == 1, ]
 dat_14c <- dat_14[dat_14$key_resp_8.corr == 1, ]
 dat_15c <- dat_15[dat_15$key_resp_8.corr == 1, ]
 
-# 生成 summary
+# Generate summary
 summary_1c  <- summarize_dat(dat_1c)
 summary_2c  <- summarize_dat(dat_2c)
 summary_3c  <- summarize_dat(dat_3c)
@@ -174,7 +174,7 @@ summary_13c <- summarize_dat(dat_13c)
 summary_14c <- summarize_dat(dat_14c)
 summary_15c <- summarize_dat(dat_15c)
 
-# 合并
+# Merge
 all_summary_correct <- bind_rows(
   mutate(summary_1c,  participant = dat_1c$participant[1]),
   mutate(summary_2c,  participant = dat_2c$participant[1]),
@@ -193,12 +193,12 @@ all_summary_correct <- bind_rows(
   mutate(summary_15c, participant = dat_15c$participant[1])
 ) %>% select(participant, everything())
 
-# 导出
+# Export
 write.csv(all_summary_correct,
           file = "../with_correct_trial.csv",
           row.names = FALSE)
 
-cat("导出完成！\n")
+cat("Export complete!\n")
 print(all_summary_correct)
 ```
 

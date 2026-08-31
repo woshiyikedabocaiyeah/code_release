@@ -22,28 +22,28 @@ folder_path <- "../../project 1_pilot/voe"
 
 csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
 
-# 分出 output, answer, 和数据文件
+# Separate output, answer, and data files
 output_file <- csv_files[grepl("output\\.csv$", csv_files)]
 answer_file <- csv_files[grepl("voe_answer\\.csv$", csv_files)]
-data_files  <- csv_files[!grepl("output\\.csv$", csv_files) & 
+data_files  <- csv_files[!grepl("output\\.csv$", csv_files) &
                          !grepl("voe_answer\\.csv$", csv_files)]
 
-# 读取 output 和 answer
+# Read output and answer files
 output <- read.csv(output_file, header = TRUE)
-cat("output 已读取：", nrow(output), "行，", ncol(output), "列\n")
+cat("output loaded: ", nrow(output), "rows, ", ncol(output), "columns\n")
 
 answer <- read.csv(answer_file, header = TRUE)
-cat("answer 已读取：", nrow(answer), "行，", ncol(answer), "列\n")
+cat("answer loaded: ", nrow(answer), "rows, ", ncol(answer), "columns\n")
 
-# 读取其余文件为 dat_1, dat_2...
+# Read the remaining files as dat_1, dat_2, ...
 for (i in seq_along(data_files)) {
   tryCatch({
     dat <- read.csv(data_files[i], header = TRUE)
     assign(paste0("dat_", i), dat)
-    cat(paste0("dat_", i, " 已读取：", basename(data_files[i]),
-               "（", nrow(dat), " 行，", ncol(dat), " 列）\n"))
+    cat(paste0("dat_", i, " loaded: ", basename(data_files[i]),
+               " (", nrow(dat), " rows, ", ncol(dat), " columns) \n"))
   }, error = function(e) {
-    cat(paste0("跳过：", basename(data_files[i]), " -> ", e$message, "\n"))
+    cat(paste0("Skip: ", basename(data_files[i]), " -> ", e$message, "\n"))
   })
 }
 rm(dat)
@@ -57,39 +57,39 @@ for (i in 1:15) {
   assign(dat_name, dat)
 }
 rm(dat)
-cat("完成！已保留所有 video/ 开头的行\n")
+cat("Complete: retained all rows beginning with video/\n")
 ```
 
 ```{r}
 for (i in 1:15) {
   dat_name <- paste0("dat_", i)
   dat <- get(dat_name)
-  
-  # 以 Video = key 为键，merge output 的 time 列
-  dat <- merge(dat, output[, c("key", "time")], 
-               by.x = "Video", by.y = "key", 
+
+  # Merge the output time column using Video as the key
+  dat <- merge(dat, output[, c("key", "time")],
+               by.x = "Video", by.y = "key",
                all.x = TRUE)
-  
+
   assign(dat_name, dat)
 }
 rm(dat)
-cat("完成！time 列已添加到所有 dat\n")
+cat("Complete: time column added to all datasets\n")
 ```
 
 ```{r}
 for (i in 1:15) {
   dat_name <- paste0("dat_", i)
   dat <- get(dat_name)
-  
-  # 直接用 match 而不是 merge，避免行数问题
+
+  # Use match instead of merge to preserve row counts
   idx <- match(dat$Video, answer$Video)
   dat$key_resp_7.corr <- ifelse(dat$key_resp_7.keys == answer$VoE_Ans[idx], 1, 0)
-  
+
   assign(dat_name, dat)
 }
 
 rm(dat)
-cat("完成！key_resp_9.corr 已添加到所有 dat\n")
+cat("Complete: key_resp_9.corr added to all datasets\n")
 ```
 
 ```{r}
@@ -97,28 +97,28 @@ folder_path <- "../../project2_pilot/voe"
 
 csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
 
-# 分出 output, answer, 和数据文件
+# Separate output, answer, and data files
 output_file <- csv_files[grepl("output\\.csv$", csv_files)]
 answer_file <- csv_files[grepl("voe_answer\\.csv$", csv_files)]
-data_files  <- csv_files[!grepl("output\\.csv$", csv_files) & 
+data_files  <- csv_files[!grepl("output\\.csv$", csv_files) &
                          !grepl("voe_answer\\.csv$", csv_files)]
 
-# 读取 output 和 answer
+# Read output and answer files
 output <- read.csv(output_file, header = TRUE)
-cat("output 已读取：", nrow(output), "行，", ncol(output), "列\n")
+cat("output loaded: ", nrow(output), "rows, ", ncol(output), "columns\n")
 
 answer_1 <- read.csv(answer_file, header = TRUE)
-cat("answer 已读取：", nrow(answer), "行，", ncol(answer), "列\n")
+cat("answer loaded: ", nrow(answer), "rows, ", ncol(answer), "columns\n")
 
-# 读取其余文件为 dat_1, dat_2...
+# Read the remaining files as dat_1, dat_2, ...
 for (i in seq_along(data_files)) {
   tryCatch({
     dat <- read.csv(data_files[i], header = TRUE)
     assign(paste0("dat_", i+15), dat)
-    cat(paste0("dat_", i+15, " 已读取：", basename(data_files[i]),
-               "（", nrow(dat), " 行，", ncol(dat), " 列）\n"))
+    cat(paste0("dat_", i+15, " loaded: ", basename(data_files[i]),
+               " (", nrow(dat), " rows, ", ncol(dat), " columns) \n"))
   }, error = function(e) {
-    cat(paste0("跳过：", basename(data_files[i]), " -> ", e$message, "\n"))
+    cat(paste0("Skip: ", basename(data_files[i]), " -> ", e$message, "\n"))
   })
 }
 rm(dat)
@@ -132,7 +132,7 @@ for (i in 16:30) {
   assign(dat_name, dat)
 }
 
-cat("完成！已保留所有 video/ 开头的行\n")
+cat("Complete: retained all rows beginning with video/\n")
 rm(dat)
 ```
 
@@ -140,16 +140,16 @@ rm(dat)
 for (i in 16:30) {
   dat_name <- paste0("dat_", i)
   dat <- get(dat_name)
-  
-  # 以 Video = key 为键，merge output 的 time 列
-  dat <- merge(dat, output[, c("key", "time")], 
-               by.x = "Video", by.y = "key", 
+
+  # Merge the output time column using Video as the key
+  dat <- merge(dat, output[, c("key", "time")],
+               by.x = "Video", by.y = "key",
                all.x = TRUE)
-  
+
   assign(dat_name, dat)
 }
 rm(dat)
-cat("完成！time 列已添加到所有 dat\n")
+cat("Complete: time column added to all datasets\n")
 
 ```
 
@@ -157,29 +157,29 @@ cat("完成！time 列已添加到所有 dat\n")
 for (i in 16:30) {
   dat_name <- paste0("dat_", i)
   dat <- get(dat_name)
-  
-  # 直接用 match 而不是 merge，避免行数问题
+
+  # Use match instead of merge to preserve row counts
   idx <- match(dat$Video, answer_1$Video)
   dat$key_resp_7.corr <- ifelse(dat$key_resp_7.keys == answer_1$VoE_Ans[idx], 1, 0)
-  
+
   assign(dat_name, dat)
 }
 
 rm(dat)
-cat("完成！key_resp_9.corr 已添加到所有 dat\n")
+cat("Complete: key_resp_9.corr added to all datasets\n")
 ```
 
 ```{r}
 for (i in 1:30) {
   dat_name <- paste0("dat_", i)
   dat <- get(dat_name)
-  
+
   dat <- dat %>%
     mutate(rt_critical = key_resp_7.rt - time)
-  
+
   assign(dat_name, dat)
 }
-cat("完成！rt_critical 列已添加到所有 dat\n")
+cat("Complete: rt_critical column added to all datasets\n")
 rm(dat)
 ```
 
@@ -187,13 +187,13 @@ rm(dat)
 for (i in 1:30) {
   dat_name <- paste0("dat_", i)
   dat <- get(dat_name)
-  
+
   dat <- dat %>%
     dplyr::select(participant, Video, key_resp_7.rt, key_resp_7.corr)
-  
+
   assign(dat_name, dat)
 }
-cat("完成！\n")
+cat("Complete!\n")
 rm(dat)
 ```
 
@@ -202,11 +202,11 @@ all_cat <- bind_rows(lapply(1:30, function(i) {
   get(paste0("dat_", i))
 }))
 
-cat("合并完成：", nrow(all_cat), "行，", ncol(all_cat), "列\n")
+cat("Merge complete: ", nrow(all_cat), "rows, ", ncol(all_cat), "columns\n")
 ```
 
 ```{r}
-# ── Step 1: 构建 RT 矩阵（行=视频，列=被试）──────────
+# ── Step 1: Build the RT matrix (rows=video, columns=participant) ──────────
 rt_wide <- all_cat %>%
   dplyr::select(Video, participant, key_resp_7.rt) %>%
   filter(!is.na(key_resp_7.rt)) %>%
@@ -218,34 +218,34 @@ rt_matrix <- rt_wide %>%
   column_to_rownames("Video") %>%
   as.matrix()
 
-cat("RT 矩阵维度：", dim(rt_matrix), "\n")
-cat("视频数：", nrow(rt_matrix), "\n")
-cat("被试数：", ncol(rt_matrix), "\n")
+cat("RT matrix dimensions: ", dim(rt_matrix), "\n")
+cat("Number of videos: ", nrow(rt_matrix), "\n")
+cat("Number of participants: ", ncol(rt_matrix), "\n")
 
-# 检查缺失值
-cat("缺失值数量：", sum(is.na(rt_matrix)), "\n")
+# Check missing values
+cat("Number of missing values: ", sum(is.na(rt_matrix)), "\n")
 ```
 
 ```{r}
-# ── Step 2: 每列计算 z-score ──────────────────────────
+# ── Step 2: Compute by column z-score ──────────────────────────
 rt_zscored <- scale(rt_matrix, center = TRUE, scale = TRUE)
 
-# ── Step 3: 跑 PCA ───────────────────────────────────
+# ── Step 3: Run PCA ───────────────────────────────────
 pca_rt <- prcomp(rt_zscored, center = FALSE, scale. = FALSE)
 
-# ── Step 4: 查看方差解释 ──────────────────────────────
+# ── Step 4: Inspect explained variance ──────────────────────────────
 var_explained <- summary(pca_rt)$importance
-cat("=== 各 PC 方差解释 ===\n")
+cat("=== Variance explained by each PC ===\n")
 print(round(var_explained[, 1:10], 3))
 
-# 找到解释 80% 和 90% 方差所需的 PC 数量
+# Find the number of PCs needed to explain 80% and 90% of the variance
 cum_var <- cumsum(pca_rt$sdev^2 / sum(pca_rt$sdev^2))
 k_80 <- which(cum_var >= 0.80)[1]
 k_90 <- which(cum_var >= 0.90)[1]
-cat("\n解释 80% 方差需要", k_80, "个 PC\n")
-cat("解释 90% 方差需要", k_90, "个 PC\n")
+cat("\nExplaining 80% of the variance requires ", k_80, " PC\n")
+cat("Explaining 90% of the variance requires ", k_90, " PC\n")
 
-# ── Step 5: 可视化方差解释 ───────────────────────────
+# ── Step 5: Visualize explained variance ───────────────────────────
 plot(cum_var, type = "b", pch = 19,
      xlab = "Number of PCs",
      ylab = "Cumulative Variance Explained",
@@ -257,30 +257,30 @@ legend("bottomright",
        col    = c("blue", "red"),
        lty    = 2)
 
-# ── Step 6: 每个视频在每个 PC 上的得分 ──────────────
+# ── Step 6: Scores for each video on each PC ──────────────
 pc_scores <- pca_rt$x
-cat("\n=== 视频 PC 得分（前5行，前5个PC）===\n")
+cat("\n=== Video PC scores (first 5 rows and first 5 PCs) ===\n")
 print(round(pc_scores[1:5, 1:5], 3))
 
-# ── Step 7: 每个 PC 得分最高和最低的视频 ────────────
-cat("\n=== 各 PC 得分最高/最低的视频 ===\n")
+# ── Step 7: Videos with the highest and lowest scores on each PC ────────────
+cat("\n=== Highest- and lowest-scoring videos for each PC ===\n")
 for (k in 1:k_90) {
   scores <- pc_scores[, k]
   top3   <- names(sort(scores, decreasing = TRUE))[1:3]
   bot3   <- names(sort(scores, decreasing = FALSE))[1:3]
   cat(paste0("\nPC", k, ":\n"))
-  cat("  最高：", paste(top3, collapse = ", "), "\n")
-  cat("  最低：", paste(bot3, collapse = ", "), "\n")
+  cat("  highest: ", paste(top3, collapse = ", "), "\n")
+  cat("  lowest: ", paste(bot3, collapse = ", "), "\n")
 }
 ```
 
-PC1 解释 17.4%，之后快速递减
-需要 14 个 PC 解释 80% 方差
-需要 19 个 PC 解释 90% 方差
-曲线平缓无明显肘部
+PC1 explains 17.4% of the variance, after which the explained variance decreases rapidly.
+Explaining 80% of the variance requires 14 PCs.
+Explaining 90% of the variance requires 19 PCs.
+The curve is smooth with no clear elbow
 
 ```{r}
-# ── 保存 PC scores（保留 80% 方差的前14个PC）──────────
+# ── Save PC scores (retain the first 14 PCs, which explain 80% of the variance) ──────────
 save_path <- "."
 
 pc_scores_80 <- as.data.frame(pc_scores[, 1:k_80])
@@ -291,7 +291,7 @@ pc_scores_90 <- as.data.frame(pc_scores[, 1:k_90])
 pc_scores_90$Video <- rownames(pc_scores)
 pc_scores_90 <- pc_scores_90 %>% dplyr::select(Video, everything())
 
-# 导出
+# Export
 write.csv(pc_scores_80,
           file.path(save_path, "voe_RT_PCA_scores_80pct.csv"),
           row.names = FALSE)
@@ -299,7 +299,7 @@ write.csv(pc_scores_90,
           file.path(save_path, "voe_RT_PCA_scores_90pct.csv"),
           row.names = FALSE)
 
-# ── 保存方差解释图 ────────────────────────────────────
+# ── Save the explained-variance plot ────────────────────────────────────
 library(ggplot2)
 
 var_df <- data.frame(
@@ -326,13 +326,13 @@ ggplot(var_df, aes(x = PC, y = cum)) +
 ggsave(file.path(fig_dir, "voe_RT_PCA_variance.png"),
        width = 8, height = 5, dpi = 300)
 
-cat("完成！PC scores 和方差图已保存\n")
+cat("Complete: PC scores and variance plot saved\n")
 ```
 
 ```{r}
 library(logisticPCA)
 
-# ── Step 1: 构建 Correctness 矩阵 ────────────────────
+# ── Step 1: Build the correctness matrix ────────────────────
 corr_wide <- all_cat %>%
   dplyr::select(Video, participant, key_resp_7.corr) %>%
   filter(!is.na(key_resp_7.corr)) %>%
@@ -344,39 +344,39 @@ corr_matrix <- corr_wide %>%
   column_to_rownames("Video") %>%
   as.matrix()
 
-cat("Correctness 矩阵维度：", dim(corr_matrix), "\n")
-cat("缺失值数量：", sum(is.na(corr_matrix)), "\n")
+cat("Correctness matrix dimensions: ", dim(corr_matrix), "\n")
+cat("Number of missing values: ", sum(is.na(corr_matrix)), "\n")
 
-# ── Step 2: Cross-validation 选最优 k ────────────────
+# ── Step 2: Select the optimal k by cross-validation ────────────────
 logpca_cv <- cv.lpca(corr_matrix, ks = 1:10, ms = 4)
 plot(logpca_cv)
 k_opt <- which.min(rowMeans(logpca_cv))
-cat("最优 k：", k_opt, "\n")
+cat("optimal k: ", k_opt, "\n")
 
-# ── Step 3: 跑 Logistic PCA ───────────────────────────
+# ── Step 3: Run logistic PCA ───────────────────────────
 logpca_model <- logisticPCA(corr_matrix, k = k_opt, m = 4)
 
-# ── Step 4: 每个视频的 PC 得分 ───────────────────────
+# ── Step 4: PC scores for each video ───────────────────────
 pc_scores_corr <- logpca_model$PCs
 rownames(pc_scores_corr) <- rownames(corr_matrix)
 
-cat("\n=== 各 PC 得分最高/最低的视频 ===\n")
+cat("\n=== Highest- and lowest-scoring videos for each PC ===\n")
 for (k in 1:k_opt) {
   scores <- pc_scores_corr[, k]
   top3   <- names(sort(scores, decreasing = TRUE))[1:3]
   bot3   <- names(sort(scores, decreasing = FALSE))[1:3]
   cat(paste0("\nPC", k, ":\n"))
-  cat("  最高：", paste(top3, collapse = ", "), "\n")
-  cat("  最低：", paste(bot3, collapse = ", "), "\n")
+  cat("  highest: ", paste(top3, collapse = ", "), "\n")
+  cat("  lowest: ", paste(bot3, collapse = ", "), "\n")
 }
 
-# ── Step 5: 方差解释 ──────────────────────────────────
-cat("\n=== 方差解释 ===\n")
+# ── Step 5: Variance explained ──────────────────────────────────
+cat("\n=== Variance explained ===\n")
 var_exp <- logpca_model$prop_deviance_expl
-cat("各 PC 解释的方差比例：\n")
+cat("Proportion of Variance explained by each PC: \n")
 print(round(var_exp, 3))
 
-# ── Step 6: 保存 ─────────────────────────────────────
+# ── Step 6: Save ─────────────────────────────────────
 pc_scores_corr_df <- as.data.frame(pc_scores_corr)
 pc_scores_corr_df$Video <- rownames(corr_matrix)
 pc_scores_corr_df <- pc_scores_corr_df %>% dplyr::select(Video, everything())
@@ -384,65 +384,65 @@ pc_scores_corr_df <- pc_scores_corr_df %>% dplyr::select(Video, everything())
 write.csv(pc_scores_corr_df,
           file.path(save_path, "voe_correctness_logisticPCA_scores.csv"),
           row.names = FALSE)
-cat("\n完成！Logistic PCA scores 已保存\n")
+cat("\nComplete: logistic PCA scores saved\n")
 ```
 
-CV 曲线仍然单调下降，k=10 只是上限
-k=10 解释 86.3% 方差
-与 CAT 类似，需要扩大搜索范围确认最优 k
+The cross-validation curve is still decreasing monotonically; k=10 is only the upper bound of the search range.
+k=10 explains 86.3% of the variance.
+As with CAT, the search range must be expanded to confirm the optimal k.
 
 ```{r}
-# 扩大 k 的范围重新 CV
+# Expand the k range and rerun cross-validation
 logpca_cv2 <- cv.lpca(corr_matrix, ks = 1:20, ms = 4)
 plot(logpca_cv2)
 
-# 手动看哪里有肘部
+# Inspect the elbow location manually
 cv_means <- rowMeans(logpca_cv2)
-cat("各 k 的 CV 得分：\n")
+cat("Cross-validation score for each k: \n")
 print(round(cv_means, 2))
 
-# 用肘部法则找最优 k
-# 计算斜率变化
+# Use the elbow rule to find the optimal k
+# Calculate changes in slope
 diffs <- diff(cv_means)
 diffs2 <- diff(diffs)
 k_elbow <- which.min(diffs2) + 1
-cat("肘部法则建议 k =", k_elbow, "\n")
+cat("The elbow rule suggests k =", k_elbow, "\n")
 
-# 或者选择方差解释达到 80% 的最小 k
-# 重新跑不同 k 看方差解释
+# Alternatively, choose the smallest value that reaches 80% explained variance
+# Rerun with different k values to inspect explained variance
 for (k in c(3, 5, 7, 10, 15, 20)) {
   m <- logisticPCA(corr_matrix, k = k, m = 4)
-  cat(paste0("k=", k, ": 方差解释 = ", round(m$prop_deviance_expl, 3), "\n"))
+  cat(paste0("k=", k, ": Variance explained = ", round(m$prop_deviance_expl, 3), "\n"))
 }
 ```
 
-建议用 k=10，理由：
+Recommendation: use k=10. Rationale:
 
-肘部法则支持
-解释 86.3% 方差，接近 90% 阈值
-曲线在 k=10 后斜率明显变缓
+The elbow rule supports this choice.
+It explains 86.3% of the variance, close to the 90% threshold.
+The curve becomes much flatter after k=10.
 
 ```{r}
-# 用 k=10 重新跑 Logistic PCA
+# Rerun logistic PCA with k=10
 logpca_final <- logisticPCA(corr_matrix, k = 10, m = 4)
 
-cat("方差解释：", round(logpca_final$prop_deviance_expl, 3), "\n")
+cat("Variance explained: ", round(logpca_final$prop_deviance_expl, 3), "\n")
 
 # PC scores
 pc_scores_corr_final <- logpca_final$PCs
 rownames(pc_scores_corr_final) <- rownames(corr_matrix)
 
-cat("\n=== 各 PC 得分最高/最低的视频 ===\n")
+cat("\n=== Highest- and lowest-scoring videos for each PC ===\n")
 for (k in 1:10) {
   scores <- pc_scores_corr_final[, k]
   top3   <- names(sort(scores, decreasing = TRUE))[1:3]
   bot3   <- names(sort(scores, decreasing = FALSE))[1:3]
   cat(paste0("\nPC", k, ":\n"))
-  cat("  最高：", paste(top3, collapse = ", "), "\n")
-  cat("  最低：", paste(bot3, collapse = ", "), "\n")
+  cat("  highest: ", paste(top3, collapse = ", "), "\n")
+  cat("  lowest: ", paste(bot3, collapse = ", "), "\n")
 }
 
-# 保存
+# Save
 pc_scores_corr_df <- as.data.frame(pc_scores_corr_final)
 colnames(pc_scores_corr_df) <- paste0("PC", 1:10)
 pc_scores_corr_df$Video <- rownames(corr_matrix)
@@ -451,7 +451,7 @@ pc_scores_corr_df <- pc_scores_corr_df %>% dplyr::select(Video, everything())
 write.csv(pc_scores_corr_df,
           file.path(save_path, "voe_correctness_logisticPCA_k10.csv"),
           row.names = FALSE)
-cat("\n完成！k=10 的 Logistic PCA scores 已保存\n")
+cat("\nComplete: k=10 logistic PCA scores saved\n")
 ```
 
 ## R Markdown

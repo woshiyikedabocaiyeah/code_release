@@ -27,7 +27,7 @@ s2_sensor <- read.csv(file.path(folder_path, "all_summary_2_sensor.csv"))
 s1_voe    <- read.csv(file.path(folder_path, "all_summary_1_voe.csv"))
 s2_voe    <- read.csv(file.path(folder_path, "all_summary_2_voe.csv"))
 
-# 看结构
+# Inspect structure
 head(s1_cat)
 head(s1_sensor)
 head(s1_voe)
@@ -62,29 +62,29 @@ ex_table <- ex_all %>%
     `IES_critical SD`  = round(sd(mean_IES_critical,   na.rm = TRUE), 3)
   )
 
-cat("=== 正式实验 Descriptive Statistics ===\n")
+cat("=== Formal Experiment Descriptive Statistics ===\n")
 print(ex_table)
 
-# 导出
+# Export
 write.csv(ex_table,
           file = file.path(folder_path, "descriptive_ex.csv"),
           row.names = FALSE)
 
-cat("\n导出完成！\n")
+cat("\nExport complete!\n")
 ```
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
 
-# 整理数据
+# Prepare data
 plot_dat <- ex_all %>%
   mutate(group = factor(group, levels = c("Categorization", "VoE", "Sensorimotor"))) %>%
-  dplyr::select(group, mean_T_encode, mean_RT_onset, mean_RT_critical, 
+  dplyr::select(group, mean_T_encode, mean_RT_onset, mean_RT_critical,
                 mean_ACC, mean_IES_onset, mean_IES_critical) %>%
   mutate(mean_ACC = mean_ACC * 100) %>%
   pivot_longer(
-    cols = c(mean_T_encode, mean_RT_onset, mean_RT_critical, 
+    cols = c(mean_T_encode, mean_RT_onset, mean_RT_critical,
              mean_ACC, mean_IES_onset, mean_IES_critical),
     names_to = "measure",
     values_to = "value"
@@ -98,7 +98,7 @@ plot_dat <- ex_all %>%
       measure == "mean_IES_onset"    ~ "IES_onset",
       measure == "mean_IES_critical" ~ "IES_critical"
     ),
-    measure = factor(measure, levels = c("T_encode (s)", "RT_onset (s)", 
+    measure = factor(measure, levels = c("T_encode (s)", "RT_onset (s)",
                                           "RT_critical (s)", "ACC (%)",
                                           "IES_onset", "IES_critical"))
   )
@@ -132,14 +132,14 @@ ggplot(plot_dat, aes(x = group, y = value, fill = group)) +
 
 ggsave(file.path(fig_dir, "boxplot_by_group.png"),
        width = 14, height = 8, dpi = 300)
-cat("图已保存！\n")
+cat("Plot saved!\n")
 ```
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
 
-# ── 整理数据 ──────────────────────────────────────────
+# ── Prepare data ──────────────────────────────────────────
 plot_dat <- ex_all %>%
   mutate(group = factor(group, levels = c("Categorization", "VoE", "Sensorimotor"))) %>%
   dplyr::select(group, mean_T_encode, mean_RT_onset, mean_RT_critical,
@@ -166,17 +166,17 @@ plot_dat <- ex_all %>%
     ))
   )
 
-# ── Nature 配色 ───────────────────────────────────────
+# ── Nature color palette ───────────────────────────────────────
 nature_colors <- c(
   "Categorization" = "#4DBBD5",
   "VoE"            = "#00A087",
   "Sensorimotor"   = "#E64B35"
 )
 
-# ── 画图 ──────────────────────────────────────────────
+# ── Plot ──────────────────────────────────────────────
 p <- ggplot(plot_dat, aes(x = group, y = value, fill = group)) +
 
-  # 箱线图
+  # Box plot
   geom_boxplot(
     width         = 0.6,
     outlier.shape = 19,
@@ -187,44 +187,44 @@ p <- ggplot(plot_dat, aes(x = group, y = value, fill = group)) +
     color         = "black"
   ) +
 
-  # 分面
+  # Facets
   facet_wrap(~ measure, scales = "free_y", nrow = 2,
              labeller = label_parsed) +
 
-  # 配色
+  # Colors
   scale_fill_manual(
     values = nature_colors,
     labels = c("Categorization", "VoE", "Sensorimotor")
   ) +
 
-  # x 轴显示组名
-  # 只需修改 scale_x_discrete 这一行
+  # x axis displays group names
+  # Only the scale_x_discrete line needs to be modified
 scale_x_discrete(labels = c(
     "Categorization" = "Categorization",
     "VoE"            = "VOE",
     "Sensorimotor"   = "Sensorimotor"
   )) +
 
-  # 标签
+  # Labels
   labs(x = NULL, y = NULL, fill = NULL) +
 
-  # 主题
+  # Theme
   theme_classic(base_size = 8, base_family = "Arial") +
   theme(
-    # 分面标题
+    # Facet titles
     strip.text       = element_text(size = 8, face = "bold", color = "black"),
     strip.background = element_rect(fill = "grey95", color = NA),
 
-    # 坐标轴
+    # Axes
     axis.text.x      = element_text(size = 7, color = "black"),
     axis.text.y      = element_text(size = 7, color = "black"),
     axis.ticks       = element_line(color = "black", linewidth = 0.3),
     axis.line        = element_line(color = "black", linewidth = 0.4),
 
-    # 图例去掉（x轴已有标签）
+    # Remove the legend (x-axis already has labels)
     legend.position  = "none",
 
-    # 面板
+    # Panel
     panel.grid.major.y = element_line(color = "grey90", linewidth = 0.3),
     panel.grid.minor   = element_blank(),
     panel.grid.major.x = element_blank(),
@@ -232,13 +232,13 @@ scale_x_discrete(labels = c(
                                       linewidth = 0.4),
     panel.spacing      = unit(0.6, "cm"),
 
-    # 整体边距
+    # Overall margins
     plot.margin = margin(6, 6, 6, 6)
   )
 
 print(p)
 
-# ── 保存 ─────────────────────────────────────────────
+# ── Save ─────────────────────────────────────────────
 ggsave(
   filename = file.path(fig_dir, "boxplot_nature.pdf"),
   plot     = p,
@@ -253,31 +253,31 @@ ggsave(
   dpi      = 300
 )
 
-cat("图已保存！\n")
+cat("Plot saved!\n")
 ```
 
 ```{r}
 all_dat <- ex_all %>%
   mutate(group = factor(group, levels = c("Categorization", "Sensorimotor", "VoE")))
 
-cat("行数：", nrow(all_dat), "\n")
-cat("组别：", levels(all_dat$group), "\n")
+cat("number of rows: ", nrow(all_dat), "\n")
+cat("groups: ", levels(all_dat$group), "\n")
 ```
 
 ```{r}
-# 正式实验数据
-# 先确认正式实验数据的变量名
-cat("列名：\n")
+# Formal-experiment data
+# First confirm the variable names in the formal-experiment data
+cat("column names: \n")
 print(colnames(all_dat))
-cat("组别：\n")
+cat("groups: \n")
 print(levels(factor(all_dat$group)))
-cat("行数：", nrow(all_dat), "\n")
+cat("number of rows: ", nrow(all_dat), "\n")
 ```
 
 ```{r}
 library(car)
 
-# ── 确保列为数值型 ────────────────────────────────────
+# ── Ensure columns are numeric ────────────────────────────────────
 ex_all$mean_T_encode     <- as.numeric(ex_all$mean_T_encode)
 ex_all$mean_IES_onset    <- as.numeric(ex_all$mean_IES_onset)
 ex_all$mean_IES_critical <- as.numeric(ex_all$mean_IES_critical)
@@ -287,8 +287,8 @@ ex_all$mean_ACC          <- as.numeric(ex_all$mean_ACC)
 ex_all$group             <- factor(ex_all$group,
                                    levels = c("Categorization", "Sensorimotor", "VoE"))
 
-# ── 正态性检验 ────────────────────────────────────────
-cat("=== Shapiro-Wilk 正态性检验 ===\n")
+# ── Normality test ────────────────────────────────────────
+cat("=== Shapiro-Wilk Normality test ===\n")
 for (dv in c("mean_IES_onset", "mean_IES_critical",
              "mean_RT_onset", "mean_RT_critical", "mean_ACC", "mean_T_encode")) {
   sw <- shapiro.test(ex_all[[dv]])
@@ -296,8 +296,8 @@ for (dv in c("mean_IES_onset", "mean_IES_critical",
              ", p = ", format(sw$p.value, scientific = TRUE, digits = 3), "\n"))
 }
 
-# ── 相关性检验 ────────────────────────────────────────
-cat("\n=== Pearson 相关：T_encode vs 各 DV ===\n")
+# ── Correlation test ────────────────────────────────────────
+cat("\n=== Pearson correlation: T_encode vs. each DV ===\n")
 dvs <- c("mean_IES_onset", "mean_IES_critical",
          "mean_RT_onset", "mean_RT_critical", "mean_ACC")
 
@@ -309,7 +309,7 @@ for (dv in dvs) {
              ", p = ", format(result$p.value, scientific = TRUE, digits = 3), "\n"))
 }
 
-# ── ANCOVA 函数 ───────────────────────────────────────
+# ── ANCOVA function ───────────────────────────────────────
 run_ancova_ex <- function(dv, covariate = NULL) {
   cat(paste0("\n", strrep("=", 50), "\n"))
   cat(paste0("DV = ", dv, "\n"))
@@ -320,8 +320,8 @@ run_ancova_ex <- function(dv, covariate = NULL) {
   print(leveneTest(as.formula(paste0(dv, " ~ group")), data = ex_all))
 
   if (!is.null(covariate)) {
-    # 平行性假设
-    cat("\n--- 平行性假设 ---\n")
+    # Homogeneity-of-slopes assumption
+    cat("\n--- Homogeneity-of-slopes assumption ---\n")
     print(summary(aov(as.formula(paste0(dv, " ~ group * ", covariate)),
                       data = ex_all)))
     # ANCOVA
@@ -342,8 +342,8 @@ run_ancova_ex <- function(dv, covariate = NULL) {
   print(TukeyHSD(model, "group"))
 }
 
-# ── 跑所有 DV ─────────────────────────────────────────
-# 根据相关性结果决定是否加协变量，先全部加上，之后可以调整
+# ── Run all DVs ─────────────────────────────────────────
+# Use the correlation results to decide which covariates to include; include all initially and refine later
 run_ancova_ex("mean_IES_onset",    covariate = "mean_T_encode")
 run_ancova_ex("mean_IES_critical", covariate = "mean_T_encode")
 run_ancova_ex("mean_RT_onset",     covariate = "mean_T_encode")
@@ -351,17 +351,17 @@ run_ancova_ex("mean_RT_critical",  covariate = "mean_T_encode")
 run_ancova_ex("mean_ACC",          covariate = "mean_T_encode")
 ```
 ```{r}
-#假设检验问题
+#Assumption checks
 
-#正态性：所有 DV 均违反，但 N=765 大样本鲁棒性足够
-#方差齐性：IES_onset, IES_critical, RT_onset, RT_critical 均违反；ACC 满足 ✓
-#平行性假设：IES_onset, IES_critical, RT_onset, RT_critical 均违反 ✗；ACC 边界 p = .052 ✓
+#Normality: all DVs violate normality, but N=765 the large sample provides adequate robustness
+#Homogeneity of variance: IES_onset, IES_critical, RT_onset, RT_critical are all violated; ACC satisfies the assumption ✓
+#Homogeneity-of-slopes assumption: IES_onset, IES_critical, RT_onset, RT_critical are all violated ✗; ACC marginal p = .052 ✓
 ```
 
 ```{r}
 library(interactions)
 
-# 对每个 DV 建含交互的模型
+# Fit an interaction model for each DV
 model_IES_onset <- lm(mean_IES_onset ~ group * mean_T_encode, data = ex_all)
 summary(model_IES_onset)
 Anova(model_IES_onset, type = "III")
@@ -369,40 +369,40 @@ Anova(model_IES_onset, type = "III")
 # Simple slopes
 sim_slopes(model_IES_onset, pred = mean_T_encode, modx = group)
 
-# 可视化
+# Visualize
 interact_plot(model_IES_onset, pred = mean_T_encode, modx = group,
               x.label = "T_encode", y.label = "IES_onset")
 ```
 
 ```{r}
-# 对所有 DV 都做 simple slopes
-for (dv in c("mean_IES_onset", "mean_IES_critical", 
+# Run simple-slopes analyses for all DVs
+for (dv in c("mean_IES_onset", "mean_IES_critical",
              "mean_RT_onset", "mean_RT_critical")) {
   cat(paste0("\n=== ", dv, " ===\n"))
-  model <- lm(as.formula(paste0(dv, " ~ group * mean_T_encode")), 
+  model <- lm(as.formula(paste0(dv, " ~ group * mean_T_encode")),
               data = ex_all)
   print(sim_slopes(model, pred = mean_T_encode, modx = group))
 }
 ```
 
 ```{r}
-#Categorization 和 VoE：T_encode 显著正向预测所有 DV，读题越久效率越低
-#Sensorimotor：T_encode 对所有 DV 均不显著，读题时间与表现无关
+# Categorization and VoE: T_encode significantly and positively predicts all DVs; longer question-reading time is associated with lower efficiency.
+# Sensorimotor: T_encode is nonsignificant for all DVs; question-reading time is unrelated to performance.
 ```
 
-假设检验
-正态性违反但 N=765 大样本鲁棒性足够。方差齐性在 IES 和 RT 上违反，但各组样本量接近（261, 258, 246），对结果影响有限。平行性假设在 IES 和 RT 上违反，因此对这些 DV 采用含交互项的回归模型进行分析；ACC 假设满足，直接用 ANCOVA。
+Assumption checks
+Normality is violated, but the large sample (N = 765) provides adequate robustness. The homogeneity-of-variance assumption is violated for IES and RT, but the group sizes are similar (261, 258, and 246), so the impact on the results should be limited. The homogeneity-of-slopes assumption is also violated for IES and RT; therefore, these DVs are analyzed with regression models that include interaction terms. The assumption is satisfied for ACC, so ANCOVA is used.
 
-主效应（Type III SS）
-所有 DV 组间差异均高度显著：
+Main effects (Type III SS)
+Group differences are highly significant for all dependent variables:
 
-IES_onset：F(2, 761) = 30.32, p < .001
-IES_critical：F(2, 761) = 28.63, p < .001
-RT_onset：F(2, 761) = 23.34, p < .001
-RT_critical：F(2, 761) = 23.34, p < .001
-ACC：F(2, 761) = 56.78, p < .001
+IES_onset: F(2, 761) = 30.32, p < .001
+IES_critical: F(2, 761) = 28.63, p < .001
+RT_onset: F(2, 761) = 23.34, p < .001
+RT_critical: F(2, 761) = 23.34, p < .001
+ACC: F(2, 761) = 56.78, p < .001
 
-Post-hoc 两两比较
+Post-hoc pairwise comparisons
 DV              Sen vs Cat      VoE vs Cat    Sen vs VoE
 IES_onset       Sen > Cat ***   VoE < Cat *   Sen > VoE ***
 IES_critical    Sen > Cat ***   n.s.          Sen > VoE ***
@@ -411,26 +411,26 @@ RT_critical     Sen > Cat ***   n.s.          Sen > VoE ***
 ACC             Sen < Cat ***   VoE > Cat **  Sen < VoE ***
 
 
-Sensorimotor 组在所有指标上表现最差（RT 最长、IES 最高、ACC 最低），VoE 和 Categorization 表现相近，但在 IES_onset 和 ACC 上 VoE 略优于 Categorization。
+The Sensorimotor group performs worst on every measure (longest RT, highest IES, and lowest ACC). VoE and Categorization perform similarly, although VoE slightly outperforms Categorization on IES_onset and ACC.
 
-T_encode 的调节作用（Simple Slopes）
-含交互项的回归模型揭示了一个重要发现：T_encode 对各组的影响方向和强度存在显著差异。
+T_encode moderation effect (simple slopes)
+The interaction model reveals that the direction and magnitude of the T_encode effect differ significantly across groups.
 
-Categorization：T_encode 显著正向预测所有 DV（IES_onset: b = 0.16, p = .02；IES_critical: b = 0.17, p < .001；RT_onset/RT_critical: b = 0.15, p < .001），说明读题时间越长，反应效率越低。
-Sensorimotor：T_encode 对所有 DV 均不显著（所有 p > .40），说明读题时间长短不影响该组的反应效率。
-VoE：T_encode 对所有 DV 均显著正向预测（IES_onset: b = 0.26, p = .03；IES_critical: b = 0.25, p < .001；RT_onset/RT_critical: b = 0.21, p < .001），且斜率最大，说明读题时间对 VoE 组效率的负面影响最强。
+Categorization: T_encode significantly and positively predicts all DVs (IES_onset: b = 0.16, p = .02; IES_critical: b = 0.17, p < .001; RT_onset/RT_critical: b = 0.15, p < .001), indicating that longer question-reading time is associated with lower response efficiency.
+Sensorimotor: T_encode is nonsignificant for all DVs (all p > .40), indicating that reading time does not affect response efficiency in this group.
+VoE: T_encode significantly and positively predicts all DVs (IES_onset: b = 0.26, p = .03; IES_critical: b = 0.25, p < .001; RT_onset/RT_critical: b = 0.21, p < .001) and has the largest slope, indicating that reading time has the strongest negative effect on efficiency in the VoE group.
 
 
-综合解读
-三组任务的整体效率排序为 VoE ≈ Categorization > Sensorimotor，Sensorimotor 组在所有指标上均显著差于其他两组。
-T_encode 的调节作用揭示了三组任务的认知机制差异：Categorization 和 VoE 任务中，读题时间反映了认知加工负荷，读题越久意味着理解越困难，进而影响后续判断效率。而 Sensorimotor 任务中读题时间与表现无关，提示该任务可能更依赖直觉感知或自动化加工，题目理解本身不构成主要瓶颈，任务难度可能主要来自视觉-运动判断本身而非语言理解。 
+Overall interpretation
+Overall efficiency across the three tasks ranks as VoE ≈ Categorization > Sensorimotor. The Sensorimotor group performs significantly worse than the other two groups on every measure.
+The moderation by T_encode suggests differences in cognitive mechanisms across the three tasks. In the Categorization and VoE tasks, question-reading time appears to reflect cognitive processing load: longer reading implies greater comprehension difficulty, which in turn reduces the efficiency of subsequent judgments. In the Sensorimotor task, reading time is unrelated to performance, suggesting greater reliance on intuitive perception or automatic processing. Question comprehension is not the primary bottleneck; task difficulty may arise mainly from visuomotor judgment rather than language comprehension.
 
 
 ```{r}
 library(car)
 library(interactions)
 
-# ── Log 变换 ─────────────────────────────────────────
+# ── Log transformation ─────────────────────────────────────────
 ex_all$log_IES_onset    <- log(ex_all$mean_IES_onset)
 ex_all$log_IES_critical <- log(ex_all$mean_IES_critical)
 ex_all$log_RT_onset     <- log(ex_all$mean_RT_onset)
@@ -439,15 +439,15 @@ ex_all$log_T_encode     <- log(ex_all$mean_T_encode)
 
 # ── Shapiro-Wilk ─────────────────────────────────────
 cat("=== Shapiro-Wilk after log transformation ===\n")
-for (dv in c("log_IES_onset", "log_IES_critical", 
+for (dv in c("log_IES_onset", "log_IES_critical",
              "log_RT_onset", "log_RT_critical", "log_T_encode")) {
   sw <- shapiro.test(ex_all[[dv]])
   cat(paste0(dv, ": W = ", round(sw$statistic, 4),
              ", p = ", format(sw$p.value, scientific = TRUE, digits = 3), "\n"))
 }
 
-# ── 相关性检验 ────────────────────────────────────────
-cat("\n=== Pearson 相关：log_T_encode vs 各 DV ===\n")
+# ── Correlation test ────────────────────────────────────────
+cat("\n=== Pearson correlation: log_T_encode vs. each DV ===\n")
 for (dv in c("log_IES_onset", "log_IES_critical",
              "log_RT_onset", "log_RT_critical")) {
   result <- cor.test(ex_all$log_T_encode, ex_all[[dv]])
@@ -457,14 +457,14 @@ for (dv in c("log_IES_onset", "log_IES_critical",
              ", p = ", format(result$p.value, scientific = TRUE, digits = 3), "\n"))
 }
 
-# ACC 用 Pearson 原始值
-cat("\n=== Pearson 相关：T_encode vs ACC ===\n")
+# Use raw ACC values with Pearson correlation
+cat("\n=== Pearson correlation: T_encode vs ACC ===\n")
 result <- cor.test(ex_all$mean_T_encode, ex_all$mean_ACC)
 cat(paste0("r = ", round(result$estimate, 3),
            ", t(", result$parameter, ") = ", round(result$statistic, 3),
            ", p = ", format(result$p.value, scientific = TRUE, digits = 3), "\n"))
 
-# ── ANCOVA 函수 ───────────────────────────────────────
+# ── ANCOVA function ───────────────────────────────────────
 run_ancova_log <- function(dv, covariate = "log_T_encode", data = ex_all) {
   cat(paste0("\n", strrep("=", 50), "\n"))
   cat(paste0("DV = ", dv, "\n"))
@@ -473,7 +473,7 @@ run_ancova_log <- function(dv, covariate = "log_T_encode", data = ex_all) {
   cat("\n--- Levene's Test ---\n")
   print(leveneTest(as.formula(paste0(dv, " ~ group")), data = data))
 
-  cat("\n--- 平行性假设 ---\n")
+  cat("\n--- Homogeneity-of-slopes assumption ---\n")
   print(summary(aov(as.formula(paste0(dv, " ~ group * ", covariate)),
                     data = data)))
 
@@ -489,111 +489,111 @@ run_ancova_log <- function(dv, covariate = "log_T_encode", data = ex_all) {
   print(TukeyHSD(model, "group"))
 }
 
-# ── 跑所有 DV ─────────────────────────────────────────
+# ── Run all DVs ─────────────────────────────────────────
 run_ancova_log("log_IES_onset")
 run_ancova_log("log_IES_critical")
 run_ancova_log("log_RT_onset")
 run_ancova_log("log_RT_critical")
 
-# ACC 用原始值
+# Use raw ACC values
 run_ancova_log("mean_ACC", covariate = "mean_T_encode")
 ```
 
 ```{r}
 library(interactions)
 
-# ── 平行性假设违反 → 交互模型 + Simple Slopes ──────────
-dvs_log <- c("log_IES_onset", "log_IES_critical", 
+# ── Homogeneity-of-slopes assumption violated → Interaction model + Simple Slopes ──────────
+dvs_log <- c("log_IES_onset", "log_IES_critical",
              "log_RT_onset", "log_RT_critical")
 
 for (dv in dvs_log) {
   cat(paste0("\n", strrep("=", 50), "\n"))
-  cat(paste0("=== 交互模型: DV = ", dv, " ===\n"))
+  cat(paste0("=== Interaction model: DV = ", dv, " ===\n"))
   cat(paste0(strrep("=", 50), "\n"))
-  
+
   model <- lm(as.formula(paste0(dv, " ~ group * log_T_encode")),
               data = ex_all)
-  
+
   cat("\n--- Type III SS ---\n")
   print(Anova(model, type = "III"))
-  
+
   cat("\n--- Simple Slopes ---\n")
   print(sim_slopes(model, pred = log_T_encode, modx = group))
-  
+
   cat("\n--- Post-hoc ---\n")
   print(TukeyHSD(aov(as.formula(paste0(dv, " ~ group + log_T_encode")),
                      data = ex_all), "group"))
 }
 ```
 
-Log 变换后交互模型结果解读：
-与原始值分析结论高度一致，验证了结果的稳健性。
+Interpretation of the interaction model after log transformation:
+The conclusions closely match the raw-value analysis, confirming the robustness of the results.
 
 log_IES_onset
 
-group × log_T_encode 交互显著，F(2, 759) = 20.45, p < .001
-Simple slopes：Cat (b = +0.10, p < .001) 和 VoE (b = +0.07, p < .001) 显著正向，Sensor (b = -0.04, p = .007) 显著负向
-Post-hoc：Sensor > Cat (p < .001)，VoE < Cat (p = .007)，Sensor > VoE (p < .001)
+The group × log_T_encode interaction is significant, F(2, 759) = 20.45, p < .001.
+Simple slopes: Cat (b = +0.10, p < .001) and VoE (b = +0.07, p < .001) are significantly positive; Sensor (b = -0.04, p = .007) is significantly negative.
+Post-hoc: Sensor > Cat (p < .001), VoE < Cat (p = .007), Sensor > VoE (p < .001)
 
 
 log_IES_critical
 
-group × log_T_encode 交互显著，F(2, 759) = 20.11, p < .001
-Simple slopes：Cat (b = +0.29, p < .001) 和 VoE (b = +0.19, p < .001) 显著正向，Sensor 不显著 (b = -0.02, p = .463)
-Post-hoc：Sensor > Cat (p < .001)，VoE < Cat (p = .008)，Sensor > VoE (p < .001)
+The group × log_T_encode interaction is significant, F(2, 759) = 20.11, p < .001.
+Simple slopes: Cat (b = +0.29, p < .001) and VoE (b = +0.19, p < .001) are significantly positive; Sensor is nonsignificant (b = -0.02, p = .463).
+Post-hoc: Sensor > Cat (p < .001), VoE < Cat (p = .008), Sensor > VoE (p < .001)
 
 
 log_RT_onset
 
-group × log_T_encode 交互显著，F(2, 759) = 17.89, p < .001
-Simple slopes：Cat (b = +0.09, p < .001) 和 VoE (b = +0.06, p < .001) 显著正向，Sensor 不显著 (b = 0.00, p = .692)
-Post-hoc：Sensor > Cat (p < .001)，VoE vs Cat 不显著 (p = .128)，Sensor > VoE (p < .001)
+The group × log_T_encode interaction is significant, F(2, 759) = 17.89, p < .001.
+Simple slopes: Cat (b = +0.09, p < .001) and VoE (b = +0.06, p < .001) are significantly positive; Sensor is nonsignificant (b = 0.00, p = .692).
+Post-hoc: Sensor > Cat (p < .001), VoE vs Cat nonsignificant (p = .128), Sensor > VoE (p < .001)
 
 
 log_RT_critical
 
-group × log_T_encode 交互显著，F(2, 759) = 16.38, p < .001
-Simple slopes：Cat (b = +0.28, p < .001) 和 VoE (b = +0.18, p < .001) 显著正向，Sensor 不显著 (b = +0.01, p = .663)
-Post-hoc：Sensor > Cat (p < .001)，VoE < Cat (p = .047)，Sensor > VoE (p < .001)
+The group × log_T_encode interaction is significant, F(2, 759) = 16.38, p < .001.
+Simple slopes: Cat (b = +0.28, p < .001) and VoE (b = +0.18, p < .001) are significantly positive; Sensor is nonsignificant (b = +0.01, p = .663).
+Post-hoc: Sensor > Cat (p < .001), VoE < Cat (p = .047), Sensor > VoE (p < .001)
 
 DV                  Sen vs Cat       VoE vs Cat       Sen vs VoE
-IES_onset（原始）   Sen > Cat ***    VoE < Cat *      Sen > VoE ***
-IES_onset（log）    Sen > Cat ***    VoE < Cat **     Sen > VoE ***
-IES_critical（原始）Sen > Cat ***    n.s.             Sen > VoE ***
-IES_critical（log） Sen > Cat ***    VoE < Cat **     Sen > VoE ***
-RT_onset（原始）    Sen > Cat ***    n.s.             Sen > VoE ***
-RT_onset（log）     Sen > Cat ***    n.s.             Sen > VoE ***
-RT_critical（原始） Sen > Cat ***    n.s.             Sen > VoE ***
-RT_critical（log）  Sen > Cat ***    VoE < Cat *      Sen > VoE ***
+IES_onset (raw)    Sen > Cat ***    VoE < Cat *      Sen > VoE ***
+IES_onset (log)     Sen > Cat ***    VoE < Cat **     Sen > VoE ***
+IES_critical (raw) Sen > Cat ***    n.s.             Sen > VoE ***
+IES_critical (log)  Sen > Cat ***    VoE < Cat **     Sen > VoE ***
+RT_onset (raw)     Sen > Cat ***    n.s.             Sen > VoE ***
+RT_onset (log)      Sen > Cat ***    n.s.             Sen > VoE ***
+RT_critical (raw)  Sen > Cat ***    n.s.             Sen > VoE ***
+RT_critical (log)   Sen > Cat ***    VoE < Cat *      Sen > VoE ***
 
 
-主要差异：
-IES_critical：VoE vs Cat
+Main differences:
+IES_critical: VoE vs Cat
 
-原始值：不显著 (p = .092)
-Log 变换：显著 (p = .008)，VoE < Cat
-原因：log 变换压缩了极端值，减小了组内方差，提高了检验效力
+Raw values: nonsignificant (p = .092)
+Log transformation: significant (p = .008), VoE < Cat
+Reason: the log transformation compresses extreme values, reduces within-group variance, and increases statistical power.
 
-RT_critical：VoE vs Cat
+RT_critical: VoE vs Cat
 
-原始值：不显著 (p = .217)
-Log 变换：显著 (p = .047)，VoE < Cat
-原因：同上，log 变换对右偏数据的极端值影响较大
+Raw values: nonsignificant (p = .217)
+Log transformation: significant (p = .047), VoE < Cat
+Reason: as above, the log transformation has a larger effect on extreme values in right-skewed data.
 
-Simple Slopes 差异：
+Simple Slopes Differences:
 DV           Cat      Cat       Sensor      Sensor     VoE        VoE
-             原始     log       原始        log        原始       log
+             raw     log       raw        log        raw       log
 IES_onset.   +0.16*.  +0.10***. -0.04n.s.   -0.04*.    +0.26*     +0.07** IES_critical +0.17*** +0.29***.  0.00 n.s.  -0.02n.s.  +0.25**.   +0.19** RT_onset.    +0.15*** +0.09***. +0.02 n.s.  .0.00n.s.  +0.21***.  +0.06*** RT_critical. +0.15*** +0.28***. +0.02 n.s.   +0.01n.s. +0.21***.  +0.18***
 
 
-核心模式一致：
+The core pattern is consistent:
 
-Cat 和 VoE：两种分析下斜率均显著正向，T_encode 越长效率越低
-Sensor：两种分析下斜率均不显著，T_encode 对表现无预测作用
-Log 变换后斜率数值有所变化（因量纲不同），但方向和显著性模式高度一致
+Cat and VoE: the slope is significantly positive in both analyses; longer T_encode values indicate lower efficiency.
+Sensor: the slope is nonsignificant in both analyses; T_encode does not predict performance.
+Slope values change after log transformation because the scales differ, but the direction and significance patterns remain highly consistent.
 
-结论：
-Log 变换后结论与原始值分析高度一致，支持将原始值分析作为主要结果报告，log 变换版本放入附录作为稳健性检验。唯一细微差异是 log_IES_onset 中 Sensor 的斜率变为显著负向，但整体模式不变。
+Conclusion:
+The conclusions after log transformation closely match the raw-value analysis. This supports reporting the raw-value analysis as the primary result and including the log-transformed version in the appendix as a robustness check. The only minor difference is that the log_IES_onset slope becomes significantly negative in the Sensor group, but the overall pattern is unchanged.
 
 
 ```{r}
@@ -606,7 +606,7 @@ library(ggsignif)
 library(patchwork)
 library(cowplot)
 
-# ── Step 1: 整理原始数据长格式 ───────────────────────
+# ── Step 1: Reshape raw data to long format ───────────────────────
 plot_dat_ex <- ex_all %>%
   mutate(group = factor(group, levels = c("Categorization", "VoE", "Sensorimotor"))) %>%
   dplyr::select(group, mean_IES_onset, mean_IES_critical,
@@ -632,7 +632,7 @@ plot_dat_ex <- ex_all %>%
     ))
   )
 
-# ── Step 2: 计算均值和 SEM ────────────────────────────
+# ── Step 2: Calculate means and SEM ────────────────────────────
 sem_dat_ex <- plot_dat_ex %>%
   group_by(group, measure) %>%
   summarise(
@@ -641,7 +641,7 @@ sem_dat_ex <- plot_dat_ex %>%
     .groups = "drop"
   )
 
-# ── Step 3: 显著性标注（正式实验，按你之前的设定）─────
+# ── Step 3: Significance annotations (Formal Experiment, using the previous specification) ─────
 comparisons_list_ex <- list(
   "IES[onset]"       = list(list(c("Categorization", "Sensorimotor"), "***"),
                             list(c("Categorization", "VoE"),          "**"),
@@ -659,7 +659,7 @@ comparisons_list_ex <- list(
                             list(c("VoE", "Sensorimotor"),            "***"))
 )
 
-# ── Step 4: 配色与标签映射 ───────────────────────────
+# ── Step 4: Color and label mapping ───────────────────────────
 nature_colors <- c(
   "Categorization" = "#4DBBD5",
   "VoE"            = "#00A087",
@@ -671,7 +671,7 @@ group_labels <- c(
   "Sensorimotor"   = "Affordance Recognition"
 )
 
-# ── Step 5: 抽取横向 legend ──────────────────────────
+# ── Step 5: Extract the horizontal legend ──────────────────────────
 legend_plot <- ggplot(sem_dat_ex, aes(x = group, y = mean, fill = group)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(
@@ -692,7 +692,7 @@ legend_plot <- ggplot(sem_dat_ex, aes(x = group, y = mean, fill = group)) +
 
 legend <- cowplot::get_legend(legend_plot)
 
-# ── Step 6: 循环画每个子图 ───────────────────────────
+# ── Step 6: Draw each subplot in a loop ───────────────────────────
 plot_list <- list()
 
 for (m in levels(sem_dat_ex$measure)) {
@@ -745,7 +745,7 @@ for (m in levels(sem_dat_ex$measure)) {
   plot_list[[m]] <- p_sub
 }
 
-# ── Step 7: 合并：5个子图一行，legend 放最底部 ───────
+# ── Step 7: Merge: five subplots in one row, legend at the bottom ───────
 combined <- wrap_plots(plot_list, nrow = 1, ncol = 5, guides = "collect") &
   theme(
     legend.position   = "bottom",
@@ -763,7 +763,7 @@ combined <- wrap_plots(plot_list, nrow = 1, ncol = 5, guides = "collect") &
 
 print(combined)
 
-# ── Step 8: 保存 ─────────────────────────────────────
+# ── Step 8: Save ─────────────────────────────────────
 ggsave(
   filename = file.path(fig_dir, "pilot_barchart.pdf"),
   plot     = combined,
@@ -783,7 +783,7 @@ ggsave(
   dpi      = 300,
   bg       = "white"
 )
-cat("图已保存！\n")
+cat("Plot saved!\n")
 ```
 
 

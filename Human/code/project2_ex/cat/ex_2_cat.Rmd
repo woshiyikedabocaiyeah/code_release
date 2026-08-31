@@ -20,19 +20,19 @@ csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
 output_file <- csv_files[grepl("output\\.csv$", csv_files)]
 data_files  <- csv_files[!grepl("output\\.csv$", csv_files)]
 
-# 读取 output.csv
+# Read output.csv
 output <- read.csv(output_file, header = TRUE)
-cat("output 已读取：", nrow(output), "行，", ncol(output), "列\n")
+cat("output loaded: ", nrow(output), "rows, ", ncol(output), "columns\n")
 
-# 不跳行，直接读
+# Do not skip rows, read directly
 for (i in seq_along(data_files)) {
   tryCatch({
-    dat <- read.csv(data_files[i], header = TRUE)  # 去掉 skip = 1
+    dat <- read.csv(data_files[i], header = TRUE)  # Remove skip = 1
     assign(paste0("dat_", i), dat)
-    cat(paste0("dat_", i, " 已读取：", basename(data_files[i]),
-               "（", nrow(dat), " 行，", ncol(dat), " 列）\n"))
+    cat(paste0("dat_", i, " loaded: ", basename(data_files[i]),
+               " (", nrow(dat), " rows, ", ncol(dat), " columns) \n"))
   }, error = function(e) {
-    cat(paste0("跳过：", basename(data_files[i]), " -> ", e$message, "\n"))
+    cat(paste0("Skip: ", basename(data_files[i]), " -> ", e$message, "\n"))
   })
 }
 rm(dat)
@@ -46,23 +46,23 @@ for (i in 1:121) {
   assign(dat_name, dat)
 }
 
-cat("完成！已保留所有 video/ 开头的行\n")
+cat("Complete: retained all rows beginning with video/\n")
 ```
 
 ```{r}
 for (i in 1:121) {
   dat_name <- paste0("dat_", i)
   dat <- get(dat_name)
-  
-  # 以 Video = key 为键，merge output 的 time 列
-  dat <- merge(dat, output[, c("key", "time")], 
-               by.x = "Video", by.y = "key", 
+
+  # Merge the output time column using Video as the key
+  dat <- merge(dat, output[, c("key", "time")],
+               by.x = "Video", by.y = "key",
                all.x = TRUE)
-  
+
   assign(dat_name, dat)
 }
 
-cat("完成！time 列已添加到所有 dat\n")
+cat("Complete: time column added to all datasets\n")
 ```
 
 ```{r}
@@ -71,21 +71,21 @@ total_count <- sum(sapply(1:121, function(i) {
   sum(dat$key_resp_8.rt < 6, na.rm = TRUE)
 }))
 
-cat("key_resp_9.rt < 6 的总数：", total_count, "\n")
+cat("Total count with key_resp_9.rt < 6: ", total_count, "\n")
 ```
 
 ```{r}
 all_dat <- bind_rows(lapply(1:121, function(i) {
   get(paste0("dat_", i))
 })) %>%
-  dplyr::select(participant,cat_practice_question.stopped, 
+  dplyr::select(participant,cat_practice_question.stopped,
                 cat_practice_question.started,
                 key_resp_8.rt,
                 time,
                 key_resp_8.corr) %>%
   mutate(condition = "categorization")
 
-cat("合并完成：", nrow(all_dat), "行，", ncol(all_dat), "列\n")
+cat("Merge complete: ", nrow(all_dat), "rows, ", ncol(all_dat), "columns\n")
 ```
 
 ```{r}
@@ -139,7 +139,7 @@ outlier_results <- lapply(names(dvs), function(dv_name) {
 
 all_outliers <- bind_rows(outlier_results)
 
-# 每个 participant 的异常情况
+# Participant-level exception cases
 all_outliers %>%
   group_by(participant, variable) %>%
   summarise(n_outliers = n(), .groups = "drop") %>%
@@ -161,30 +161,30 @@ summarize_dat <- function(dat) {
       # T_encode
       mean_T_encode     = mean(cat_practice_question.stopped - cat_practice_question.started, na.rm = TRUE),
       sd_T_encode       = sd(cat_practice_question.stopped   - cat_practice_question.started, na.rm = TRUE),
-      
+
       # RT_onset
       mean_RT_onset     = mean(key_resp_8.rt, na.rm = TRUE),
       sd_RT_onset       = sd(key_resp_8.rt,   na.rm = TRUE),
-      
+
       # RT_critical
       mean_RT_critical  = mean(key_resp_8.rt - time, na.rm = TRUE),
       sd_RT_critical    = sd(key_resp_8.rt   - time, na.rm = TRUE),
-      
+
       # ACC
       mean_ACC          = mean(key_resp_8.corr, na.rm = TRUE),
       sd_ACC            = sd(key_resp_8.corr,   na.rm = TRUE),
-      
+
       # IES_onset
       mean_IES_onset    = mean(key_resp_8.rt / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
       sd_IES_onset      = sd(key_resp_8.rt   / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
-      
+
       # IES_critical
       mean_IES_critical = mean((key_resp_8.rt - time) / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE),
       sd_IES_critical   = sd((key_resp_8.rt   - time) / mean(key_resp_8.corr, na.rm = TRUE), na.rm = TRUE)
     )
 }
 
-# 生成所有 summary 并合并
+# Generate and merge all summaries
 all_summary <- bind_rows(
   lapply(1:121, function(i) {
     dat <- get(paste0("dat_", i))
@@ -193,16 +193,16 @@ all_summary <- bind_rows(
   })
 ) %>% select(participant, everything())
 
-cat("完成！\n")
+cat("Complete!\n")
 write.csv(all_summary,
           file = "../../data_analysis/ex_2_cat/all_summary.csv",
           row.names = FALSE)
 
-cat("导出完成！\n")
+cat("Export complete!\n")
 ```
 
 ```{r}
-# 筛选 correct trials 并生成 summary
+# Filter correct trials and generate summary
 all_summary_correct <- bind_rows(
   lapply(1:121, function(i) {
     dat <- get(paste0("dat_", i))
@@ -212,12 +212,12 @@ all_summary_correct <- bind_rows(
   })
 ) %>% select(participant, everything())
 
-# 导出
+# Export
 write.csv(all_summary_correct,
           file = "../../data_analysis/ex_2_cat/with_correct_trial.csv",
           row.names = FALSE)
 
-cat("导出完成！\n")
+cat("Export complete!\n")
 print(all_summary_correct)
 ```
 

@@ -27,7 +27,7 @@ s2_sensor <- read.csv(file.path(folder_path, "all_summary_2_sensor.csv"))
 s1_voe    <- read.csv(file.path(folder_path, "all_summary_1_voe.csv"))
 s2_voe    <- read.csv(file.path(folder_path, "all_summary_2_voe.csv"))
 
-# 看结构
+# Inspect structure
 head(s1_cat)
 head(s1_sensor)
 head(s1_voe)
@@ -43,7 +43,7 @@ colnames(s1_voe)
 ```{r}
 library(tidyverse)
 
-# ── 预实验 ────────────────────────────────────────
+# ── pilot study ────────────────────────────────────────
 pilot_cat    <- bind_rows(s1_cat, s2_cat)       %>% mutate(group = "Categorization")
 pilot_sensor <- bind_rows(s1_sensor, s2_sensor) %>% mutate(group = "Sensorimotor")
 pilot_voe    <- bind_rows(s1_voe, s2_voe)       %>% mutate(group = "VoE")
@@ -69,29 +69,29 @@ pilot_table <- pilot_all %>%
     `IES_critical SD`  = round(sd(mean_IES_critical,   na.rm = TRUE), 3)
   )
 
-cat("=== 预实验 Descriptive Statistics ===\n")
+cat("=== pilot study Descriptive Statistics ===\n")
 print(pilot_table)
 
-# 导出
+# Export
 write.csv(pilot_table,
           file = file.path(folder_path, "descriptive_pilot.csv"),
           row.names = FALSE)
 
-cat("\n导出完成！\n")
+cat("\nExport complete!\n")
 ```
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
 
-# 整理数据
+# Prepare data
 plot_dat <- pilot_all %>%
   mutate(group = factor(group, levels = c("Categorization", "VoE", "Sensorimotor"))) %>%
-  dplyr::select(group, mean_T_encode, mean_RT_onset, mean_RT_critical, 
+  dplyr::select(group, mean_T_encode, mean_RT_onset, mean_RT_critical,
                 mean_ACC, mean_IES_onset, mean_IES_critical) %>%
   mutate(mean_ACC = mean_ACC * 100) %>%
   pivot_longer(
-    cols = c(mean_T_encode, mean_RT_onset, mean_RT_critical, 
+    cols = c(mean_T_encode, mean_RT_onset, mean_RT_critical,
              mean_ACC, mean_IES_onset, mean_IES_critical),
     names_to = "measure",
     values_to = "value"
@@ -105,7 +105,7 @@ plot_dat <- pilot_all %>%
       measure == "mean_IES_onset"    ~ "IES_onset",
       measure == "mean_IES_critical" ~ "IES_critical"
     ),
-    measure = factor(measure, levels = c("T_encode (s)", "RT_onset (s)", 
+    measure = factor(measure, levels = c("T_encode (s)", "RT_onset (s)",
                                           "RT_critical (s)", "ACC (%)",
                                           "IES_onset", "IES_critical"))
   )
@@ -139,22 +139,22 @@ ggplot(plot_dat, aes(x = group, y = value, fill = group)) +
 
 ggsave(file.path(fig_dir, "boxplot_by_group.png"),
        width = 14, height = 8, dpi = 300)
-cat("图已保存！\n")
+cat("Plot saved!\n")
 ```
 
 ```{r}
 all_dat <- pilot_all %>%
   mutate(group = factor(group, levels = c("Categorization", "Sensorimotor", "VoE")))
 
-cat("行数：", nrow(all_dat), "\n")
-cat("组别：", levels(all_dat$group), "\n")
+cat("number of rows: ", nrow(all_dat), "\n")
+cat("groups: ", levels(all_dat$group), "\n")
 ```
 
 
 ```{r}
 library(bestNormalize)
 
-# 用 orderNorm 单独变换 T_encode
+# Transform T_encode separately with orderNorm
 on_T_encode <- orderNorm(all_dat$mean_T_encode)
 all_dat$bc_T_encode <- on_T_encode$x.t
 shapiro.test(all_dat$bc_T_encode)
@@ -166,36 +166,36 @@ library(bestNormalize)
 # IES_onset
 bn_IES_onset <- bestNormalize(all_dat$mean_IES_onset)
 all_dat$bc_IES_onset <- bn_IES_onset$x.t
-cat("IES_onset 变换：", class(bn_IES_onset$chosen_transform)[1], "\n")
+cat("IES_onset transformation: ", class(bn_IES_onset$chosen_transform)[1], "\n")
 print(shapiro.test(all_dat$bc_IES_onset))
 
 # IES_critical
 bn_IES_critical <- bestNormalize(all_dat$mean_IES_critical)
 all_dat$bc_IES_critical <- bn_IES_critical$x.t
-cat("IES_critical 变换：", class(bn_IES_critical$chosen_transform)[1], "\n")
+cat("IES_critical transformation: ", class(bn_IES_critical$chosen_transform)[1], "\n")
 print(shapiro.test(all_dat$bc_IES_critical))
 
 # RT_onset
 bn_RT_onset <- bestNormalize(all_dat$mean_RT_onset)
 all_dat$bc_RT_onset <- bn_RT_onset$x.t
-cat("RT_onset 变换：", class(bn_RT_onset$chosen_transform)[1], "\n")
+cat("RT_onset transformation: ", class(bn_RT_onset$chosen_transform)[1], "\n")
 print(shapiro.test(all_dat$bc_RT_onset))
 
 #RT_critical
 all_dat$bc_RT_critical <- orderNorm(all_dat$mean_RT_critical)$x.t
-cat("RT_critical 变换：orderNorm\n")
+cat("RT_critical transformation: orderNorm\n")
 print(shapiro.test(all_dat$bc_RT_critical))
 
-# T_encode 用 orderNorm
+# Transform T_encode with orderNorm
 on_T_encode <- orderNorm(all_dat$mean_T_encode)
 all_dat$bc_T_encode <- on_T_encode$x.t
-cat("T_encode 变换：orderNorm\n")
+cat("T_encode transformation: orderNorm\n")
 print(shapiro.test(all_dat$bc_T_encode))
 ```
 
 
 ```{r}
-cat("=== Pearson 相关：bc_T_encode vs 变换后各 DV ===\n")
+cat("=== Pearson correlation: bc_T_encode vs. each transformed DV ===\n")
 
 dvs_cor <- list(
   "bc_IES_onset"    = all_dat$bc_IES_onset,
@@ -212,8 +212,8 @@ for (dv_name in names(dvs_cor)) {
              ", p = ", format(result$p.value, scientific = TRUE, digits = 3), "\n"))
 }
 
-# ACC 用 Spearman
-cat("\n=== Spearman 相关：T_encode vs ACC ===\n")
+# Use Spearman correlation for ACC
+cat("\n=== Spearman correlation: T_encode vs ACC ===\n")
 print(cor.test(all_dat$mean_T_encode, all_dat$mean_ACC, method = "spearman"))
 ```
 
@@ -224,25 +224,25 @@ run_ancova <- function(dv, covariate = "bc_T_encode") {
   cat(paste0("\n", strrep("=", 50), "\n"))
   cat(paste0("DV = ", dv, "\n"))
   cat(paste0(strrep("=", 50), "\n"))
-  
+
   # Levene's Test
   cat("\n--- Levene's Test ---\n")
   print(leveneTest(as.formula(paste0(dv, " ~ group")), data = all_dat))
-  
-  # 平行性假设
-  cat("\n--- 平行性假设 ---\n")
+
+  # Homogeneity-of-slopes assumption
+  cat("\n--- Homogeneity-of-slopes assumption ---\n")
   print(summary(aov(as.formula(paste0(dv, " ~ group * ", covariate)),
                     data = all_dat)))
-  
+
   # ANCOVA
   cat("\n--- ANCOVA ---\n")
   model <- aov(as.formula(paste0(dv, " ~ group + ", covariate)),
                data = all_dat)
   print(summary(model))
-  
+
   cat("\n--- Type III SS ---\n")
   print(Anova(model, type = "III"))
-  
+
   cat("\n--- Post-hoc Tukey HSD ---\n")
   print(TukeyHSD(model, "group"))
 }
@@ -255,12 +255,12 @@ run_ancova("bc_RT_critical")
 
 
 ```{r}
-# 对 ACC 取秩再做 ANCOVA
+# Rank-transform ACC before ANCOVA
 all_dat$rank_ACC <- rank(all_dat$mean_ACC)
 
 rank_model <- aov(rank_ACC ~ group + mean_T_encode, data = all_dat)
 
-cat("=== 秩 ANCOVA ===\n")
+cat("=== rank ANCOVA ===\n")
 rank_anova <- Anova(rank_model, type = "III")
 print(rank_anova)
 
@@ -300,28 +300,28 @@ rank_tukey_eta <- rank_tukey_eta %>%
 
 print(rank_tukey_eta)
 ```
-IES_onset（ANCOVA）
+IES_onset (ANCOVA)
 
-Type III：group 显著，F(2, 86) = 3.47, p = .036，协变量不显著 p = .198
-Post-hoc：Sensorimotor > Categorization (p = .016)，Sensorimotor > VoE (p < .001)，Cat vs VoE 不显著
-
-
-IES_critical（ANCOVA）
-
-Type III：group 不显著，F(2, 86) = 2.41, p = .096，协变量不显著 p = .092
-Post-hoc：仅 Sensorimotor > VoE 显著 (p < .001)
+Type III: group significant, F(2, 86) = 3.47, p = .036, covariate nonsignificant p = .198
+Post-hoc: Sensorimotor > Categorization (p = .016), Sensorimotor > VoE (p < .001), Cat vs VoE nonsignificant
 
 
-RT_onset（ANCOVA）
+IES_critical (ANCOVA)
 
-Type III：group 不显著，F(2, 86) = 2.20, p = .117，协变量边界显著 p = .055
-Post-hoc：仅 Sensorimotor > VoE 显著 (p < .001)
+Type III: group nonsignificant, F(2, 86) = 2.41, p = .096, covariate nonsignificant p = .092
+Post-hoc: only Sensorimotor > VoE significant (p < .001)
 
 
-RT_critical（ANCOVA）
+RT_onset (ANCOVA)
 
-Type III：group 不显著，F(2, 86) = 2.30, p = .106，协变量显著 p = .039
-Post-hoc：仅 Sensorimotor > VoE 显著 (p < .001)
+Type III: group nonsignificant, F(2, 86) = 2.20, p = .117; the covariate is marginally significant p = .055
+Post-hoc: only Sensorimotor > VoE significant (p < .001)
+
+
+RT_critical (ANCOVA)
+
+Type III: group nonsignificant, F(2, 86) = 2.30, p = .106; the covariate is significant p = .039
+Post-hoc: only Sensorimotor > VoE significant (p < .001)
 
 
 
@@ -337,7 +337,7 @@ library(ggsignif)
 library(patchwork)
 library(cowplot)
 
-# ── Step 1: 整理原始数据长格式 ───────────────────────
+# ── Step 1: Reshape raw data to long format ───────────────────────
 plot_dat <- all_dat %>%
   mutate(group = factor(group, levels = c("Categorization", "VoE", "Sensorimotor"))) %>%
   dplyr::select(group, mean_IES_onset, mean_IES_critical,
@@ -363,7 +363,7 @@ plot_dat <- all_dat %>%
     ))
   )
 
-# ── Step 2: 计算均值和 SEM ────────────────────────────
+# ── Step 2: Calculate means and SEM ────────────────────────────
 sem_dat <- plot_dat %>%
   group_by(group, measure) %>%
   summarise(
@@ -372,7 +372,7 @@ sem_dat <- plot_dat %>%
     .groups = "drop"
   )
 
-# ── Step 3: 显著性标注 ────────────────────────────────
+# ── Step 3: Significance annotations ────────────────────────────────
 comparisons_list <- list(
   "IES[onset]"       = list(list(c("Categorization", "Sensorimotor"), "*"),
                             list(c("VoE", "Sensorimotor"), "***")),
@@ -383,7 +383,7 @@ comparisons_list <- list(
                             list(c("VoE", "Sensorimotor"), "**"))
 )
 
-# ── Step 4: 配色 ─────────────────────────────────────
+# ── Step 4: Colors ─────────────────────────────────────
 nature_colors <- c(
   "Categorization" = "#4DBBD5",
   "VoE"            = "#00A087",
@@ -395,7 +395,7 @@ group_labels <- c(
   "Sensorimotor"   = "Affordance Recognition"
 )
 
-# ── Step 5: 循环画每个子图 ───────────────────────────
+# ── Step 5: Draw each subplot in a loop ───────────────────────────
 plot_list <- list()
 
 for (m in levels(sem_dat$measure)) {
@@ -448,7 +448,7 @@ for (m in levels(sem_dat$measure)) {
   plot_list[[m]] <- p_sub
 }
 
-# ── Step 6: 合并：5个子图一行，自动收集 legend ───────
+# ── Step 6: Merge five subplots in one row and collect the legend automatically ───────
 combined <- wrap_plots(plot_list, nrow = 1, ncol = 5, guides = "collect") &
   theme(
     legend.position   = "bottom",
@@ -466,7 +466,7 @@ combined <- wrap_plots(plot_list, nrow = 1, ncol = 5, guides = "collect") &
 
 print(combined)
 
-# ── Step 7: 保存 ─────────────────────────────────────
+# ── Step 7: Save ─────────────────────────────────────
 ggsave(
   filename = file.path(fig_dir, "pilot_barchart.pdf"),
   plot     = combined,
@@ -486,7 +486,7 @@ ggsave(
   dpi      = 300,
   bg       = "white"
 )
-cat("图已保存！\n")
+cat("Plot saved!\n")
 ```
 
 ## R Markdown
